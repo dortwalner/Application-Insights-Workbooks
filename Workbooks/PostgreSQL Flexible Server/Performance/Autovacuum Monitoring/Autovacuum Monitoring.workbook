@@ -1313,7 +1313,7 @@
                           "componentIdSource": "workbook",
                           "resourceIdsSource": "workbook",
                           "templateIdSource": "static",
-                          "templateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum Blockers",
+                          "templateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum blockers",
                           "typeSource": "workbook",
                           "gallerySource": "workbook",
                           "locationSource": "default",
@@ -1426,7 +1426,7 @@
                           "componentIdSource": "workbook",
                           "resourceIdsSource": "workbook",
                           "templateIdSource": "static",
-                          "templateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum Blockers",
+                          "templateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum blockers",
                           "typeSource": "workbook",
                           "gallerySource": "workbook",
                           "locationSource": "default",
@@ -4129,7 +4129,7 @@
     {
       "type": 1,
       "content": {
-        "json": "These metrics need to be enabled by the server parameter `metrics.collector_database_activity`. This is a dynamic server parameter that does not require a server restart.\r\n\r\n\r\n- **Maximum Used Transaction IDs** : The \"Maximum Used Transaction IDs\" metric reveals the highest count of transaction identifiers (XIDs) in use by active transactions within the PostgreSQL Flexible Server over a defined period. \r\n\r\n\tWhen the count of active transactions approaches the limit of 2 billion transaction IDs, it's crucial to consider the potential impact on database write operations. PostgreSQL employs a 32-bit transaction identifier, allowing for a maximum of approximately 2 billion unique transaction IDs. If this limit is nearing exhaustion, the database may cease accepting new write transactions. For more information, please visit [PostgreSQL official docs](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)\r\n\tTo mitigate the risk of transaction ID exhaustion, consider setting up a metric alert to notify when the \"Maximum Used Transaction IDs\" metric crosses the 1 billion mark. This threshold allows for proactive intervention to address potential issues before they escalate. Additionally, investigate the root cause behind the increased transaction ID utilization by visiting **Autovacuum Blockers Troubleshooting Guide**.\r\n- **Oldest Backend Xmin**: \tThe actual value of the oldest xmin. If xmin isn't increasing, it indicates that there are some long-running transactions that can potentially hold dead tuples from being removed.",
+        "json": "These metrics need to be enabled by the server parameter `metrics.collector_database_activity`. This is a dynamic server parameter that does not require a server restart.\r\n\r\n\r\n- **Maximum Used Transaction IDs** : The \"Maximum Used Transaction IDs\" metric reveals the highest count of transaction identifiers (XIDs) in use by active transactions within the PostgreSQL Flexible Server over a defined period. \r\n\r\n\tWhen the count of active transactions approaches the limit of 2 billion transaction IDs, it's crucial to consider the potential impact on database write operations. PostgreSQL employs a 32-bit transaction identifier, allowing for a maximum of approximately 2 billion unique transaction IDs. If this limit is nearing exhaustion, the database may cease accepting new write transactions. For more information, please visit [PostgreSQL official docs](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)\r\n\tTo mitigate the risk of transaction ID exhaustion, consider setting up a metric alert to notify when the \"Maximum Used Transaction IDs\" metric crosses the 1 billion mark. This threshold allows for proactive intervention to address potential issues before they escalate. Additionally, investigate the root cause behind the increased transaction ID utilization by visiting **Autovacuum blockers Troubleshooting Guide**.\r\n- **Oldest Backend Xmin**: \tThe actual value of the oldest xmin. If xmin isn't increasing, it indicates that there are some long-running transactions that can potentially hold dead tuples from being removed.",
         "style": "info"
       },
       "conditionalVisibilities": [

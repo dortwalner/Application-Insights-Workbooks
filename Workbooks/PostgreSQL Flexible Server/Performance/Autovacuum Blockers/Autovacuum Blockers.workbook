@@ -10,7 +10,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Monitoring Autovacuum Blockers and Wraparound Risks\r\nIn this troubleshooting guide we will try to identify blockers preventing autovacuum from removing dead tuples and fixes to mitigate the issue. The guide also gives details if the databases on the server are closer to triggering emergency autovacuum  or if the databases are closer to Transaction ID wraparound problem.",
+              "json": "## Monitoring Autovacuum blockers and Wraparound Risks\r\nIn this troubleshooting guide we will try to identify blockers preventing autovacuum from removing dead tuples and fixes to mitigate the issue. The guide also gives details if the databases on the server are closer to triggering emergency autovacuum  or if the databases are closer to Transaction ID wraparound problem.",
               "style": "info"
             },
             "name": "start"
@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "Step | Observations\r\n--- | ---\r\n**Emergency Autovacuum and Transaction ID Wraparound Issue Identification** | Step 1: Analyze the metric to understand how close the databases on the server are to trigger an emergency autovacuum or Transaction ID wraparound protection. The section also provides resolutions around it.\r\n**Autovacuum Blockers** | Step 2: Guide would identify if any autovacuum blockers - long running transactions, inactive replication slots or orphaned prepared transactions exist on the server and shares the blocker details along with mitigation steps. If there are no blockers then autovacuum blockers section would indicate no blockers found.\r\n\r\n"
+              "json": "Step | Observations\r\n--- | ---\r\n**Emergency Autovacuum and Transaction ID Wraparound Issue Identification** | Step 1: Analyze the metric to understand how close the databases on the server are to trigger an emergency autovacuum or Transaction ID wraparound protection. The section also provides resolutions around it.\r\n**Autovacuum blockers** | Step 2: Guide would identify if any autovacuum blockers - long running transactions, inactive replication slots or orphaned prepared transactions exist on the server and shares the blocker details along with mitigation steps. If there are no blockers then autovacuum blockers section would indicate no blockers found.\r\n\r\n"
             },
             "name": "steps"
           }
@@ -965,7 +965,7 @@
     {
       "type": 1,
       "content": {
-        "json": "** Possible autovacuum blocker present.** \r\n\r\nThere is a possibility that autovacuum blockers might be present. To investigate further, please go to the \"Autovacuum Blockers\" tab for more details.",
+        "json": "** Possible autovacuum blocker present.** \r\n\r\nThere is a possibility that autovacuum blockers might be present. To investigate further, please go to the \"Autovacuum blockers\" tab for more details.",
         "style": "warning"
       },
       "conditionalVisibilities": [
@@ -1001,7 +1001,7 @@
             "id": "63c1f551-2212-45de-be0b-7b308be38fa4",
             "cellValue": "mtab",
             "linkTarget": "parameter",
-            "linkLabel": "Autovacuum Blockers",
+            "linkLabel": "Autovacuum blockers",
             "subTarget": "blocker",
             "style": "link"
           }
@@ -2201,7 +2201,7 @@
           "value": "Yes"
         }
       ],
-      "name": "Autovacuum Blockers lower down in the workbook"
+      "name": "Autovacuum blockers lower down in the workbook"
     },
     {
       "type": 12,
@@ -2486,7 +2486,7 @@
           {
             "type": 1,
             "content": {
-              "json": "\r\n** When the percentage of wraparound approaches 50%, equivalent to 1 billion Transaction IDs, and the percentage of emergency autovacuum exceeds 500%, it is a concerning situation that requires immediate attention. These indicators may suggest that the database system is at risk of encountering performance issues and potential downtime.**\r\n\r\n\r\nIn case the autovacuum process is ongoing and the percentages of wraparound protection and emergency autovacuum continue to increase, it is essential to investigate the possible causes of autovacuum blockers explained in the \"Autovacuum Blockers\" section and address them promptly to resolve the issue.\r\n",
+              "json": "\r\n** When the percentage of wraparound approaches 50%, equivalent to 1 billion Transaction IDs, and the percentage of emergency autovacuum exceeds 500%, it is a concerning situation that requires immediate attention. These indicators may suggest that the database system is at risk of encountering performance issues and potential downtime.**\r\n\r\n\r\nIn case the autovacuum process is ongoing and the percentages of wraparound protection and emergency autovacuum continue to increase, it is essential to investigate the possible causes of autovacuum blockers explained in the \"Autovacuum blockers\" section and address them promptly to resolve the issue.\r\n",
               "style": "warning"
             },
             "customWidth": "75",

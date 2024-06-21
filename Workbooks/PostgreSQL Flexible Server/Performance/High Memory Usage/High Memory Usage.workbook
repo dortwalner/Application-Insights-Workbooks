@@ -10,7 +10,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Optimizing High Memory Utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high memory usage and suggest solutions to alleviate the issue. \r\n\r\nHigh memory utilization may arise from various factors, such as a surge in workload, memory-intensive queries, or a rise in the number of server connections.\r\n\r\nThe following table outlines the step-by-step approach to using the troubleshooting guide to investigate server behavior and improve memory usage.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+              "json": "## Optimizing high memory utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high memory usage and suggest solutions to alleviate the issue. \r\n\r\nHigh memory utilization may arise from various factors, such as a surge in workload, memory-intensive queries, or a rise in the number of server connections.\r\n\r\nThe following table outlines the step-by-step approach to using the troubleshooting guide to investigate server behavior and improve memory usage.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
               "style": "info"
             },
             "name": "high memory intial heading"

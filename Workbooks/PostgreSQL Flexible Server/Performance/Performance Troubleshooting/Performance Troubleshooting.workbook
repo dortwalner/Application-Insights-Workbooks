@@ -61,7 +61,7 @@
             "id": "577dd358-f25f-4c34-8ee0-d063a383567a",
             "cellValue": "tabType",
             "linkTarget": "parameter",
-            "linkLabel": "Autovacuum Blockers",
+            "linkLabel": "Autovacuum blockers",
             "subTarget": "BLOCKERS",
             "style": "link"
           }
@@ -149,7 +149,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum Blockers",
+        "loadFromTemplateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum blockers",
         "items": []
       },
       "conditionalVisibility": {
