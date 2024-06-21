@@ -830,7 +830,7 @@
                     "componentIdSource": "workbook",
                     "resourceIdsSource": "workbook",
                     "templateIdSource": "static",
-                    "templateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum Monitoring",
+                    "templateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum monitoring",
                     "typeSource": "workbook",
                     "gallerySource": "workbook",
                     "locationSource": "default",
@@ -2062,7 +2062,7 @@
             "aggregation": 1
           }
         ],
-        "title": "Transactions committed (xact_commit) vs transactions rolled back (xact_rollback)",
+        "title": "Transactions committed vs transactions rolled back",
         "showCreateAlertRule": true,
         "filters": [
           {

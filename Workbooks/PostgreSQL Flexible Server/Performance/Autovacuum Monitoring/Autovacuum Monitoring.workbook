@@ -10,7 +10,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Autovacuum Monitoring\r\n\r\nThis troubleshooting guide is designed to assess the health of autovacuum or vacuum on Azure Database for PostgreSQL Flexible Server. During the execution of autovacuum, it removes dead tuples, which can free up disk space and improve query performance. Additionally, it updates the visibility map to keep track of pages that do not contain any outdated or deleted data, helping to reduce unnecessary I/O operations. \r\n\r\nAnother critical function of autovacuum is to prevent transaction ID wraparound situations, which could result in data loss. \r\n\r\nBy analyzing the results of this troubleshooting guide, you can take proactive steps to optimize autovacuum and maintain the long-term health of your database.",
+              "json": "## Autovacuum monitoring\r\n\r\nThis troubleshooting guide is designed to assess the health of autovacuum or vacuum on Azure Database for PostgreSQL Flexible Server. During the execution of autovacuum, it removes dead tuples, which can free up disk space and improve query performance. Additionally, it updates the visibility map to keep track of pages that do not contain any outdated or deleted data, helping to reduce unnecessary I/O operations. \r\n\r\nAnother critical function of autovacuum is to prevent transaction ID wraparound situations, which could result in data loss. \r\n\r\nBy analyzing the results of this troubleshooting guide, you can take proactive steps to optimize autovacuum and maintain the long-term health of your database.",
               "style": "info"
             },
             "name": "introduction to the workbook"
