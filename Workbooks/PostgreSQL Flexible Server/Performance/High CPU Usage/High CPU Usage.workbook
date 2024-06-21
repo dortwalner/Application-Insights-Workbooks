@@ -830,7 +830,7 @@
                     "componentIdSource": "workbook",
                     "resourceIdsSource": "workbook",
                     "templateIdSource": "static",
-                    "templateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum monitoring",
+                    "templateId": "Community-Workbooks/PostgreSQL Flexible Server/Performance/Autovacuum Monitoring",
                     "typeSource": "workbook",
                     "gallerySource": "workbook",
                     "locationSource": "default",
