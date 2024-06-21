@@ -2289,7 +2289,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### The selected window does not contain any data in the telemetry. To configure logging and address this issue, please refer to the error message located at the top of the troubleshooting guide.\r\n\r\n",
+        "json": "#### The selected window does not contain any data in the telemetry. To configure logging and address this issue, please refer to the error message located at the top of the troubleshooting guide.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -3146,7 +3146,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### The selected window does not contain any data in the telemetry. To configure logging and address this issue, please refer to the error message located at the top of the troubleshooting guide.\r\n\r\n",
+        "json": "#### The selected window does not contain any data in the telemetry. To configure logging and address this issue, please refer to the error message located at the top of the troubleshooting guide.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -5091,7 +5091,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### The selected window does not contain any data in the telemetry. To configure logging and address this issue, please refer to the error message located at the top of the troubleshooting guide.\r\n\r\n",
+        "json": "#### The selected window does not contain any data in the telemetry. To configure logging and address this issue, please refer to the error message located at the top of the troubleshooting guide.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -5253,7 +5253,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### The selected window does not contain any data in the telemetry. To configure logging and address this issue, please refer to the error message located at the top of the troubleshooting guide.\r\n\r\n",
+        "json": "#### The selected window does not contain any data in the telemetry. To configure logging and address this issue, please refer to the error message located at the top of the troubleshooting guide.",
         "style": "info"
       },
       "conditionalVisibilities": [

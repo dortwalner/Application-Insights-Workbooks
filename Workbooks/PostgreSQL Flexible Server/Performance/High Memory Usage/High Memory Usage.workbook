@@ -10,7 +10,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Optimizing high memory utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high memory usage and suggest solutions to alleviate the issue. \r\n\r\nHigh memory utilization may arise from various factors, such as a surge in workload, memory-intensive queries, or a rise in the number of server connections.\r\n\r\nThe following table outlines the step-by-step approach to using the troubleshooting guide to investigate server behavior and improve memory usage.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+              "json": "## Optimizing high memory utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high memory usage and suggest solutions to alleviate the issue.\r\n\r\nHigh memory utilization may arise from various factors, such as a surge in workload, memory-intensive queries, or a rise in the number of server connections.\r\n\r\nThe following table outlines the step-by-step approach to using the troubleshooting guide to investigate server behavior and improve memory usage.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
               "style": "info"
             },
             "name": "high memory intial heading"
@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": " Step | Observations\r\n--- | ---\r\n**Parameter Selection** | Step 0: Choose the time interval that you wish to analyze.\r\n**Analyzing Memory Usage** | Step 1: Monitor the memory usage on the server. Any sudden increase in values in comparison to previous time intervals should be viewed as abnormal and needs further investigation.\r\n**Analyzing Workload** | Step 2: Check `read` and `write workloads`. Read workload includes select queries and write workload includes insert, update, delete queries. Compare the Memory spike seen in Step 1 with read and write workloads. A surge in workload during the time frame being investigated indicates an increase in server activity. Step 4 and 5 try to identify those read/write queries.\r\n**Analyze Long Running Sessions** | Step 3:  Analyze the `long running sessions` section to identify process IDs (PIDs). Follow the suggested mitigation measures outlined in the section and monitor memory usage accordingly.\r\n**Identify queries by data usage** | Step 4: Utilize the query store to examine the top 5 queries by data usage during the time frame being investigated, as listed in the `Top Queries By Data Usage` section. Take the recommended remedial actions in the section and track data usage.\r\n**Analyzing Connection Patterns** | Step 5: Understand connectivity patterns from `Total User Only Connections` section. Follow the suggested mitigation measures provided in the section and continue to monitor memory usage.\r\n**Validating Memory Parameters** | Step 6: Verify the `work_mem`, `maintenance_work_mem`, `shared_buffers`, `max_connections`, and `max_locks_per_transaction` parameters that are configured on the server. Refer to the `Guidelines for configuring parameters` section to determine the appropriate value for each parameter."
+              "json": " Step | Description\r\n--- | ---\r\n**Set parameters** | Choose the time interval that you wish to analyze.\r\n**Memory usage** | Monitor the memory usage on the server. Any sudden increase in values, in comparison to previous time intervals, should be viewed as abnormal and needs further investigation.\r\n**Type of workload** | Use the `Workload details` tab to analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU usage** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server. çççStep 4 and 5 try to identify those read/write queries.ççç\r\n**Long running sessions** | Use the `Long running sessions` tab to identify process identifiers (PIDs). Follow the suggested mitigation measures outlined in the section and monitor memory usage accordingly.\r\n**Identify queries by data usage** | Use Query Store to examine the top 5 queries by data usage during the time frame being investigated. They are listed in the `Top queries by data usage` tab. Take the recommended remediating actions in the section and track data usage.\r\n**Connectivity patterns** | Use `Total user only connections` tab to understand the connectivity patterns of your client applications. Follow mitigation steps suggested in the tab and continue to monitor memory usage.\r\n**Memory parameters** | Validate that `work_mem`, `maintenance_work_mem`, `shared_buffers`, `max_connections`, and `max_locks_per_transaction` server parameters are appropriately configured on the server. Refer to the `Guidelines for configuring parameters` tab to determine the appropriate value for each parameter."
             },
             "customWidth": "70",
             "name": "high memory guidance"
@@ -695,7 +695,7 @@
             "version": "KqlParameterItem/1.0",
             "name": "validate_memory_parameters",
             "type": 1,
-            "query": "let work_mem_value = {fetch_work_mem}; \r\nlet default_work_mem = {fetch_work_mem_default};\r\n\r\nlet maintenance_work_mem_value = {fetch_maintenance_work_mem}; \r\nlet default_maintenance_work_mem = {fetch_maintenance_work_mem_default};\r\n\r\nlet shared_buffers_value = {fetch_shared_buffers}; \r\nlet default_shared_buffers = {fetch_shared_buffers_default};\r\n\r\nlet max_locks_per_transaction_value = {fetch_max_locks_per_transaction}; \r\nlet default_max_locks_per_transaction = {fetch_max_locks_per_transaction_default};\r\n\r\nlet autovacuum_work_mem_value = {fetch_autovacuum_work_mem} ; \r\nlet default_autovacuum_work_mem = {fetch_autovacuum_work_mem_default} ;\r\n\r\nlet Autovacuum_max_workers_value = {fetch_autovacuum_max_workers}; \r\nlet default_Autovacuum_max_workers = {fetch_autovacuum_max_workers_default} ;\r\n\r\nlet HasChanged = strcat(\r\n    iff(work_mem_value > default_work_mem, strcat('work_mem', ', '), ''), \r\n    iff(maintenance_work_mem_value > default_maintenance_work_mem, strcat('maintenance_work_mem', ', '), ''), \r\n    iff(shared_buffers_value > default_shared_buffers, strcat('shared_buffers', ', '), ''), \r\n    iff(max_locks_per_transaction_value > default_max_locks_per_transaction, strcat('max_locks_per_transaction', ', '), ''), \r\n    iff(autovacuum_work_mem_value > default_autovacuum_work_mem, strcat('autovacuum_work_mem', ', '), ''), \r\n    iff(Autovacuum_max_workers_value > default_Autovacuum_max_workers, strcat('Autovacuum_max_workers', ', '), '')\r\n);\r\n\r\nprint iff(strlen(HasChanged) > 0, trim(',', HasChanged), \"No\");\r\n",
+            "query": "let work_mem_value = {fetch_work_mem}; \r\nlet default_work_mem = {fetch_work_mem_default};\r\n\r\nlet maintenance_work_mem_value = {fetch_maintenance_work_mem}; \r\nlet default_maintenance_work_mem = {fetch_maintenance_work_mem_default};\r\n\r\nlet shared_buffers_value = {fetch_shared_buffers}; \r\nlet default_shared_buffers = {fetch_shared_buffers_default};\r\n\r\nlet max_locks_per_transaction_value = {fetch_max_locks_per_transaction}; \r\nlet default_max_locks_per_transaction = {fetch_max_locks_per_transaction_default};\r\n\r\nlet autovacuum_work_mem_value = {fetch_autovacuum_work_mem} ; \r\nlet default_autovacuum_work_mem = {fetch_autovacuum_work_mem_default} ;\r\n\r\nlet autovacuum_max_workers_value = {fetch_autovacuum_max_workers}; \r\nlet default_autovacuum_max_workers = {fetch_autovacuum_max_workers_default} ;\r\n\r\nlet HasChanged = strcat(\r\n    iff(work_mem_value > default_work_mem, strcat('work_mem', ', '), ''), \r\n    iff(maintenance_work_mem_value > default_maintenance_work_mem, strcat('maintenance_work_mem', ', '), ''), \r\n    iff(shared_buffers_value > default_shared_buffers, strcat('shared_buffers', ', '), ''), \r\n    iff(max_locks_per_transaction_value > default_max_locks_per_transaction, strcat('max_locks_per_transaction', ', '), ''), \r\n    iff(autovacuum_work_mem_value > default_autovacuum_work_mem, strcat('autovacuum_work_mem', ', '), ''), \r\n    iff(autovacuum_max_workers_value > default_autovacuum_max_workers, strcat('autovacuum_max_workers', ', '), '')\r\n);\r\n\r\nprint iff(strlen(HasChanged) > 0, trim(',', HasChanged), \"No\");\r\n",
             "crossComponentResources": [
               "{Resource}"
             ],
@@ -1012,7 +1012,7 @@
     {
       "type": 1,
       "content": {
-        "json": "### Memory configuration: parameter value change detected!\r\n\r\nWe’ve observed that the memory parameters have been set to values higher than their default settings. These changes can impact system performance. Please check if there's an increase in server memory usage after these modifications.\r\n\r\nHere is the list of parameters that changed **{validate_memory_parameters}**\r\n\r\nAltering these parameters should be done with caution. For best practices on parameter configuration, refer to the **\"Guidelines For Configuring Parameters\"** section in this troubleshooting guide.\r\n",
+        "json": "### Memory configuration: parameter value change detected!\r\n\r\nWe’ve observed that the memory parameters have been set to values higher than their default settings. These changes can impact system performance. Please check if there's an increase in server memory usage after these modifications.\r\n\r\nHere is the list of parameters that have been changed: **{validate_memory_parameters}**\r\n\r\nAltering these parameters should be done with caution. For best practices on parameter configuration, refer to the **\"Guidelines for configuring parameters\"** tab in this troubleshooting guide.\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1027,12 +1027,12 @@
           "value": "No"
         }
       ],
-      "name": "Memory paramters default value infomation"
+      "name": "Memory parameters default value infomation"
     },
     {
       "type": 1,
       "content": {
-        "json": "### Long idle session detected!\r\n\r\nOur monitoring systems have detected a PostgreSQL session that has been idle and connected to the server for **more than {long_idle_sessions_threshold_hour} hours**. Long-idle sessions can consume valuable system resources and potentially impact overall server performance.\r\n\r\nWe strongly recommend you to **review your PostgreSQL sessions** and **terminate any idle sessions that have been connected for an extended period**. Efficient session management is key to maintaining optimal performance in a PostgreSQL environment.\r\n\r\nPlease follow these best practices:\r\nPlease follow these best practices:\r\n1. **Identify long-idle sessions**. Use PostgreSQL system catalogs or administration tools to identify any sessions that have been idle for an extended period.\r\n2. **Terminate idle sessions**. If a session is idle and has been connected for more than {long_idle_sessions_threshold_hour} hours, consider terminating it to free up system resources.\r\n3. **Review your application logic**. If your application often leaves sessions idle for extended periods, it might be a good idea to review your application logic to prevent this from happening.\r\n4. **Implement idle session timeout settings**. For PostgreSQL 14 and above, consider implementing `idle_session_timeout` settings in your PostgreSQL configuration to automatically terminate sessions after a certain period of inactivity.\r\n\r\n",
+        "json": "### Long idle session detected!\r\n\r\nOur monitoring system has detected a PostgreSQL session that has been idle and connected to the server for **more than {long_idle_sessions_threshold_hour} hours**. Long-idle sessions can consume valuable system resources and potentially impact overall server performance.\r\n\r\nWe strongly recommend you to **review your PostgreSQL sessions** and **terminate any idle sessions that have been connected for an extended period**. Efficient session management is key to maintaining optimal performance in a PostgreSQL environment.\r\n\r\nPlease follow these best practices:\r\n1. **Identify long-idle sessions**: Use PostgreSQL system catalogs or administration tools to identify any sessions that have been idle for an extended period.\r\n2. **Terminate idle sessions**: If a session is idle and has been connected for more than {long_idle_sessions_threshold_hour} hours, consider terminating it to free up system resources.\r\n3. **Review your application logic**: If your application often leaves sessions idle for extended periods, it might be a good idea to review your application logic to prevent this from happening.\r\n4. **Implement idle session timeout settings**: For PostgreSQL 14 and above, consider implementing `idle_session_timeout` settings in your PostgreSQL configuration to automatically terminate sessions after a certain period of inactivity.\r\n\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1060,7 +1060,7 @@
             "id": "3a72e467-cf2f-49e6-b558-b9b73d820e20",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Memory Utilization",
+            "linkLabel": "Memory utilization",
             "subTarget": "memory",
             "style": "link"
           },
@@ -1068,7 +1068,7 @@
             "id": "b1510460-7e36-4b34-aa90-afcce4e1a471",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Workload Details",
+            "linkLabel": "Workload details",
             "subTarget": "workload",
             "style": "link"
           },
@@ -1076,7 +1076,7 @@
             "id": "32e2433c-1be0-44a8-b79b-7beeefbe3eae",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Long Running Sessions",
+            "linkLabel": "Long running sessions",
             "subTarget": "sessions",
             "style": "link"
           },
@@ -1084,7 +1084,7 @@
             "id": "d04fe585-6a68-4c91-bd8b-e8ea28d18ab3",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Top Queries By Data-Usage",
+            "linkLabel": "Top queries by data usage",
             "subTarget": "querystore",
             "style": "link"
           },
@@ -1092,7 +1092,7 @@
             "id": "b9d67896-ede2-4ac2-8133-c8afab0790f6",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Total User Only Connections",
+            "linkLabel": "Total user only connections",
             "subTarget": "connections",
             "style": "link"
           },
@@ -1100,7 +1100,7 @@
             "id": "58d38541-e497-4712-a357-b0a46464f881",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Guidelines For Configuring Parameters",
+            "linkLabel": "Guidelines for configuring parameters",
             "subTarget": "guidelines",
             "style": "link"
           }
@@ -1117,7 +1117,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server in question. Kindly allow 15 minutes to 30 minutes for the telemetry data to become visible.",
+              "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
               "style": "info"
             },
             "conditionalVisibility": {
@@ -1150,7 +1150,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server in question. Kindly allow 15 minutes to 30 minutes for the telemetry data to become visible.",
+              "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
               "style": "info"
             },
             "conditionalVisibilities": [
@@ -1170,7 +1170,7 @@
           {
             "type": 1,
             "content": {
-              "json": "**Selected interval is too small. A one hour capture from the selected End Time is being shown.**",
+              "json": "**Selected interval is too small. A one hour capture from the selected end time is being shown.**",
               "style": "warning"
             },
             "conditionalVisibilities": [
@@ -1787,7 +1787,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server in question. Kindly allow 15 minutes to 30 minutes for the telemetry data to become visible.",
+              "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
               "style": "info"
             },
             "conditionalVisibility": {
@@ -1825,7 +1825,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server in question. Kindly allow 15 minutes to 30 minutes for the telemetry data to become visible.",
+              "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
               "style": "info"
             },
             "conditionalVisibilities": [
@@ -2716,7 +2716,7 @@
                 {
                   "type": 1,
                   "content": {
-                    "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server in question. Kindly allow 15 minutes to 30 minutes for the telemetry data to become visible.",
+                    "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
                     "style": "info"
                   },
                   "conditionalVisibility": {
@@ -2749,7 +2749,7 @@
                 {
                   "type": 1,
                   "content": {
-                    "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server in question. Kindly allow 15 minutes to 30 minutes for the telemetry data to become visible.",
+                    "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
                     "style": "info"
                   },
                   "conditionalVisibilities": [
@@ -2860,7 +2860,7 @@
                 {
                   "type": 1,
                   "content": {
-                    "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server in question. Kindly allow 15 minutes to 30 minutes for the telemetry data to become visible.",
+                    "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
                     "style": "info"
                   },
                   "conditionalVisibility": {
@@ -2893,7 +2893,7 @@
                 {
                   "type": 1,
                   "content": {
-                    "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server in question. Kindly allow 15 minutes to 30 minutes for the telemetry data to become visible.",
+                    "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
                     "style": "info"
                   },
                   "conditionalVisibilities": [
@@ -3010,7 +3010,7 @@
             "aggregation": 3
           }
         ],
-        "title": "Maximum Percentage of Memory in Use",
+        "title": "Maximum percentage of memory in use",
         "showCreateAlertRule": true,
         "timeBrushParameterName": "TimeRange",
         "timeBrushExportOnlyWhenBrushed": true,
@@ -3028,7 +3028,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### PostgreSQL can use high memory in various scenarios, including:\r\n\r\n- **Large amounts of data:** As the amount of data stored in a database increases, the memory required to access and manipulate that data also increases. If your database contains many tables or large tables with many columns, this can consume a lot of memory. To find more information, please refer to the section on **Workload Details** in this troubleshooting guide.\r\n\r\n- **Large transactions:** Transactions that modify many rows or tables can consume a significant amount of memory, especially if the changes involve indexes or triggers. If the transaction is not committed or rolled back in a timely manner, it can keep locks and buffers in memory, causing high memory usage. To find more information, please refer to the section on **Long Running Sessions** in this troubleshooting guide.\r\n\r\n- **Complex queries:** Queries that involve multiple joins, subqueries, or aggregates can require significant amounts of memory to execute. If these queries are not optimized or tuned correctly, they can consume excessive memory. To find more information, please refer to the section on **Top Queries by Data-Usage**.\r\n\r\n- **Concurrent connections:** If your application has many concurrent connections to the database, each connection will consume a certain amount of memory. Improper management of connections can lead to high memory usage. To find more information, please refer to the section on **Total User Only Connections** in this troubleshooting guide.\r\n\r\nTo manage memory usage in PostgreSQL, it is important to properly configure server parameters, optimize queries, and monitor the system's memory usage.",
+        "json": "#### PostgreSQL can use high memory in various scenarios, including:\r\n\r\n- **Large amounts of data:** As the amount of data stored in a database increases, the memory required to access and manipulate that data also increases. If your database contains many tables or large tables with many columns, this can consume a lot of memory. To find more information, please refer to the section on **Workload Details** in this troubleshooting guide.\r\n\r\n- **Large transactions:** Transactions that modify many rows or tables can consume a significant amount of memory, especially if the changes involve indexes or triggers. If the transaction is not committed or rolled back in a timely manner, it can keep locks and buffers in memory, causing high memory usage. To find more information, please refer to the section on **Long Running Sessions** in this troubleshooting guide.\r\n\r\n- **Complex queries:** Queries that involve multiple joins, subqueries, or aggregates can require significant amounts of memory to execute. If these queries are not optimized or tuned correctly, they can consume excessive memory. To find more information, please refer to the section on **Top queries by data usage**.\r\n\r\n- **Concurrent connections:** If your application has many concurrent connections to the database, each connection will consume a certain amount of memory. Improper management of connections can lead to high memory usage. To find more information, please refer to the section on **Total User Only Connections** in this troubleshooting guide.\r\n\r\nTo manage memory usage in PostgreSQL, it is important to properly configure server parameters, optimize queries, and monitor the system's memory usage.",
         "style": "info"
       },
       "conditionalVisibility": {
