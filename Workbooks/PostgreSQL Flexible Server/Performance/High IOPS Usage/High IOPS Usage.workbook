@@ -10,7 +10,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Optimizing high IOPS utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high IOPS usage and suggest solutions to alleviate the issue. \r\n\r\nHigh IOPS utilization may arise from various factors, such as a surge in workload, IO-intensive queries, long running sessions or too frequent checkpoints.\r\n\r\nThe following table outlines the step-by-step approach to investigate server behavior and improve IOPS usage.",
+              "json": "## Optimizing high IOPS utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high IOPS utilization and suggest solutions to alleviate the issue. \r\n\r\nHigh IOPS utilization may arise from various factors, such as a surge in workload, IO-intensive queries, long running sessions or too frequent checkpoints.\r\n\r\nThe following table outlines the step-by-step approach to investigate server behavior and improve IOPS utilization.",
               "style": "info"
             },
             "name": "the aim of the workbook"
@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "Step | Description\r\n--- | ---\r\n**Set analysis period** | Choose the time interval that you wish to analyze.\r\n**IOPS usage** | Use the `IOPS utilization` tab to analyze and understand `CPU` usage on the server. Any spike in values compared to previous time intervals can be considered unusual and needing further investigation.\r\n**Type of workload** | Use the `Workload details` tab to analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU usage** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server.\r\n**Do you see long running queries** | Step 3: Analyze session details tab for any read queries, write queries running for long time . Follow mitigation steps suggested in the section and monitor IOPS Usage.\r\n**Identify IO consuming queries** | Step 4: Analyze top IOPS consuming  queries during window of interest from `Top Queries By IOPS`. Follow mitigation steps suggested in the section.\r\n**Identify IO wait events** | Step 5: Analyze `IO` wait events from `IO Wait Events` tab and follow recommendations on IO waits.\r\n**Do you see too frequent checkpoints** | Step 6: Checkpoints happening too frequently can consume IO. Analyze `Checkpoint Details` tab to identify any in the window of interest. Follow mitigation steps suggested in the section.\r\n**Check Storage Utilization** | Step 7: Increasing storage helps when you're adding more IOPS to the server. Check `Storage Usage` tab to understand current storage usage on the server."
+              "json": "Step | Description\r\n--- | ---\r\n**Set analysis period** | Choose the time interval that you wish to analyze.\r\n**IOPS utilization** | Use the `IOPS utilization` tab to analyze and understand `CPU` utilization on the server. Any spike in values compared to previous time intervals can be considered unusual and needing further investigation.\r\n**Type of workload** | Use the `Workload details` tab to analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU utilization** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server.\r\n**Do you see long running queries** | Step 3: Analyze session details tab for any read queries, write queries running for long time . Follow mitigation steps suggested in the section and monitor IOPS utilization.\r\n**Identify IO consuming queries** | Step 4: Analyze top IOPS consuming  queries during window of interest from `Top Queries By IOPS`. Follow mitigation steps suggested in the section.\r\n**Identify IO wait events** | Step 5: Analyze `IO` wait events from `IO Wait Events` tab and follow recommendations on IO waits.\r\n**Do you see too frequent checkpoints** | Step 6: Checkpoints happening too frequently can consume IO. Analyze `Checkpoint Details` tab to identify any in the window of interest. Follow mitigation steps suggested in the section.\r\n**Check Storage Utilization** | Step 7: Increasing storage helps when you're adding more IOPS to the server. Check `Storage utilization` tab to understand current storage utilization on the server."
             },
             "name": "steps in the workbook"
           }
@@ -809,7 +809,7 @@
             "id": "53a4d309-f616-49ac-b3f8-01f9b81c712f",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Workload Details",
+            "linkLabel": "Workload details",
             "subTarget": "workload",
             "style": "link"
           },
@@ -817,7 +817,7 @@
             "id": "1cb86df9-058f-4ea3-a646-888e89b1fb39",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Session Details",
+            "linkLabel": "Session details",
             "subTarget": "long",
             "style": "link"
           },
@@ -825,7 +825,7 @@
             "id": "065516f7-e3d8-4ff6-a120-568403493106",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Top Queries By IOPS",
+            "linkLabel": "Top queries by IOPS",
             "subTarget": "queries",
             "style": "link"
           },
@@ -833,7 +833,7 @@
             "id": "c9da01bb-faab-4428-b968-8dfcf6ababbc",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "IO Wait Events",
+            "linkLabel": "IO wait events",
             "subTarget": "wait",
             "style": "link"
           },
@@ -841,7 +841,7 @@
             "id": "68f9ff2d-6068-4537-88f0-96c59fe3bb9a",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Checkpoint Details",
+            "linkLabel": "Checkpoint details",
             "subTarget": "checkpoint",
             "style": "link"
           },
@@ -849,7 +849,7 @@
             "id": "0c59f2dd-2110-4403-8777-a6c3003b898f",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Storage Usage",
+            "linkLabel": "Storage utilization",
             "subTarget": "storage",
             "style": "link"
           }
@@ -2530,7 +2530,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**General Query Recommendations To Tune High IO Queries** \r\n\r\n**1)** Tune queries identified above using explain analyze. More information on EXPLAIN command [can be found here](https://www.postgresql.org/docs/current/sql-explain.html). \r\n\r\n**2)** High bloat on the tables can also lead to considerable IO usage. As a one off case consider carrying manual vacuum analyze of the tables used in the slow running queries using the below command on the database: \r\n\r\n\tVacuum (analyze,verbose) <Table Name> \r\n\r\n\r\n**3)** Partitioning: If you observe queries on large tables taking high IO consider partitioning the large tables.\r\n\r\n**4)** Indexes & Joins: Consider creating indexes and reduce the joins in the query if applicable.\r\n\r\n**5)** Consider tuning server parameters like `work_mem`, `maintainence_work_mem`. Please make the changes with caution and testing as setting a very high value of both parameters could lead to out of memory issues.\r\n\r\n**6)** Understand the checkpoint timings and follow the recommendations provided below in checkpoint details tab of the troubleshooting guide to tune checkpoint related server parameters.\r\n ",
+        "json": "**General Query Recommendations To Tune High IO Queries** \r\n\r\n**1)** Tune queries identified above using explain analyze. More information on EXPLAIN command [can be found here](https://www.postgresql.org/docs/current/sql-explain.html). \r\n\r\n**2)** High bloat on the tables can also lead to considerable IO utilization. As a one off case consider carrying manual vacuum analyze of the tables used in the slow running queries using the below command on the database: \r\n\r\n\tVacuum (analyze,verbose) <Table Name> \r\n\r\n\r\n**3)** Partitioning: If you observe queries on large tables taking high IO consider partitioning the large tables.\r\n\r\n**4)** Indexes & Joins: Consider creating indexes and reduce the joins in the query if applicable.\r\n\r\n**5)** Consider tuning server parameters like `work_mem`, `maintainence_work_mem`. Please make the changes with caution and testing as setting a very high value of both parameters could lead to out of memory issues.\r\n\r\n**6)** Understand the checkpoint timings and follow the recommendations provided below in checkpoint details tab of the troubleshooting guide to tune checkpoint related server parameters.\r\n ",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -3954,7 +3954,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**Recommendations On Common IO Wait Events**\r\n\r\n*IO:DATAFILEREAD* or *IO:DATAFILEWRITE*\r\n\r\n\r\n* High bloat on the tables can also lead to considerable IO usage. As a one-off case consider carrying manual vacuum analyze of the tables using the below command on the database\r\n\r\n        Vacuum (analyze,verbose) <Table Name> \r\n\r\n* Partitioning: If you observe queries on large tables taking high IO consider partitioning the large tables.\r\n\r\n* Indexes & Joins: Consider creating indexes and reducing the joins in the query if applicable.\r\n\r\n* Consider tuning server parameters like work_mem, and maintainence_work_mem. Please make the changes with caution and testing as setting a very high value of both parameters could lead to out-of-memory issues.\r\n\r\n* Understand the checkpoint timings and follow the recommendations below in the troubleshooting guide's checkpoint details tab to tune checkpoint-related server parameters.\r\n\r\n* Consider moving to a higher SKU.\r\n\r\n*IO:WALWRITE*\r\n\r\n* Analyze the checkpoint details tab and follow recommendations around server parameters `max_wal_size`,`checkpoint_completion_target`.\r\n\r\n* Tune queries.\r\n\r\n* Consider moving to a higher SKU.\r\n",
+        "json": "**Recommendations On Common IO Wait Events**\r\n\r\n*IO:DATAFILEREAD* or *IO:DATAFILEWRITE*\r\n\r\n\r\n* High bloat on the tables can also lead to considerable IO utilization. As a one-off case consider carrying manual vacuum analyze of the tables using the below command on the database\r\n\r\n        Vacuum (analyze,verbose) <Table Name> \r\n\r\n* Partitioning: If you observe queries on large tables taking high IO consider partitioning the large tables.\r\n\r\n* Indexes & Joins: Consider creating indexes and reducing the joins in the query if applicable.\r\n\r\n* Consider tuning server parameters like work_mem, and maintainence_work_mem. Please make the changes with caution and testing as setting a very high value of both parameters could lead to out-of-memory issues.\r\n\r\n* Understand the checkpoint timings and follow the recommendations below in the troubleshooting guide's checkpoint details tab to tune checkpoint-related server parameters.\r\n\r\n* Consider moving to a higher SKU.\r\n\r\n*IO:WALWRITE*\r\n\r\n* Analyze the checkpoint details tab and follow recommendations around server parameters `max_wal_size`,`checkpoint_completion_target`.\r\n\r\n* Tune queries.\r\n\r\n* Consider moving to a higher SKU.\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
