@@ -1354,7 +1354,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Statistics on long running sessions\r\n\r\nNote:\r\n\r\n* Connection Duration **(blue)** - Duration of session or connection (collection_time - backend_start). You will notice higher value in case if you are using conneciton pool.\r\n* Query duration **(yellow)** - Duration of query (collection_time - query_start). This should be in expected range of query execution time.\r\n\r\nLong running transactions are identified through the information provided by the pg_stat_activity view in PostgreSQL. If you want to know more about the semantics of these columns, please refer to the [official documentation](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW).",
+              "json": "## Statistics on long running sessions\r\n\r\nNote:\r\n\r\n* Connection duration **(blue)** - Duration of session or connection `(collection_time - backend_start)`. You will notice higher value if you are using connection pool.\r\n* Query duration **(yellow)** - Duration of query `(collection_time - query_start)`. This should be in expected range of query execution time.\r\n\r\nLong running transactions are identified through the information provided by the pg_stat_activity view in PostgreSQL. If you want to know more about the semantics of these columns, please refer to the [official documentation](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW).",
               "style": "info"
             },
             "conditionalVisibility": {
