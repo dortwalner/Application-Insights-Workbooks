@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "Step | Observations\r\n--- | ---\r\n**Select Parameters** | Step 0: Select Time interval of interest and database. You can select All option to view the metrics for all databases available on server or by selecting a particular database you could drill down metrics for that selected database.\r\n** Identify Bloat** | Step 1: Determine database bloat ratio. \r\n**Live, Dead and DML Tuple count ** | Step 2: Identify count of dead tuples, live tuples, inserted/updated/deleted tuples.\r\n**Table Vacuumed Execution Count** | Step 3: Identify count of tables vacuumed in the database. \r\n**Table Analyzed Execution Count** | Step 4: Identify count of tables analyzed in the database. \r\n**Autovacuum Workers Execution Count** | Step 5: Monitor autovacuum workers execution count.\r\n\r\n"
+              "json": "Step | Observations\r\n--- | ---\r\n**Analysis period** | Step 0: Select Time interval of interest and database. You can select All option to view the metrics for all databases available on server or by selecting a particular database you could drill down metrics for that selected database.\r\n** Identify Bloat** | Step 1: Determine database bloat ratio. \r\n**Live, Dead and DML Tuple count ** | Step 2: Identify count of dead tuples, live tuples, inserted/updated/deleted tuples.\r\n**Table Vacuumed Execution Count** | Step 3: Identify count of tables vacuumed in the database. \r\n**Table Analyzed Execution Count** | Step 4: Identify count of tables analyzed in the database. \r\n**Autovacuum Workers Execution Count** | Step 5: Monitor autovacuum workers execution count.\r\n\r\n"
             },
             "name": "table of contents"
           },

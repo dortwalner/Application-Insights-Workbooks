@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "\r\n\r\nStep | Description\r\n--- | ---\r\n**Select Parameters** | Step 0: Select time interval of interest.\r\n**Understand Storage usage** | Step 1: Analyze server storage used using the `Storage` tab. Any sudden spike in storage used in the time interval selected compared to previous time intervals may need further investigation.\r\n**Understand Temporary File Generation** | Step 2: Analyze the number of temporary files and temporary bytes generated in the time interval selected using the `Temporary File Generated` tab. \r\n**Understand the workload** | Step 3: Analyze the  `read` and `write` workloads during the time interval using the `Workload` tab.\r\n**Top Queries By Temporary Files** | step 4: Identify and analyze high temporary file generation queries using `Top Queries By Temporary Files` tab."
+              "json": "\r\n\r\nStep | Description\r\n--- | ---\r\n**Analysis period** | Step 0: Select time interval of interest.\r\n**Storage** | Step 1: Analyze server storage used using the `Storage` tab. Any sudden spike in storage used in the time interval selected compared to previous time intervals may need further investigation.\r\n**Temporary files** | Step 2: Analyze the number of temporary files and temporary bytes generated in the time interval selected using the `Temporary File Generated` tab. \r\n**Workload** | Step 3: Analyze the  `read` and `write` workloads during the time interval using the `Workload` tab.\r\n**Queries** | step 4: Identify and analyze high temporary file generation queries using `Top Queries By Temporary Files` tab."
             },
             "name": "high temp usage workbook"
           }
