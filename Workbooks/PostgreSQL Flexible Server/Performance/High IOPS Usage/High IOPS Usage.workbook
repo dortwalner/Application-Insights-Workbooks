@@ -589,7 +589,7 @@
             "version": "KqlParameterItem/1.0",
             "name": "MetricsGrain",
             "type": 1,
-            "query": "let trange=iff({TimeRange:grain}<5m,5m, {TimeRange:grain});\r\nprint case(\r\n    trange<1h, strcat(format_timespan(trange,'m'),' minute(s)'),\r\n    trange>=1h and trange<1d, strcat(format_timespan(trange,'H'),' hour(s)') ,\r\n    strcat(format_timespan(trange,'dd'),' day(s)')\r\n);",
+            "query": "let trange=iff({TimeRange:grain}<5m,5m, {TimeRange:grain});\r\nprint case(\r\n    trange<1h, strcat(format_timespan(trange,'m'),' minute(s)'),\r\n    trange>=1h and trange<1d, strcat(format_timespan(trange,'H'),' hour(s)') ,\r\n    strcat(format_timespan(trange,'dd'),' day(s)')\r\n);",
             "crossComponentResources": [
               "{Resource}"
             ],
@@ -615,7 +615,7 @@
             "version": "KqlParameterItem/1.0",
             "name": "ChartGrain",
             "type": 1,
-            "query": "let trange=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nprint case(\r\n    trange<1h, strcat(format_timespan(trange,'m'),' minute(s)'),\r\n    trange>=1h and trange<1d, strcat(format_timespan(trange,'H'),' hour(s)') ,\r\n    strcat(format_timespan(trange,'dd'),' day(s)')\r\n);",
+            "query": "let trange=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nprint case(\r\n    trange<1h, strcat(format_timespan(trange,'m'),' minute(s)'),\r\n    trange>=1h and trange<1d, strcat(format_timespan(trange,'H'),' hour(s)') ,\r\n    strcat(format_timespan(trange,'dd'),' day(s)')\r\n);",
             "crossComponentResources": [
               "{Resource}"
             ],
@@ -983,7 +983,7 @@
     {
       "type": 1,
       "content": {
-        "json": "** Monitor IOPS utilization, disk bandwidth consumed and disk IO consumed on the server. **  \r\n\r\nMore details about disk bandwidth and disk IO consumed metrics can be reviewed [here](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-metrics). \r\n\r\nMore details IOPS utilization metric can be reviewed [here](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-compute-storage). ",
+        "json": "** Monitor IOPS utilization, disk bandwidth consumed and disk IO consumed on the server. **  \r\n\r\nMore details about disk bandwidth and disk IO consumed metrics can be reviewed in the documentation of [disk performance metrics](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-metrics). \r\n\r\nMore details about IOPS utilization metric can be reviewed in the documentation of [compute options in Azure Database for PostgreSQL](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-compute-storage).",
         "style": "info"
       },
       "conditionalVisibility": {
@@ -1230,7 +1230,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**The read workload metric calculates the total number of tuples fetched and returned, but it does not include databases like `azure_sys` and `azure_maintenance`.**",
+        "json": "**The read workload metric calculates the total number of tuples fetched and returned for all databases, except for system databases like `azure_sys` and `azure_maintenance`.**",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1364,19 +1364,19 @@
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched",
-              "label": "Tuples Fetched (Sum)"
+              "label": "fetched (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched Timeline",
-              "label": "Tuples Fetched (Sum) [Timeline]"
+              "label": "fetched (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned",
-              "label": "Tuples Returned (Sum)"
+              "label": "returned (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned Timeline",
-              "label": "Tuples Returned (Sum) [Timeline]"
+              "label": "returned (sm) [timeline]"
             }
           ]
         },
@@ -1404,7 +1404,7 @@
     {
       "type": 1,
       "content": {
-        "json": "## Write workload details \r\nThe number of tuples that have been inserted, updated, or deleted are critical for understanding the overall performance of the database and for identifying potential inefficiencies.\r\n\r\nBy monitoring these metrics, administrators can gain insights into the performance of their PostgreSQL write workloads and make data-driven decisions to optimize the database.\r\n\r\n",
+        "json": "## Write workload details\r\nThe number of tuples that have been inserted, updated, or deleted are critical for understanding the overall performance of the database and for identifying potential inefficiencies.\r\n\r\n\r\nBy monitoring these metrics, you can gain insights into the performance of your PostgreSQL write workloads and make data-driven decisions to optimize the database.\r\n\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1465,7 +1465,7 @@
             "aggregation": 1
           }
         ],
-        "title": "Write Workload Metrics",
+        "title": "Write workload metrics",
         "filters": [
           {
             "id": "2",
@@ -1510,7 +1510,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**The write workload metric calculates the total number of inserted, updated, and deleted tuples, but it does not include databases like `azure_sys` and `azure_maintenance`.**\r\n\r\n",
+        "json": "**The write workload metric calculates the total number of tuples inserted, updated, and deleted for all databases, except for system databases like `azure_sys` and `azure_maintenance`.**\r\n\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1580,7 +1580,7 @@
             "splitByLimit": 50
           }
         ],
-        "title": "Tuples Inserted, Updated & Deleted by Database",
+        "title": "Tuples inserted, updated and deleted by database",
         "gridFormatType": 2,
         "resourceLimit": 10000,
         "filters": [
@@ -1660,31 +1660,31 @@
           "labelSettings": [
             {
               "columnId": "Segment",
-              "label": "Database"
+              "label": "database"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_inserted",
-              "label": "Tuples Inserted (Sum)"
+              "label": "inserted (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_inserted Timeline",
-              "label": "Tuples Inserted  (Sum) [Timeline]"
+              "label": "inserted (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_updated",
-              "label": "Tuples Updated  (Sum)"
+              "label": "updated (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_updated Timeline",
-              "label": "Tuples Updated  (Sum) [Timeline]"
+              "label": "updated (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_deleted",
-              "label": "Tuples Deleted  (Sum)"
+              "label": "deleted (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_deleted Timeline",
-              "label": "Tuples Deleted  (Sum) [Timeline]"
+              "label": "deleted (sum) [timeline]"
             }
           ]
         },
@@ -1728,7 +1728,7 @@
             "name": "HaveHighIOConsumingQueries",
             "label": "HaveHighIOQueries",
             "type": 1,
-            "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where BlkReadTime+BlkWriteTime > 0\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| where UserId != 10 // exclude azure super user \r\n| summarize max(Mean_blk_rw_time) by QueryId\r\n| count\r\n| extend HaveQueryIds = iff(Count > 0, \"Yes\", \"No\")\r\n| project HaveQueryIds",
+            "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where BlkReadTime+BlkWriteTime > 0\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| where UserId != 10 // exclude azure super user \r\n| summarize max(Mean_blk_rw_time) by QueryId\r\n| count\r\n| extend HaveQueryIds = iff(Count > 0, \"Yes\", \"No\")\r\n| project HaveQueryIds",
             "crossComponentResources": [
               "{Resource}"
             ],
@@ -1751,7 +1751,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server.\r\n\r\n",
+        "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1786,7 +1786,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### There is no data available in the telemetry for the chosen window or you may have recently configured logging for the server.",
+        "json": "#### There is no data available in the telemetry for the chosen window. Maybe you have recently configured logging for the server. If so, kindly allow up to 30 minutes for the telemetry data to become visible.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1821,7 +1821,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### No IO consuming queries found in the selected TimeRange.",
+        "json": "#### No IO consuming queries found in the period selected.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1856,7 +1856,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### No IO consuming queries found in selected TimeRange. Server parameter `track_io_timing` is disabled. ",
+        "json": "#### No IO consuming queries found in the period selected. Server parameter `track_io_timing` is disabled. ",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1916,7 +1916,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**NOTE:**  When using query store please make sure to enable server parameter  *`track_io_timing`* . <br>The parameter helps in populating columns *`blk_read_time`*  and *`blk_write_time`* in query store which helps in identifying high IO consuming queries. \r\n\r\n*`blk_read_time`*: Total time the statement spent reading data file blocks, in milliseconds <br>\r\n*`blk_write_time`*: Total time the statement spent writing data file blocks, in milliseconds <br>\r\n\r\nThe metric below identifies the top IO-Consuming queries, ordered by sum of *`blk_read_time`* and *`blk_write_time`* . <br>",
+        "json": "**Note:** When using Query Store, please make sure you enable server parameter *`track_io_timing`*.\r\nWhen this parameter is enabled, columns *`blk_read_time`*  and *`blk_write_time`* in Query Store are populated, and that information helps in identifying high IO consuming queries. \r\n\r\n*`blk_read_time`*: Total time the statement spent reading data file blocks, in milliseconds <br>\r\n*`blk_write_time`*: Total time the statement spent writing data file blocks, in milliseconds <br>\r\n\r\nThe metric below identifies the top IO consuming queries, ordered by sum of *`blk_read_time`* and *`blk_write_time`*.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -2035,10 +2035,10 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet TopQueryIDs = \r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where BlkReadTime+BlkWriteTime > 0\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| where UserId != 10 // exclude azure super user \r\n| summarize max(Mean_blk_rw_time) by QueryId\r\n| top {TopIOConsumingQueries} by max_Mean_blk_rw_time desc\r\n| project QueryId;\r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId != 10\r\n| where QueryId in (TopQueryIDs)\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(EndTime, 1m)\r\n| make-series maxiotime=max(Mean_blk_rw_time) default=0 on EVENT_TIME_GRAPHGRAIN from TimeStart to TimeEnd step graphgrain by Queryid=strcat('QueryId ',QueryId)",
+        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet TopQueryIDs = \r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where BlkReadTime+BlkWriteTime > 0\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| where UserId != 10 // exclude azure super user \r\n| summarize max(Mean_blk_rw_time) by QueryId\r\n| top {TopIOConsumingQueries} by max_Mean_blk_rw_time desc\r\n| project QueryId;\r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId != 10\r\n| where QueryId in (TopQueryIDs)\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(EndTime, 1m)\r\n| make-series maxiotime=max(Mean_blk_rw_time) default=0 on EVENT_TIME_GRAPHGRAIN from TimeStart to TimeEnd step graphgrain by Queryid=strcat('QueryId ',QueryId)",
         "size": 0,
         "aggregation": 2,
-        "title": "Top {TopIOConsumingQueries} IOPS Consuming Queries. Data is plotted at a granularity of {ChartGrain}",
+        "title": "Top {TopIOConsumingQueries} queries with highest IOPS consumption. Data is plotted at a granularity of {ChartGrain}",
         "timeBrushParameterName": "TimeRange",
         "timeBrushExportOnlyWhenBrushed": true,
         "queryType": 0,
@@ -2099,7 +2099,7 @@
             "label": "QueryId Snapshot",
             "type": 2,
             "isRequired": true,
-            "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where UserId != 10\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where BlkReadTime+BlkWriteTime > 0\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| where UserId != 10 // exclude azure super user \r\n| summarize max(Mean_blk_rw_time) by QueryId\r\n| top {TopIOConsumingQueries} by max_Mean_blk_rw_time desc\r\n| serialize Rank = row_number()\r\n| project label = QueryId, value =  QueryId, selected = iff(Rank == 1, true, false)",
+            "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where UserId != 10\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where BlkReadTime+BlkWriteTime > 0\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| where UserId != 10 // exclude azure super user \r\n| summarize max(Mean_blk_rw_time) by QueryId\r\n| top {TopIOConsumingQueries} by max_Mean_blk_rw_time desc\r\n| serialize Rank = row_number()\r\n| project label = QueryId, value =  QueryId, selected = iff(Rank == 1, true, false)",
             "crossComponentResources": [
               "{Resource}"
             ],
@@ -2143,9 +2143,9 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId != 10 // exclude azure super user \r\n| where QueryId == {QueryIdsByIO}\r\n| distinct MeanExecDurationMs,MaxExecDurationMs,MinExecDurationMs,Calls,QueryId,QueryType,BlkReadTime,BlkWriteTime,RuntimeStatsEntryId\r\n| extend blk_rw_time=BlkReadTime+BlkWriteTime\r\n| extend Mean_blk_rw_time=blk_rw_time/Calls\r\n| summarize MeanIOtime=avg(Mean_blk_rw_time),MeanExecutionTime=avg(MeanExecDurationMs),MaxIOtime=max(blk_rw_time),MaxExecutionTime=max(MaxExecDurationMs),TotalCalls=sum(Calls),MinIOtime=min(blk_rw_time), MinExecutionTime=min(MinExecDurationMs) by QueryId,QueryType\r\n",
+        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId != 10 // exclude azure super user \r\n| where QueryId == {QueryIdsByIO}\r\n| distinct MeanExecDurationMs,MaxExecDurationMs,MinExecDurationMs,Calls,QueryId,QueryType,BlkReadTime,BlkWriteTime,RuntimeStatsEntryId\r\n| extend blk_rw_time=BlkReadTime+BlkWriteTime\r\n| extend Mean_blk_rw_time=blk_rw_time/Calls\r\n| summarize ['mean io time'] = avg(Mean_blk_rw_time), ['mean execution time'] = avg(MeanExecDurationMs), ['maximum io time'] = max(blk_rw_time), ['maximum execution time'] = max(MaxExecDurationMs), ['total calls'] = sum(Calls), ['minimum io time'] = min(blk_rw_time), ['minimum execution time'] = min(MinExecDurationMs) by ['query identifier'] = QueryId, ['query type'] = QueryType",
         "size": 4,
-        "title": "QueryId {QueryIdsByIO} Summary in Selected TimeRange",
+        "title": "Summary for query with identifier {QueryIdsbyCalls} for the period analyzed",
         "showExportToExcel": true,
         "queryType": 0,
         "resourceType": "microsoft.dbforpostgresql/flexibleservers",
@@ -2155,7 +2155,7 @@
         "gridSettings": {
           "formatters": [
             {
-              "columnMatch": "MeanIOtime",
+              "columnMatch": "mean io time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2165,7 +2165,7 @@
               }
             },
             {
-              "columnMatch": "MeanExecutionTime",
+              "columnMatch": "mean execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2175,7 +2175,7 @@
               }
             },
             {
-              "columnMatch": "MaxIOtime",
+              "columnMatch": "maximum io time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2185,7 +2185,7 @@
               }
             },
             {
-              "columnMatch": "MaxExecutionTime",
+              "columnMatch": "maximum execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2195,7 +2195,7 @@
               }
             },
             {
-              "columnMatch": "MinIOtime",
+              "columnMatch": "minimum io time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2205,7 +2205,7 @@
               }
             },
             {
-              "columnMatch": "MinExecutionTime",
+              "columnMatch": "minimum execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2215,7 +2215,7 @@
               }
             },
             {
-              "columnMatch": "AvgIOtime",
+              "columnMatch": "average io time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2225,7 +2225,7 @@
               }
             },
             {
-              "columnMatch": "AvgExecutionTime",
+              "columnMatch": "average execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2266,9 +2266,9 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet databasename = \r\n{SessionsTable}\r\n|distinct DatabaseName,DatabaseId;\r\n{QueryStoreTable}\r\n    | where EndTime >= TimeStart and EndTime <= TimeEnd\r\n    | where UserId != 10   \r\n    | where QueryId == {QueryIdsByIO}\r\n    | distinct MeanExecDurationMs,MaxExecDurationMs,MinExecDurationMs,Calls,QueryId,QueryType,Rows,TotalExecDurationMs,StartTime,EndTime,PlanId,DatabaseId,UserId,BlkReadTime,BlkWriteTime,SharedBlksRead,SharedBlksDirtied,RuntimeStatsEntryId\r\n    | extend blk_rw_time=BlkReadTime+BlkWriteTime\r\n    | extend mean_Blk_read_time=BlkReadTime/Calls\r\n    | extend mean_Blk_write_time=BlkWriteTime/Calls\r\n    | extend mean_blk_rw_time=blk_rw_time/Calls\r\n    | extend Mean_data_read_kb=SharedBlksRead*8/Calls, Mean_data_write_kb=SharedBlksDirtied*8/Calls\r\n| summarize WindowStart=min(StartTime), WindowEnd=max(EndTime),MeanIOtime=avg(mean_blk_rw_time),MeanExecutionTime=avg(MeanExecDurationMs), MeanReadIOtime=avg(mean_Blk_read_time),MeanDataRead=avg(Mean_data_read_kb),MeanWriteIOtime=avg(mean_Blk_write_time),MeanDataWrite=avg(Mean_data_write_kb),\r\nMeanRows=sum(Rows)/sum(Calls),MinIOtime=min(mean_blk_rw_time),MinExecutionTime=min(MinExecDurationMs),MaxIOtime=max(mean_blk_rw_time),MaxExecutionTime=max(MaxExecDurationMs),TotalCalls=sum(Calls),TotalExecutionTime=sum(TotalExecDurationMs),TotalRows=sum(Rows),TotalIOtime=sum(blk_rw_time) by bin(todatetime(EndTime), graphgrain), QueryId,PlanId,DatabaseId,UserId\r\n//excluded MeanReadIOtime and MeanWriteIOtime, because most of the time write io time will be less. Writes are on bgwriter \r\n| join kind=leftouter databasename on $left.DatabaseId == $right.DatabaseId\r\n| project QueryId,PlanId,DatabaseName = iff(isempty(DatabaseName),strcat(\"oid::\",DatabaseId), DatabaseName),UserId,WindowStart, WindowEnd, MeanIOtime,MeanExecutionTime,MeanDataRead,MeanDataWrite,MeanRows,TotalCalls,TotalRows,TotalIOtime,TotalExecutionTime,MinIOtime,MinExecutionTime,MaxIOtime,MaxExecutionTime\r\n|order by WindowStart asc\r\n\r\n   \r\n",
+        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet databasename = \r\n{SessionsTable}\r\n|distinct DatabaseName,DatabaseId;\r\n{QueryStoreTable}\r\n    | where EndTime >= TimeStart and EndTime <= TimeEnd\r\n    | where UserId != 10   \r\n    | where QueryId == {QueryIdsByIO}\r\n    | distinct MeanExecDurationMs,MaxExecDurationMs,MinExecDurationMs,Calls,QueryId,QueryType,Rows,TotalExecDurationMs,StartTime,EndTime,PlanId,DatabaseId,UserId,BlkReadTime,BlkWriteTime,SharedBlksRead,SharedBlksDirtied,RuntimeStatsEntryId\r\n    | extend blk_rw_time=BlkReadTime+BlkWriteTime\r\n    | extend mean_Blk_read_time=BlkReadTime/Calls\r\n    | extend mean_Blk_write_time=BlkWriteTime/Calls\r\n    | extend mean_blk_rw_time=blk_rw_time/Calls\r\n    | extend Mean_data_read_kb=SharedBlksRead*8/Calls, Mean_data_write_kb=SharedBlksDirtied*8/Calls\r\n| summarize WindowStart=min(StartTime), WindowEnd=max(EndTime),MeanIOtime=avg(mean_blk_rw_time),MeanExecutionTime=avg(MeanExecDurationMs), MeanReadIOtime=avg(mean_Blk_read_time),MeanDataRead=avg(Mean_data_read_kb),MeanWriteIOtime=avg(mean_Blk_write_time),MeanDataWrite=avg(Mean_data_write_kb),\r\nMeanRows=sum(Rows)/sum(Calls),MinIOtime=min(mean_blk_rw_time),MinExecutionTime=min(MinExecDurationMs),MaxIOtime=max(mean_blk_rw_time),MaxExecutionTime=max(MaxExecDurationMs),TotalCalls=sum(Calls),TotalExecutionTime=sum(TotalExecDurationMs),TotalRows=sum(Rows),TotalIOtime=sum(blk_rw_time) by bin(todatetime(EndTime), graphgrain), QueryId,PlanId,DatabaseId,UserId\r\n//excluded MeanReadIOtime and MeanWriteIOtime, because most of the time write io time will be less. Writes are on bgwriter \r\n| join kind=leftouter databasename on $left.DatabaseId == $right.DatabaseId\r\n| project QueryId,PlanId,DatabaseName = iff(isempty(DatabaseName),strcat(\"oid::\",DatabaseId), DatabaseName),UserId,WindowStart, WindowEnd, MeanIOtime,MeanExecutionTime,MeanDataRead,MeanDataWrite,MeanRows,TotalCalls,TotalRows,TotalIOtime,TotalExecutionTime,MinIOtime,MinExecutionTime,MaxIOtime,MaxExecutionTime\r\n| order by WindowStart asc\r\n\r\n   \r\n",
         "size": 0,
-        "title": "QueryId {QueryIdsByIO} Runtime Statistics Split by Time Buckets of {ChartGrain} Each",
+        "title": "Runtime statistics for query identifier {QueryIdsByIO} split by time buckets of {ChartGrain}",
         "showExportToExcel": true,
         "queryType": 0,
         "resourceType": "microsoft.dbforpostgresql/flexibleservers",
@@ -2490,7 +2490,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where BlkReadTime+BlkWriteTime > 0\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| where UserId != 10 // exclude azure super user \r\n| summarize max(Mean_blk_rw_time) by QueryId\r\n| top {TopIOConsumingQueries} by max_Mean_blk_rw_time desc\r\n| extend SQL= strcat(\"SELECT query_sql_text FROM query_store.query_texts_view WHERE query_text_id=\",QueryId,\";\")\r\n| project SQL",
+        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where BlkReadTime+BlkWriteTime > 0\r\n| extend Mean_blk_rw_time=(BlkReadTime+BlkWriteTime)/Calls\r\n| where UserId != 10 // exclude azure super user \r\n| summarize max(Mean_blk_rw_time) by QueryId\r\n| top {TopIOConsumingQueries} by max_Mean_blk_rw_time desc\r\n| extend SQL= strcat(\"SELECT query_sql_text FROM query_store.query_texts_view WHERE query_text_id=\",QueryId,\";\")\r\n| project SQL",
         "size": 1,
         "title": "Get query_text from QueryId",
         "showExportToExcel": true,
@@ -2530,7 +2530,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**General Query Recommendations To Tune High IO Queries** \r\n\r\n**1)** Tune queries identified above using explain analyze. More information on EXPLAIN command [can be found here](https://www.postgresql.org/docs/current/sql-explain.html). \r\n\r\n**2)** High bloat on the tables can also lead to considerable IO utilization. As a one off case consider carrying manual vacuum analyze of the tables used in the slow running queries using the below command on the database: \r\n\r\n\tVacuum (analyze,verbose) <Table Name> \r\n\r\n\r\n**3)** Partitioning: If you observe queries on large tables taking high IO consider partitioning the large tables.\r\n\r\n**4)** Indexes & Joins: Consider creating indexes and reduce the joins in the query if applicable.\r\n\r\n**5)** Consider tuning server parameters like `work_mem`, `maintainence_work_mem`. Please make the changes with caution and testing as setting a very high value of both parameters could lead to out of memory issues.\r\n\r\n**6)** Understand the checkpoint timings and follow the recommendations provided below in checkpoint details tab of the troubleshooting guide to tune checkpoint related server parameters.\r\n ",
+        "json": "**General Query Recommendations To Tune High IO Queries** \r\n\r\n**1)** Tune queries identified above using explain analyze. More information on EXPLAIN command [can be found here](https://www.postgresql.org/docs/current/sql-explain.html). \r\n\r\n**2)** High bloat on the tables can also lead to considerable IO utilization. As a one off case consider carrying manual vacuum analyze of the tables used in the slow running queries using the below command on the database: \r\n\r\n\tVacuum (analyze,verbose) <Table Name> \r\n\r\n\r\n**3)** Partitioning: If you observe queries on large tables taking high IO consider partitioning the large tables.\r\n\r\n**4)** Indexes & Joins: Consider creating indexes and reduce the joins in the query if applicable.\r\n\r\n**5)** Consider tuning server parameters like `work_mem`, `maintainence_work_mem`. Please make the changes with caution and testing as setting a very high value of both parameters could lead to out of memory issues.\r\n\r\n**6)** Understand the checkpoint timings and follow the recommendations provided below in checkpoint details tab of the troubleshooting guide to tune checkpoint related server parameters.\r\n ",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -3185,7 +3185,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{SessionsTable}\r\n| where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where UserId != 10\r\n| distinct TimeGenerated,ProcessId,BackendStartTime,BackendType,State,CollectionTime,QueryStartTime,TransactionStartTime,StateChangeTime,DatabaseId,DatabaseName,UserId,ClientIpAddress\r\n| extend uniquePidkeys=strcat(toint(ProcessId),'-',BackendStartTime)\r\n| where uniquePidkeys =='{SessionPid}'\r\n| extend Connection_Duration=iff(CollectionTime-BackendStartTime<time(00:00:00.00),0, datetime_diff('millisecond',CollectionTime,BackendStartTime))\r\n| extend StateLastChanged_ms=iff(CollectionTime-StateChangeTime<time(00:00:00.00),0, datetime_diff('millisecond',CollectionTime,StateChangeTime))\r\n| extend Xact_duration_ms=iff(CollectionTime-TransactionStartTime<time(00:00:00.00), datetime_diff('millisecond',TransactionStartTime,CollectionTime), datetime_diff('millisecond',CollectionTime,TransactionStartTime))\r\n| extend Query_duration_ms=iff(CollectionTime-QueryStartTime<time(00:00:00.00),datetime_diff('millisecond',QueryStartTime,CollectionTime), datetime_diff('millisecond',CollectionTime,QueryStartTime))\r\n| extend dummy_row=1\r\n| summarize max(Connection_Duration), max(Query_duration_ms), max(Xact_duration_ms),sum(dummy_row)  by ProcessId,BackendStartTime, DatabaseId, DatabaseName, UserId, ClientIpAddress, BackendType\r\n| project ProcessId,BackendType, DatabaseId, DatabaseName, UserId, ClientIpAddress,BackendStartTime,TotalConnectionDuration=max_Connection_Duration, LongestTransactionDuration=max_Xact_duration_ms,LongestQueryDuration=max_Query_duration_ms, SampledDatapointsCounter=sum_dummy_row",
+        "query": "let Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{SessionsTable}\r\n| where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where UserId != 10\r\n| distinct TimeGenerated,ProcessId,BackendStartTime,BackendType,State,CollectionTime,QueryStartTime,TransactionStartTime,StateChangeTime,DatabaseId,DatabaseName,UserId,ClientIpAddress\r\n| extend uniquePidkeys=strcat(toint(ProcessId),'-',BackendStartTime)\r\n| where uniquePidkeys =='{SessionPid}'\r\n| extend Connection_Duration=iff(CollectionTime-BackendStartTime<time(00:00:00.00),0, datetime_diff('millisecond',CollectionTime,BackendStartTime))\r\n| extend StateLastChanged_ms=iff(CollectionTime-StateChangeTime<time(00:00:00.00),0, datetime_diff('millisecond',CollectionTime,StateChangeTime))\r\n| extend Xact_duration_ms=iff(CollectionTime-TransactionStartTime<time(00:00:00.00), datetime_diff('millisecond',TransactionStartTime,CollectionTime), datetime_diff('millisecond',CollectionTime,TransactionStartTime))\r\n| extend Query_duration_ms=iff(CollectionTime-QueryStartTime<time(00:00:00.00),datetime_diff('millisecond',QueryStartTime,CollectionTime), datetime_diff('millisecond',CollectionTime,QueryStartTime))\r\n| extend dummy_row=1\r\n| summarize max(Connection_Duration), max(Query_duration_ms), max(Xact_duration_ms),sum(dummy_row)  by ProcessId,BackendStartTime, DatabaseId, DatabaseName, UserId, ClientIpAddress, BackendType\r\n| project ProcessId,BackendType, DatabaseId, DatabaseName, UserId, ClientIpAddress,BackendStartTime,TotalConnectionDuration=max_Connection_Duration, LongestTransactionDuration=max_Xact_duration_ms,LongestQueryDuration=max_Query_duration_ms, SampledDatapointsCounter=sum_dummy_row",
         "size": 4,
         "title": "Summary as Of Time - {GlobalEndTime} UTC",
         "noDataMessage": "No PIDs data was found for the selected time range. Select a wider time range",
@@ -3608,7 +3608,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**Recommendations**\r\n\r\n* As a long term approach consider tuning queries identified from the above PIDs using explain analyze.\r\nMore information on EXPLAIN command can be found here https://www.postgresql.org/docs/current/sql-explain.html\r\n\r\n\r\n* As a short term option you can terminate or cancel the sessions by executing below commands:\r\n\r\nFrom the PIDs retrieved above execute the below query on the server to terminate the session:\r\n\r\n\tSELECT pg_terminate_backend(<pid>);\r\n\r\nYou could also cancel the running queries by executing the below query:\r\n\r\n\tSelect pg_cancel_backend(<pid>); \r\n\r\n* It is recommended to configure the server parameters such as `statement_timeout` (in PG14, `idle_session_timeout`) or `idle_in_transaction_session_timeout` to terminate such long running sessions. This will prevent unnecessary consumption of system resources and help maintain server performance.",
+        "json": "**Recommendations**\r\n\r\n* As a long term approach consider tuning queries identified from the above PIDs using explain analyze.\r\nMore information on EXPLAIN command can be found here https://www.postgresql.org/docs/current/sql-explain.html\r\n\r\n\r\n* As a short term option you can terminate or cancel the sessions by executing below commands:\r\n\r\nFrom the PIDs retrieved above execute the below query on the server to terminate the session:\r\n\r\n\tSELECT pg_terminate_backend(<pid>);\r\n\r\nYou could also cancel the running queries by executing the below query:\r\n\r\n\tSelect pg_cancel_backend(<pid>); \r\n\r\n* It is recommended to configure the server parameters such as `statement_timeout` (in PG14, `idle_session_timeout`) or `idle_in_transaction_session_timeout` to terminate such long running sessions. This will prevent unnecessary consumption of system resources and help maintain server performance.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -3663,7 +3663,7 @@
             "version": "KqlParameterItem/1.0",
             "name": "HasWaitSampleData",
             "type": 1,
-            "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| count\r\n| extend HaveData = iff(Count > 0, \"Yes\", \"No\")\r\n| project HaveData\r\n\r\n",
+            "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| count\r\n| extend HaveData = iff(Count > 0, \"Yes\", \"No\")\r\n| project HaveData\r\n\r\n",
             "crossComponentResources": [
               "{Resource}"
             ],
@@ -3865,7 +3865,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "\r\nlet graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\n//let graphgrain=15m;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet Topwaits = \r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| extend WaitEvent = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| summarize max_calls = max(Calls) by WaitEvent\r\n| where max_calls > 0\r\n| top {MaxCount} by max_calls desc\r\n| project WaitEvent;\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n| where EventType=='IO'\r\n| extend Events = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| where Events in (Topwaits)\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(todatetime(EndTime),1m)\r\n| make-series max(Calls) default=0 on EVENT_TIME_GRAPHGRAIN from TimeStart to TimeEnd step graphgrain by Events\r\n\r\n",
+        "query": "\r\nlet graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\n//let graphgrain=15m;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet Topwaits = \r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| extend WaitEvent = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| summarize max_calls = max(Calls) by WaitEvent\r\n| where max_calls > 0\r\n| top {MaxCount} by max_calls desc\r\n| project WaitEvent;\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n| where EventType=='IO'\r\n| extend Events = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| where Events in (Topwaits)\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(todatetime(EndTime),1m)\r\n| make-series max(Calls) default=0 on EVENT_TIME_GRAPHGRAIN from TimeStart to TimeEnd step graphgrain by Events\r\n\r\n",
         "size": 0,
         "aggregation": 2,
         "title": "Top Sampled Wait Events. Data is plotted at a granularity of {ChartGrain}",
@@ -3910,7 +3910,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "\r\nlet graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\n//let graphgrain=15m;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet Topwaits = \r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| extend WaitEvent = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| summarize max_calls = max(Calls) by WaitEvent\r\n| where max_calls > 0\r\n| top {MaxCount} by max_calls desc\r\n| project WaitEvent;\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n| where EventType=='IO'\r\n| extend Events = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| where Events in (Topwaits)\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(todatetime(EndTime),1m)\r\n| summarize Calls=max(Calls) by QueryId, Events\r\n| order by Calls\r\n\r\n",
+        "query": "\r\nlet graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\n//let graphgrain=15m;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet Topwaits = \r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| extend WaitEvent = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| summarize max_calls = max(Calls) by WaitEvent\r\n| where max_calls > 0\r\n| top {MaxCount} by max_calls desc\r\n| project WaitEvent;\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n| where EventType=='IO'\r\n| extend Events = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| where Events in (Topwaits)\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(todatetime(EndTime),1m)\r\n| summarize Calls=max(Calls) by QueryId, Events\r\n| order by Calls\r\n\r\n",
         "size": 0,
         "aggregation": 2,
         "title": "Top Sampled Wait Events By QueryId",
@@ -4028,7 +4028,7 @@
             "name": "isCheckpoint",
             "label": "Checkpoint Frequency",
             "type": 1,
-            "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PGServerLogsTable}\r\n| where Message contains \"checkpoints are occurring too frequently\"\r\n| where Timestamp >= TimeStart and Timestamp <= TimeEnd\r\n|count\r\n|extend checkpointfrequent = iff(Count >0,'Yes','No')\r\n|project checkpointfrequent\r\n",
+            "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PGServerLogsTable}\r\n| where Message contains \"checkpoints are occurring too frequently\"\r\n| where Timestamp >= TimeStart and Timestamp <= TimeEnd\r\n|count\r\n|extend checkpointfrequent = iff(Count >0,'Yes','No')\r\n|project checkpointfrequent\r\n",
             "crossComponentResources": [
               "{Resource}"
             ],
@@ -4217,7 +4217,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PGServerLogsTable}\r\n| where todatetime(Timestamp) >= TimeStart and todatetime(Timestamp) <= TimeEnd\r\n| where Message contains \"checkpoint starting\" or Message contains \"restartpoint starting\"\r\n|distinct Message,Timestamp\r\n| extend preg_matchall=extract_all(@'(checkpoint|restartpoint) starting: (.+)',Message)\r\n| extend CheckpointFlagsBit=tostring(preg_matchall[0][1])\r\n| extend CheckpointType=preg_matchall[0][0]\r\n| project Timestamp,CheckpointType,CheckpointFlagsBit\r\n| extend ts = bin(todatetime(Timestamp), 1m)\r\n| where CheckpointFlagsBit ==\"time\" or CheckpointFlagsBit==\"wal\"\r\n| make-series NrOfCheckpointsEach30min=count(CheckpointFlagsBit) default=0 on ts  from TimeStart to TimeEnd step graphgrain by CheckpointFlagsBit\r\n\r\n\r\n",
+        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PGServerLogsTable}\r\n| where todatetime(Timestamp) >= TimeStart and todatetime(Timestamp) <= TimeEnd\r\n| where Message contains \"checkpoint starting\" or Message contains \"restartpoint starting\"\r\n|distinct Message,Timestamp\r\n| extend preg_matchall=extract_all(@'(checkpoint|restartpoint) starting: (.+)',Message)\r\n| extend CheckpointFlagsBit=tostring(preg_matchall[0][1])\r\n| extend CheckpointType=preg_matchall[0][0]\r\n| project Timestamp,CheckpointType,CheckpointFlagsBit\r\n| extend ts = bin(todatetime(Timestamp), 1m)\r\n| where CheckpointFlagsBit ==\"time\" or CheckpointFlagsBit==\"wal\"\r\n| make-series NrOfCheckpointsEach30min=count(CheckpointFlagsBit) default=0 on ts  from TimeStart to TimeEnd step graphgrain by CheckpointFlagsBit\r\n\r\n\r\n",
         "size": 0,
         "title": "Checkpoint Frequency Every {ChartGrain}",
         "timeBrushParameterName": "TimeRange",
@@ -4274,7 +4274,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PGServerLogsTable}\r\n| where todatetime(Timestamp) >= TimeStart and todatetime(Timestamp) <= TimeEnd\r\n| where Message contains \"checkpoint complete\"\r\n| distinct Message,Timestamp\r\n| extend preg_matchall=extract_all(@'checkpoint complete: (.+)',Message)\r\n|extend CheckpointFlagsBit=extract(\"total=([0-9.]+)\", 1, tostring(preg_matchall[0]), typeof(real))\r\n| project Timestamp,CheckpointFlagsBit,Type=strcat(extract(\"checkpoint\",0,Message),' ',\"Times\")\r\n| extend ts = bin(todatetime(Timestamp), 1m)\r\n| make-series NrOfCheckpointsEach30min=avg(CheckpointFlagsBit) default=0 on ts from  TimeStart to TimeEnd step graphgrain by Type",
+        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PGServerLogsTable}\r\n| where todatetime(Timestamp) >= TimeStart and todatetime(Timestamp) <= TimeEnd\r\n| where Message contains \"checkpoint complete\"\r\n| distinct Message,Timestamp\r\n| extend preg_matchall=extract_all(@'checkpoint complete: (.+)',Message)\r\n|extend CheckpointFlagsBit=extract(\"total=([0-9.]+)\", 1, tostring(preg_matchall[0]), typeof(real))\r\n| project Timestamp,CheckpointFlagsBit,Type=strcat(extract(\"checkpoint\",0,Message),' ',\"Times\")\r\n| extend ts = bin(todatetime(Timestamp), 1m)\r\n| make-series NrOfCheckpointsEach30min=avg(CheckpointFlagsBit) default=0 on ts from  TimeStart to TimeEnd step graphgrain by Type",
         "size": 0,
         "aggregation": 3,
         "title": "Checkpoint Time Every {ChartGrain}",
@@ -4321,7 +4321,7 @@
     {
       "type": 1,
       "content": {
-        "json": "\r\n\r\n#### Tune server parameters\r\n\r\nIf you've observed that the checkpoint is happening too frequently, increase the max_wal_size server parameter until most checkpoints are time driven, instead of requested. Eventually, 90 percent or more should be time  based, and the interval between two  checkpoints should be close to the checkpoint_timeout value that's set on the server. \r\n\r\n**max_wal_size**: Peak business hours are a good time to arrive at a max_wal_size value. To arrive at a value, do the following: \r\n\r\nRun the following query to get the current WAL LSN, and then note the result: \r\n\r\n```\r\nSELECT pg_current_wal_lsn();\r\n```\r\n\r\nWait for a checkpoint_timeout number of seconds. Run the following query to get the current WAL LSN, and then note the result: \r\n\r\n```\r\nSELECT pg_current_wal_lsn();\r\n```\r\n\r\nRun the following query, which uses the two results, to check the difference, in gigabytes (GB): \r\n\r\n```\r\nSELECT round (pg_wal_lsn_diff ('LSN value when run second time', 'LSN value when run first time')/1024/1024/1024,2) WAL_CHANGE_GB; \r\n```\r\n\r\n**checkpoint_completion_target**: A good practice would be to set the value to 0.9. As an example, a value of 0.9 for a checkpoint_timeout of 5 minutes indicates that the target to complete a checkpoint is 270 seconds (0.9*300 seconds). A value of 0.9 provides a fairly consistent I/O load. An aggressive value of checkpoint_completion_target might result in an increased I/O load on the server. \r\n\r\n**checkpoint_timeout**: You can increase the checkpoint_timeout value from the default value that's set on the server. As you're increasing the value, take into consideration that increasing it would also increase the time for crash recovery.\r\n",
+        "json": "\r\n\r\n#### Tune server parameters\r\n\r\nIf you've observed that the checkpoint is happening too frequently, increase the max_wal_size server parameter until most checkpoints are time driven, instead of requested. Eventually, 90 percent or more should be time  based, and the interval between two  checkpoints should be close to the checkpoint_timeout value that's set on the server. \r\n\r\n**max_wal_size**: Peak business hours are a good time to arrive at a max_wal_size value. To arrive at a value, do the following: \r\n\r\nRun the following query to get the current WAL LSN, and then note the result: \r\n\r\n```\r\nSELECT pg_current_wal_lsn();\r\n```\r\n\r\nWait for a checkpoint_timeout number of seconds. Run the following query to get the current WAL LSN, and then note the result: \r\n\r\n```\r\nSELECT pg_current_wal_lsn();\r\n```\r\n\r\nRun the following query, which uses the two results, to check the difference, in gigabytes (GB): \r\n\r\n```\r\nSELECT round (pg_wal_lsn_diff ('LSN value when run second time', 'LSN value when run first time')/1024/1024/1024,2) WAL_CHANGE_GB; \r\n```\r\n\r\n**checkpoint_completion_target**: A good practice would be to set the value to 0.9. As an example, a value of 0.9 for a checkpoint_timeout of 5 minutes indicates that the target to complete a checkpoint is 270 seconds (0.9*300 seconds). A value of 0.9 provides a fairly consistent I/O load. An aggressive value of checkpoint_completion_target might result in an increased I/O load on the server. \r\n\r\n**checkpoint_timeout**: You can increase the checkpoint_timeout value from the default value that's set on the server. As you're increasing the value, take into consideration that increasing it would also increase the time for crash recovery.\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
