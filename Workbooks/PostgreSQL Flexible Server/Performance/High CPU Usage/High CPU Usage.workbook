@@ -1099,7 +1099,7 @@
           {
             "type": 1,
             "content": {
-              "json": "### Enhanced Metrics are currently disabled.\r\nThis Troubleshooting guide requires the use of enhanced metrics. To activate these metrics, simply enable the dynamic server parameter `metrics.collector_database_activity`.",
+              "json": "### Enhanced metrics are currently disabled.\r\nThis Troubleshooting guide requires the use of enhanced metrics. To activate these metrics, simply enable the dynamic server parameter `metrics.collector_database_activity`.",
               "style": "error"
             },
             "conditionalVisibility": {
@@ -1276,7 +1276,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### Enhanced metrics are disabled on the server. To obtain additional information, please refer to the error message located at the top of the troubleshooting guide.\r\n",
+        "json": "### Enhanced metrics are currently disabled.\r\nThis Troubleshooting guide requires the use of enhanced metrics. To activate these metrics, simply enable the dynamic server parameter `metrics.collector_database_activity`.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -2012,7 +2012,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### Enhanced metrics are disabled on the server. To obtain additional information, please refer to the error message located at the top of the troubleshooting guide.\r\n",
+        "json": "### Enhanced metrics are currently disabled.\r\nThis Troubleshooting guide requires the use of enhanced metrics. To activate these metrics, simply enable the dynamic server parameter `metrics.collector_database_activity`.",
         "style": "info"
       },
       "conditionalVisibilities": [

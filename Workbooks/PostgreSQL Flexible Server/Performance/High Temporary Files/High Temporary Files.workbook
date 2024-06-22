@@ -502,7 +502,7 @@
     {
       "type": 1,
       "content": {
-        "json": "### Enhanced Metrics are currently disabled.\r\nThis troubleshooting guide requires the use of enhanced metrics to display the content in `workload` and `temporary files generated` tabs below. To activate these metrics, simply enable the dynamic server parameter `metrics.collector_database_activity`.",
+        "json": "### Enhanced metrics are currently disabled.\r\nThis Troubleshooting guide requires the use of enhanced metrics. To activate these metrics, simply enable the dynamic server parameter `metrics.collector_database_activity`.",
         "style": "error"
       },
       "conditionalVisibility": {
@@ -583,14 +583,13 @@
             "linkTarget": "parameter",
             "linkLabel": "Storage utilization",
             "subTarget": "storage",
-            "preText": "Storage xtilization",
             "style": "link"
           },
           {
             "id": "9b83c708-b230-436c-bd2f-16dc00270d74",
             "cellValue": "temptab",
             "linkTarget": "parameter",
-            "linkLabel": "Temporary Files Generated",
+            "linkLabel": "Temporary files generated",
             "subTarget": "tempfiles",
             "style": "link"
           },
@@ -598,7 +597,7 @@
             "id": "77c6da6f-b6a5-4014-a702-7dfd33d570f8",
             "cellValue": "temptab",
             "linkTarget": "parameter",
-            "linkLabel": "Workload Details",
+            "linkLabel": "Workload details",
             "subTarget": "workload",
             "style": "link"
           },
@@ -606,7 +605,7 @@
             "id": "002bb8a3-a418-42f3-a9ae-b23596d9b62f",
             "cellValue": "temptab",
             "linkTarget": "parameter",
-            "linkLabel": "Top Queries by Temporary Files",
+            "linkLabel": "Top queries by temporary files",
             "subTarget": "tempqueries",
             "style": "link"
           }
@@ -624,7 +623,7 @@
             "id": "6ecc08b6-475d-4e78-b2d6-6fc300932335",
             "cellValue": "storage-tab",
             "linkTarget": "parameter",
-            "linkLabel": "Storage Used Percentage",
+            "linkLabel": "Percentage of used storage",
             "subTarget": "storagepct",
             "style": "link"
           },
@@ -632,7 +631,7 @@
             "id": "559e5a96-b09c-4c9c-9d6b-ab15ef257d28",
             "cellValue": "storage-tab",
             "linkTarget": "parameter",
-            "linkLabel": "Storage Used Size",
+            "linkLabel": "Used storage",
             "subTarget": "storageused",
             "style": "link"
           }
@@ -670,7 +669,7 @@
             "splitBy": null
           }
         ],
-        "title": "Maximum Storage Space Used. Data is plotted at a granularity of {MetricsGrain}",
+        "title": "Maximum percentage of used storage. Data is plotted at a granularity of {MetricsGrain}",
         "showCreateAlertRule": true,
         "timeBrushParameterName": "TimeRange",
         "gridSettings": {
@@ -716,7 +715,7 @@
             "splitBy": null
           }
         ],
-        "title": "Maximum Percent of Storage Space Used. Data is plotted at a granularity of {MetricsGrain}",
+        "title": "Maximum percentage of used storage. Data is plotted at a granularity of {MetricsGrain}",
         "showCreateAlertRule": true,
         "timeBrushParameterName": "TimeRange",
         "gridSettings": {
@@ -775,7 +774,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### Analyze storage used percentage or storage used size charts for any sudden spikes in storage utilization. It is recommended to analyze the Temporary Files Generated tab in this troubleshooting guide if sudden storage spikes are noticed.",
+        "json": "#### Analyze storage used percentage or storage used size charts for any sudden spikes in storage utilization. It is recommended to analyze the Temporary files generated tab in this troubleshooting guide, if sudden storage spikes are noticed.",
         "style": "info"
       },
       "conditionalVisibility": {
@@ -788,7 +787,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### The Enhanced Metrics are disabled on server. To obtain additional information, please refer to the error message located at the top of the troubleshooting guide.",
+        "json": "### Enhanced metrics are currently disabled.\r\nThis Troubleshooting guide requires the use of enhanced metrics. To activate these metrics, simply enable the dynamic server parameter `metrics.collector_database_activity`.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1250,7 +1249,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### The Enhanced Metrics are disabled on server. To obtain additional information, please refer to the error message located at the top of the troubleshooting guide.",
+        "json": "### Enhanced metrics are currently disabled.\r\nThis Troubleshooting guide requires the use of enhanced metrics. To activate these metrics, simply enable the dynamic server parameter `metrics.collector_database_activity`.",
         "style": "info"
       },
       "conditionalVisibilities": [
