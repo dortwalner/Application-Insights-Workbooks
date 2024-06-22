@@ -3290,7 +3290,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{SessionsTable}\r\n| where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where UserId != 10 and State !='idle'\r\n| where isnotempty(DatabaseId) and DatabaseName !in('azure_sys','azure_maintenance')\r\n| distinct DatabaseId,DatabaseName,ProcessId,BackendStartTime,State\r\n    | extend uniquePidkeys=strcat(toint(ProcessId),'-',BackendStartTime)\r\n    | where uniquePidkeys =='{SessionPid}'\r\n| extend workingState=iff(State in ('active','idle','idle in transaction','idle in transaction (aborted)'),State,'Other')\r\n| summarize count() by State=workingState",
+        "query": "let Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{SessionsTable}\r\n| where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where UserId != 10 and State !='idle'\r\n| where isnotempty(DatabaseId) and DatabaseName !in('azure_sys','azure_maintenance')\r\n| distinct DatabaseId,DatabaseName,ProcessId,BackendStartTime,State\r\n    | extend uniquePidkeys=strcat(toint(ProcessId),'-',BackendStartTime)\r\n    | where uniquePidkeys =='{SessionPid}'\r\n| extend workingState=iff(State in ('active','idle','idle in transaction','idle in transaction (aborted)'), State, 'other')\r\n| summarize count() by State=workingState",
         "size": 4,
         "title": "Overall State of the PID for the Period. Data is sampled each 5 minutes",
         "queryType": 0,
