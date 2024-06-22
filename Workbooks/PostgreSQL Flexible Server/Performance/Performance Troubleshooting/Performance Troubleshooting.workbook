@@ -12,7 +12,7 @@
             "id": "1d96987a-24d3-4382-a299-1cba6098f069",
             "cellValue": "tabType",
             "linkTarget": "parameter",
-            "linkLabel": "CPU utilization",
+            "linkLabel": "CPU",
             "subTarget": "CPU",
             "style": "link",
             "workbookContext": {
@@ -29,7 +29,7 @@
             "id": "404ca5fd-86de-465c-a171-17480180053a",
             "cellValue": "tabType",
             "linkTarget": "parameter",
-            "linkLabel": "Memory utilization",
+            "linkLabel": "Memory",
             "subTarget": "MEMORY",
             "style": "link"
           },
@@ -37,7 +37,7 @@
             "id": "23f6e613-ad03-4686-b7ec-d643a7e1cf2e",
             "cellValue": "tabType",
             "linkTarget": "parameter",
-            "linkLabel": "IOPS utilization",
+            "linkLabel": "IOPS",
             "subTarget": "IOPS",
             "style": "link"
           },
@@ -82,7 +82,7 @@
         "comparison": "isEqualTo",
         "value": "CPU"
       },
-      "name": "CPU utilization"
+      "name": "CPU Usage"
     },
     {
       "type": 12,
