@@ -2187,76 +2187,22 @@
                     "gridSettings": {
                       "formatters": [
                         {
-                          "columnMatch": "DatabaseId",
-                          "formatter": 5
-                        },
-                        {
-                          "columnMatch": "WindowStart",
+                          "columnMatch": "window start",
                           "formatter": 6
                         },
                         {
-                          "columnMatch": "WindowEnd",
+                          "columnMatch": "window end",
                           "formatter": 6
                         },
                         {
-                          "columnMatch": "Rows",
+                          "columnMatch": "total rows",
                           "formatter": 8,
                           "formatOptions": {
                             "palette": "blue"
                           }
                         },
                         {
-                          "columnMatch": "MeanDataUsage",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          },
-                          "numberFormat": {
-                            "unit": 3,
-                            "options": {
-                              "style": "decimal"
-                            }
-                          }
-                        },
-                        {
-                          "columnMatch": "MeanExecutionTime",
-                          "formatter": 0,
-                          "numberFormat": {
-                            "unit": 23,
-                            "options": {
-                              "style": "decimal"
-                            }
-                          }
-                        },
-                        {
-                          "columnMatch": "MinDataUsage",
-                          "formatter": 0,
-                          "numberFormat": {
-                            "unit": 3,
-                            "options": {
-                              "style": "decimal"
-                            }
-                          }
-                        },
-                        {
-                          "columnMatch": "MaxDataUsage",
-                          "formatter": 0,
-                          "numberFormat": {
-                            "unit": 3,
-                            "options": {
-                              "style": "decimal"
-                            }
-                          }
-                        },
-                        {
-                          "columnMatch": "Calls",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          }
-                        },
-                        {
-                          "columnMatch": "TotalDataUsage",
+                          "columnMatch": "mean data usage",
                           "formatter": 8,
                           "formatOptions": {
                             "palette": "blue"
@@ -2269,7 +2215,7 @@
                           }
                         },
                         {
-                          "columnMatch": "MinExecutionTime",
+                          "columnMatch": "mean execution time",
                           "formatter": 0,
                           "numberFormat": {
                             "unit": 23,
@@ -2279,27 +2225,34 @@
                           }
                         },
                         {
-                          "columnMatch": "MaxExecutionTime",
+                          "columnMatch": "minimum data usage",
                           "formatter": 0,
                           "numberFormat": {
-                            "unit": 23,
+                            "unit": 3,
                             "options": {
                               "style": "decimal"
                             }
                           }
                         },
                         {
-                          "columnMatch": "TotalExecutionTime",
+                          "columnMatch": "maximum data usage",
                           "formatter": 0,
                           "numberFormat": {
-                            "unit": 23,
+                            "unit": 3,
                             "options": {
                               "style": "decimal"
                             }
                           }
                         },
                         {
-                          "columnMatch": "MeanMemory",
+                          "columnMatch": "total calls",
+                          "formatter": 8,
+                          "formatOptions": {
+                            "palette": "blue"
+                          }
+                        },
+                        {
+                          "columnMatch": "total data usage",
                           "formatter": 8,
                           "formatOptions": {
                             "palette": "blue"
@@ -2312,152 +2265,56 @@
                           }
                         },
                         {
-                          "columnMatch": "MinMemory",
+                          "columnMatch": "minimum execution time",
                           "formatter": 0,
                           "numberFormat": {
-                            "unit": 3,
+                            "unit": 23,
                             "options": {
                               "style": "decimal"
                             }
                           }
                         },
                         {
-                          "columnMatch": "MaxMemory",
+                          "columnMatch": "maxium execution time",
                           "formatter": 0,
                           "numberFormat": {
-                            "unit": 3,
+                            "unit": 23,
                             "options": {
                               "style": "decimal"
                             }
                           }
                         },
                         {
-                          "columnMatch": "TotalMemory",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          },
+                          "columnMatch": "total execution time",
+                          "formatter": 0,
                           "numberFormat": {
-                            "unit": 3,
+                            "unit": 23,
                             "options": {
                               "style": "decimal"
                             }
                           }
                         },
                         {
-                          "columnMatch": "EndTime",
-                          "formatter": 5
-                        },
-                        {
-                          "columnMatch": "End_time",
-                          "formatter": 5
-                        },
-                        {
-                          "columnMatch": "Queryid",
+                          "columnMatch": "query identifier",
                           "formatter": 1
                         },
                         {
-                          "columnMatch": "Dbid",
+                          "columnMatch": "query type",
                           "formatter": 1
-                        },
-                        {
-                          "columnMatch": "Start_time",
-                          "formatter": 6
-                        },
-                        {
-                          "columnMatch": "Query_type",
-                          "formatter": 1
-                        },
-                        {
-                          "columnMatch": "Shared_blks_dirtied",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          }
-                        },
-                        {
-                          "columnMatch": "Shared_blks_hit",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          }
-                        },
-                        {
-                          "columnMatch": "Memory_blks_hit",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          },
-                          "numberFormat": {
-                            "unit": 3,
-                            "options": {
-                              "style": "decimal"
-                            }
-                          }
-                        },
-                        {
-                          "columnMatch": "PreciseTimeStamp",
-                          "formatter": 6
-                        },
-                        {
-                          "columnMatch": "memory_blks_hit",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          },
-                          "numberFormat": {
-                            "unit": 3,
-                            "options": {
-                              "style": "decimal"
-                            }
-                          }
-                        },
-                        {
-                          "columnMatch": "Total_consumed_memory",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          },
-                          "numberFormat": {
-                            "unit": 3,
-                            "options": {
-                              "style": "decimal"
-                            }
-                          }
-                        },
-                        {
-                          "columnMatch": "Total_blks",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          },
-                          "numberFormat": {
-                            "unit": 3,
-                            "options": {
-                              "style": "decimal"
-                            }
-                          }
-                        },
-                        {
-                          "columnMatch": "Max_blks",
-                          "formatter": 8,
-                          "formatOptions": {
-                            "palette": "blue"
-                          }
                         }
                       ],
                       "rowLimit": 10000,
                       "filter": true,
                       "sortBy": [
                         {
-                          "itemKey": "WindowStart",
+                          "itemKey": "window start",
                           "sortOrder": 1
                         }
                       ]
                     },
                     "sortBy": [
                       {
-                        "itemKey": "WindowStart",
+                        "itemKey": "window start",
                         "sortOrder": 1
                       }
                     ]
