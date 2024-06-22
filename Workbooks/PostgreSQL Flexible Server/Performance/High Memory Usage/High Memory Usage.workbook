@@ -1015,7 +1015,7 @@
     {
       "type": 1,
       "content": {
-        "json": "### Memory configuration: parameter value change detected!\r\n\r\nWe’ve observed that the memory parameters have been set to values higher than their default settings. These changes can impact system performance. Please check if there's an increase in server memory usage after these modifications.\r\n\r\nHere is the list of parameters that have been changed: ** {validate_memory_parameters}**\r\n\r\nAltering these parameters should be done with caution. For best practices on parameter configuration, refer to the **\"Guidelines for configuring parameters\"** tab in this troubleshooting guide.\r\n",
+        "json": "### Memory configuration: parameter value change detected!\r\n\r\nWe’ve observed that the memory parameters have been set to values higher than their default settings. These changes can impact system performance. Please check if there's an increase in server memory usage after these modifications.\r\n\r\nHere is the list of parameters that have been changed: **{validate_memory_parameters} **\r\n\r\nAltering these parameters should be done with caution. For best practices on parameter configuration, refer to the **\"Guidelines for configuring parameters\"** tab in this troubleshooting guide.\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
