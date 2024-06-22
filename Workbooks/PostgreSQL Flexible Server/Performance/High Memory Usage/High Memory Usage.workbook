@@ -1036,7 +1036,7 @@
       "type": 1,
       "content": {
         "json": "### Long idle session detected!\r\n\r\nOur monitoring system has detected a PostgreSQL session that has been idle and connected to the server for **more than {long_idle_sessions_threshold_hour} hours**. Long-idle sessions can consume valuable system resources and potentially impact overall server performance.\r\n\r\nWe strongly recommend you to **review your PostgreSQL sessions** and **terminate any idle sessions that have been connected for an extended period**. Efficient session management is key to maintaining optimal performance in a PostgreSQL environment.\r\n\r\nPlease follow these best practices:\r\n1. **Identify long-idle sessions**: Use PostgreSQL system catalogs or administration tools to identify any sessions that have been idle for an extended period.\r\n2. **Terminate idle sessions**: If a session is idle and has been connected for more than {long_idle_sessions_threshold_hour} hours, consider terminating it to free up system resources.\r\n3. **Review your application logic**: If your application often leaves sessions idle for extended periods, it might be a good idea to review your application logic to prevent this from happening.\r\n4. **Implement idle session timeout settings**: For PostgreSQL 14 and above, consider implementing `idle_session_timeout` settings in your PostgreSQL configuration to automatically terminate sessions after a certain period of inactivity.\r\n\r\n",
-        "style": "info"
+        "style": "warning"
       },
       "conditionalVisibilities": [
         {
