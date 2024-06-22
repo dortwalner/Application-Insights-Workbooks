@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "Step | Description\r\n--- | ---\r\n**Set analysis period** | Choose the time interval that you wish to analyze.\r\n**IOPS utilization** | Use the `IOPS utilization` tab to analyze and understand `CPU` utilization on the server. Any spike in values compared to previous time intervals can be considered unusual and needing further investigation.\r\n**Type of workload** | Use the `Workload details` tab to analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU utilization** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server.\r\n**Do you see long running queries** | Step 3: Analyze session details tab for any read queries, write queries running for long time . Follow mitigation steps suggested in the section and monitor IOPS utilization.\r\n**Identify IO consuming queries** | Step 4: Analyze top IOPS consuming  queries during window of interest from `Top Queries By IOPS`. Follow mitigation steps suggested in the section.\r\n**Identify IO wait events** | Step 5: Analyze `IO` wait events from `IO Wait Events` tab and follow recommendations on IO waits.\r\n**Do you see too frequent checkpoints** | Step 6: Checkpoints happening too frequently can consume IO. Analyze `Checkpoint Details` tab to identify any in the window of interest. Follow mitigation steps suggested in the section.\r\n**Check Storage Utilization** | Step 7: Increasing storage helps when you're adding more IOPS to the server. Check `Storage utilization` tab to understand current storage utilization on the server."
+              "json": "Step | Description\r\n--- | ---\r\n**Set analysis period** | Choose the time interval that you wish to analyze.\r\n**IOPS utilization** | Use the `IOPS` tab to analyze and understand `CPU` utilization on the server. Any spike in values compared to previous time intervals can be considered unusual and needing further investigation.\r\n**Type of workload** | Use the `Workload` tab to analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU utilization** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server.\r\n**Do you see long running queries** | Step 3: Analyze session details tab for any read queries, write queries running for long time . Follow mitigation steps suggested in the section and monitor IOPS utilization.\r\n**Identify IO consuming queries** | Step 4: Analyze top IOPS consuming  queries during window of interest from `Top Queries By IOPS`. Follow mitigation steps suggested in the section.\r\n**Identify IO wait events** | Step 5: Analyze `IO` wait events from the `Waits` tab and follow recommendations on IO waits.\r\n**Do you see too frequent checkpoints** | Step 6: Checkpoints happening too frequently can consume IO. Analyze `Checkpoints` tab to identify any in the window of interest. Follow mitigation steps suggested in the section.\r\n**Check Storage Utilization** | Step 7: Increasing storage helps when you're adding more IOPS to the server. Check `Storage` tab to understand current storage utilization on the server."
             },
             "name": "steps in the workbook"
           }
@@ -801,7 +801,7 @@
             "id": "561184d2-fedd-44f8-9fe1-5a5bca468465",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "IOPS utilization",
+            "linkLabel": "IOPS",
             "subTarget": "usage",
             "style": "link"
           },
@@ -809,7 +809,7 @@
             "id": "53a4d309-f616-49ac-b3f8-01f9b81c712f",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Workload details",
+            "linkLabel": "Workload",
             "subTarget": "workload",
             "style": "link"
           },
@@ -817,7 +817,7 @@
             "id": "1cb86df9-058f-4ea3-a646-888e89b1fb39",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Session details",
+            "linkLabel": "Session",
             "subTarget": "long",
             "style": "link"
           },
@@ -825,7 +825,7 @@
             "id": "065516f7-e3d8-4ff6-a120-568403493106",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Top queries by IOPS",
+            "linkLabel": "Queries",
             "subTarget": "queries",
             "style": "link"
           },
@@ -833,7 +833,7 @@
             "id": "c9da01bb-faab-4428-b968-8dfcf6ababbc",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "IO wait events",
+            "linkLabel": "Waits",
             "subTarget": "wait",
             "style": "link"
           },
@@ -841,7 +841,7 @@
             "id": "68f9ff2d-6068-4537-88f0-96c59fe3bb9a",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Checkpoint details",
+            "linkLabel": "Checkpoints",
             "subTarget": "checkpoint",
             "style": "link"
           },
@@ -849,7 +849,7 @@
             "id": "0c59f2dd-2110-4403-8777-a6c3003b898f",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Storage utilization",
+            "linkLabel": "Storage",
             "subTarget": "storage",
             "style": "link"
           }
