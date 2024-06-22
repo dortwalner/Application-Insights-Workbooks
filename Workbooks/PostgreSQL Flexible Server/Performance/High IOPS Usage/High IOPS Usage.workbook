@@ -817,7 +817,7 @@
             "id": "1cb86df9-058f-4ea3-a646-888e89b1fb39",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "Session",
+            "linkLabel": "Sessions",
             "subTarget": "long",
             "style": "link"
           },
