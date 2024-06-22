@@ -10,7 +10,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Optimizing Temporary File Usage\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high temporary file usage and suggest solutions to alleviate the issue. \r\n\r\nHigh temporary file usage may arise from various factors, such as a surge in workload or high temporary file generating queries.\r\n\r\nThe following table outlines the step-by-step approach to investigate server behavior and improve temporary file usage.\r\n\r\n",
+              "json": "## Optimizing temporary file utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high temporary file utilization and suggest solutions to alleviate the issue. \r\n\r\nHigh temporary file utilization may arise from various factors, such as a surge in workload or high temporary file generating queries.\r\n\r\nThe following table outlines the step-by-step approach to investigate server behavior and improve temporary file utilization.\r\n\r\n",
               "style": "info"
             },
             "name": "high temp header"
@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "\r\n\r\nStep | Observations\r\n--- | ---\r\n**Select Parameters** | Step 0: Select time interval of interest.\r\n**Understand Storage usage** | Step 1: Analyze server storage used using the `Storage utilization` tab. Any sudden spike in storage used in the time interval selected compared to previous time intervals may need further investigation.\r\n**Understand Temporary File Generation** | Step 2: Analyze the number of temporary files and temporary bytes generated in the time interval selected using the `Temporary File Generated` tab. \r\n**Understand the workload** | Step 3: Analyze the  `read` and `write` workloads during the time interval using the `Workload Details` tab.\r\n**Top Queries By Temporary Files** | step 4: Identify and analyze high temporary file generation queries using `Top Queries By Temporary Files` tab."
+              "json": "\r\n\r\nStep | Description\r\n--- | ---\r\n**Select Parameters** | Step 0: Select time interval of interest.\r\n**Understand Storage usage** | Step 1: Analyze server storage used using the `Storage utilization` tab. Any sudden spike in storage used in the time interval selected compared to previous time intervals may need further investigation.\r\n**Understand Temporary File Generation** | Step 2: Analyze the number of temporary files and temporary bytes generated in the time interval selected using the `Temporary File Generated` tab. \r\n**Understand the workload** | Step 3: Analyze the  `read` and `write` workloads during the time interval using the `Workload details` tab.\r\n**Top Queries By Temporary Files** | step 4: Identify and analyze high temporary file generation queries using `Top Queries By Temporary Files` tab."
             },
             "name": "high temp usage workbook"
           }
@@ -83,7 +83,7 @@
             "timeContext": {
               "durationMs": 86400000
             },
-            "label": "TimeRange (Local Time)"
+            "label": "Analysis period (local time)"
           },
           {
             "id": "6573f642-b4c6-4a56-8bdd-8ef451b7bdf5",
@@ -814,7 +814,7 @@
             "id": "6ecc08b6-475d-4e78-b2d6-6fc300932335",
             "cellValue": "tempfiles-tab",
             "linkTarget": "parameter",
-            "linkLabel": "Temporary Bytes Generated",
+            "linkLabel": "Temporary gytes generated",
             "subTarget": "bytes",
             "style": "link"
           },
@@ -822,7 +822,7 @@
             "id": "559e5a96-b09c-4c9c-9d6b-ab15ef257d28",
             "cellValue": "tempfiles-tab",
             "linkTarget": "parameter",
-            "linkLabel": "Number of Temporary Files",
+            "linkLabel": "Number of temporary files",
             "subTarget": "count",
             "style": "link"
           }
@@ -867,7 +867,7 @@
             "splitBy": null
           }
         ],
-        "title": "Number of Temporary Files Generated. Data is plotted at a granularity of {MetricsGrain}",
+        "title": "Number of temporary files generated. Data is plotted at a granularity of {MetricsGrain}",
         "showCreateAlertRule": true,
         "filters": [
           {
@@ -929,7 +929,7 @@
             "splitBy": "DatabaseName"
           }
         ],
-        "title": "Number of Temporary Files Generated. Data is plotted at a granularity of {MetricsGrain}",
+        "title": "Number of temporary files generated. Data is plotted at a granularity of {MetricsGrain}",
         "gridFormatType": 2,
         "resourceLimit": 10000,
         "filters": [
@@ -986,15 +986,15 @@
           "labelSettings": [
             {
               "columnId": "Segment",
-              "label": "Database Name"
+              "label": "database"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-temp_files",
-              "label": "Temporary Files (Sum)"
+              "label": "temporary files (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-temp_files Timeline",
-              "label": "Temporary Files (Sum) [Timeline]"
+              "label": "temporary files (sum) [timeline]"
             }
           ]
         },
@@ -1050,7 +1050,7 @@
             "splitBy": null
           }
         ],
-        "title": "Size of Temporary Files Generated. Data is plotted at a granularity of {MetricsGrain}",
+        "title": "Size of temporary files generated. Data is plotted at a granularity of {MetricsGrain}",
         "showCreateAlertRule": true,
         "filters": [
           {
@@ -1112,7 +1112,7 @@
             "splitBy": "DatabaseName"
           }
         ],
-        "title": "Size of Temporary Files Generated. Data is plotted at a granularity of {MetricsGrain}",
+        "title": "Size of temporary files generated. Data is plotted at a granularity of {MetricsGrain}",
         "gridFormatType": 2,
         "resourceLimit": 10000,
         "filters": [
@@ -1187,15 +1187,15 @@
           "labelSettings": [
             {
               "columnId": "Segment",
-              "label": "Database Name"
+              "label": "database"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-temp_bytes",
-              "label": "Temporary Files Size (sum)"
+              "label": "temporary files size (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-temp_bytes Timeline",
-              "label": "Temporary Files Size (sum) [Timeline]"
+              "label": "temporary files size (sum) [timeline]"
             }
           ]
         },
@@ -1229,7 +1229,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### If the temporary file generation is high and storage spikes exist in the window of interest then analyze the workload and also top temporary files/bytes generating queries ",
+        "json": "#### If the temporary file generation is high and storage spikes exist in the window of interest, then analyze the workload and also top temporary files/bytes generating queries.",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -1309,7 +1309,7 @@
     {
       "type": 1,
       "content": {
-        "json": "## Read workload details\r\n\r\n**tup_fetched** and **tup_returned** are two metrics that measure the number of rows read from a table.\r\n\r\n**tup_returned** represents the number of live rows fetched by sequential scans and index entries returned by index scans in this database.\r\n\r\n**tup_fetched** measures the number of live rows fetched by index scans in this database.\r\n\r\nBy monitoring these two metrics, administrators can gain a better understanding of the performance of their PostgreSQL read workloads.",
+        "json": "## Read workload details\r\n\r\n**tup_fetched** and **tup_returned** are two metrics that measure the number of rows read from a table.\r\n\r\n**tup_returned** represents the number of live rows fetched by sequential scans and index entries returned by index scans in this database.\r\n\r\n**tup_fetched** measures the number of live rows fetched by index scans in this database.\r\n\r\nBy monitoring these two metrics, you can gain a better understanding of the performance of your PostgreSQL read workloads.",
         "style": "info"
       },
       "conditionalVisibilities": [

@@ -111,7 +111,7 @@
             "timeContext": {
               "durationMs": 86400000
             },
-            "label": "TimeRange (Local Time)"
+            "label": "Analysis period (local time)"
           },
           {
             "id": "af775476-7170-4279-a661-d41ee3581495",

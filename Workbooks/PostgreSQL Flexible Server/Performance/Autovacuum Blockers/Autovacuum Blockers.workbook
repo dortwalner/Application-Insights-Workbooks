@@ -62,7 +62,7 @@
             "id": "38363c8a-5314-46ed-bb25-dea7706762df",
             "version": "KqlParameterItem/1.0",
             "name": "TimeRange",
-            "label": "TimeRange (Local Time)",
+            "label": "Analysis period (local time)",
             "type": 4,
             "isRequired": true,
             "typeSettings": {
