@@ -581,7 +581,7 @@
             "id": "ee43ed49-2952-4ec1-bc72-84bbcc71591a",
             "cellValue": "temptab",
             "linkTarget": "parameter",
-            "linkLabel": "Storage Utilization",
+            "linkLabel": "Storage utilization",
             "subTarget": "storage",
             "preText": "Storage Utilization",
             "style": "link"
