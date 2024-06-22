@@ -10,7 +10,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Optimizing High IOPS Utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high IOPS usage and suggest solutions to alleviate the issue. \r\n\r\nHigh IOPS utilization may arise from various factors, such as a surge in workload, IO-intensive queries, long running sessions or too frequent checkpoints.\r\n\r\nThe following table outlines the step-by-step approach to investigate server behavior and improve IOPS usage.",
+              "json": "## Optimizing high IOPS utilization\r\n\r\nThe aim of this troubleshooting guide is to pinpoint potential reasons for high IOPS usage and suggest solutions to alleviate the issue. \r\n\r\nHigh IOPS utilization may arise from various factors, such as a surge in workload, IO-intensive queries, long running sessions or too frequent checkpoints.\r\n\r\nThe following table outlines the step-by-step approach to investigate server behavior and improve IOPS usage.",
               "style": "info"
             },
             "name": "the aim of the workbook"
@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "Step | Observations\r\n--- | ---\r\n**Select Parameters** | Step 0: Select time interval of interest.\r\n**Understand IOPS usage** | Step 1: Analyze the metrics in the IOPS Usage tab. Any spike in values compared to previous time intervals can be considered unusual which needs further investigation.\r\n**Understand the workload** | Step 2: Analyze workload details tab and check `read` and `write workloads`.\r\n**Do you see long running queries** | Step 3: Analyze session details tab for any read queries, write queries running for long time . Follow mitigation steps suggested in the section and monitor IOPS Usage.\r\n**Identify IO consuming queries** | Step 4: Analyze top IOPS consuming  queries during window of interest from `Top Queries By IOPS`. Follow mitigation steps suggested in the section.\r\n**Identify IO wait events** | Step 5: Analyze `IO` wait events from `IO Wait Events` tab and follow recommendations on IO waits.\r\n**Do you see too frequent checkpoints** | Step 6: Checkpoints happening too frequently can consume IO. Analyze `Checkpoint Details` tab to identify any in the window of interest. Follow mitigation steps suggested in the section.\r\n**Check Storage Utilization** | Step 7: Increasing storage helps when you're adding more IOPS to the server. Check `Storage Usage` tab to understand current storage usage on the server."
+              "json": "Step | Description\r\n--- | ---\r\n**Set analysis period** | Choose the time interval that you wish to analyze.\r\n**IOPS usage** | Use the `IOPS utilization` tab to analyze and understand `CPU` usage on the server. Any spike in values compared to previous time intervals can be considered unusual and needing further investigation.\r\n**Type of workload** | Use the `Workload details` tab to analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU usage** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server.\r\n**Do you see long running queries** | Step 3: Analyze session details tab for any read queries, write queries running for long time . Follow mitigation steps suggested in the section and monitor IOPS Usage.\r\n**Identify IO consuming queries** | Step 4: Analyze top IOPS consuming  queries during window of interest from `Top Queries By IOPS`. Follow mitigation steps suggested in the section.\r\n**Identify IO wait events** | Step 5: Analyze `IO` wait events from `IO Wait Events` tab and follow recommendations on IO waits.\r\n**Do you see too frequent checkpoints** | Step 6: Checkpoints happening too frequently can consume IO. Analyze `Checkpoint Details` tab to identify any in the window of interest. Follow mitigation steps suggested in the section.\r\n**Check Storage Utilization** | Step 7: Increasing storage helps when you're adding more IOPS to the server. Check `Storage Usage` tab to understand current storage usage on the server."
             },
             "name": "steps in the workbook"
           }
@@ -801,7 +801,7 @@
             "id": "561184d2-fedd-44f8-9fe1-5a5bca468465",
             "cellValue": "iopstab",
             "linkTarget": "parameter",
-            "linkLabel": "IOPS Usage",
+            "linkLabel": "IOPS utilization",
             "subTarget": "usage",
             "style": "link"
           },
