@@ -1191,19 +1191,19 @@
           "labelSettings": [
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched",
-              "label": "Tuples Fetched (Preview) (Sum)"
+              "label": "fetched (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched Timeline",
-              "label": "Tuples Fetched (Preview) Timeline"
+              "label": "fetched (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned",
-              "label": "Tuples Returned (Preview) (Sum)"
+              "label": "returned (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned Timeline",
-              "label": "Tuples Returned (Preview) Timeline"
+              "label": "returned (sum) [timeline]"
             }
           ]
         }
@@ -1360,7 +1360,7 @@
           "labelSettings": [
             {
               "columnId": "Segment",
-              "label": "Database"
+              "label": "database"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched",
