@@ -1198,7 +1198,8 @@
                 {
                   "id": "98d4f3a7-4057-400a-a84f-cbd61df98051",
                   "version": "KqlParameterItem/1.0",
-                  "name": "Maximum queries",
+                  "name": "TopQueries",
+                  "label": "Maximum queries",
                   "type": 2,
                   "isRequired": true,
                   "typeSettings": {
