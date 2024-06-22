@@ -12,7 +12,7 @@
     {
       "type": 1,
       "content": {
-        "json": "Step | Description\r\n--- | ---\r\n**Set analysis period** | Choose the time interval that you wish to analyze.\r\n**CPU utilization** | Use the `CPU utilization` tab to analyze and understand `CPU` usage on the server. Any spike in values compared to previous time intervals can be considered unusual and needing further investigation.\r\n**Type of workload** | Use the `Workload details` tab to analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU utilization** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server.\r\n**Transaction trend [tps] ** | Use the `Transaction trends and counts` tab to analyze transaction trends on the server.\r\n**Long running transactions** | Use the `Long running transactions` tab to identify PIDs which have long running transactions. Follow mitigation steps suggested in the tab and monitor CPU utilization.\r\n**Time consuming queries** | Use the `Top CPU consuming queries` tab to identify and analyze top time consuming queries during the window of interest. Follow mitigation steps suggested in the tab and monitor CPU utilization.\r\n**Connectivity patterns** | Use `Total user only connections` tab to understand the connectivity patterns of your client applications. Follow mitigation steps suggested in the tab and monitor CPU Usage.\r\n"
+        "json": "Step | Description\r\n--- | ---\r\n**Set analysis period** | Choose the time interval that you wish to analyze.\r\n**CPU utilization** | Use the `CPU` tab to analyze and understand `CPU` usage on the server. Any spike in values compared to previous time intervals can be considered unusual and needing further investigation.\r\n**Type of workload** | Use the `Workload` tab to analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU utilization** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server.\r\n**Transaction trend [tps] ** | Use the `Transactions` tab to analyze transaction trends on the server.\r\n**Long running transactions** | Use the `Long running transactions` tab to identify PIDs which have long running transactions. Follow mitigation steps suggested in the tab and monitor CPU utilization.\r\n**Time consuming queries** | Use the `Queries` tab to identify and analyze top time consuming queries during the window of interest. Follow mitigation steps suggested in the tab and monitor CPU utilization.\r\n**Connectivity patterns** | Use `User connections` tab to understand the connectivity patterns of your client applications. Follow mitigation steps suggested in the tab and monitor CPU Usage.\r\n"
       },
       "name": "high cpu workbook grid",
       "styleSettings": {
@@ -1158,7 +1158,7 @@
             "id": "561184d2-fedd-44f8-9fe1-5a5bca468465",
             "cellValue": "cputab",
             "linkTarget": "parameter",
-            "linkLabel": "CPU utilization",
+            "linkLabel": "CPU",
             "subTarget": "usage",
             "style": "link"
           },
@@ -1166,7 +1166,7 @@
             "id": "53a4d309-f616-49ac-b3f8-01f9b81c712f",
             "cellValue": "cputab",
             "linkTarget": "parameter",
-            "linkLabel": "Workload details",
+            "linkLabel": "Workload",
             "subTarget": "workload",
             "style": "link"
           },
@@ -1174,7 +1174,7 @@
             "id": "1cb86df9-058f-4ea3-a646-888e89b1fb39",
             "cellValue": "cputab",
             "linkTarget": "parameter",
-            "linkLabel": "Transaction trends and counts",
+            "linkLabel": "Transactions",
             "subTarget": "transactions",
             "style": "link"
           },
@@ -1190,7 +1190,7 @@
             "id": "c9da01bb-faab-4428-b968-8dfcf6ababbc",
             "cellValue": "cputab",
             "linkTarget": "parameter",
-            "linkLabel": "Top CPU consuming queries",
+            "linkLabel": "Queries",
             "subTarget": "hightimequeries",
             "style": "link"
           },
@@ -1198,7 +1198,7 @@
             "id": "68f9ff2d-6068-4537-88f0-96c59fe3bb9a",
             "cellValue": "cputab",
             "linkTarget": "parameter",
-            "linkLabel": "Total user only connections",
+            "linkLabel": "User connections",
             "subTarget": "connections",
             "style": "link"
           },
@@ -1206,7 +1206,7 @@
             "id": "72429625-f0c4-4db4-bc69-da3093632ed3",
             "cellValue": "cputab",
             "linkTarget": "parameter",
-            "linkLabel": "Locks insights",
+            "linkLabel": "Locking and blocking",
             "subTarget": "locks",
             "style": "link"
           }
@@ -2369,7 +2369,7 @@
             "timeContext": {
               "durationMs": 86400000
             },
-            "label": "Number of top PIDs"
+            "label": "Maximum processes"
           },
           {
             "id": "58670e06-5b7c-430f-b471-9074ef67b788",
@@ -5644,7 +5644,7 @@
     {
       "type": 1,
       "content": {
-        "json": "## Locks insights\r\n\r\nThis tab offers a detailed analysis of the locking mechanisms in your PostgreSQL server. The data displayed here is based on the `log_lock_waits` & `metrics.collector_database_activity` parameters, `log_lock_waits` triggers a log message when a session's wait time to acquire a lock exceeds the `deadlock_timeout (default: 1s)`.\r\n\r\nThe main sections of this tab include:\r\n\r\n- **Sessions by lock wait event**: This metric provides a count of sessions that are waiting due to a `Lock` wait event.\r\n- **Duration of acquired locks categorized by lock type**: This chart displays the duration of locks that have been acquired in the system during a specified time window, categorized by lock type.\r\n- **Overview of waiting and acquired locks**: This grid view provides information about both acquired and waiting locks. It displays the duration for acquired locks. Notice that it doesn't  show the duration of waiting locks for sessions that have disconnected from the server without acquiring the lock.\r\n- **Blocking information**: This grid provides information about sessions that are still waiting to acquire a lock in the system during the specified time window.\r\n\r\n> **Note**: The `log_lock_waits` and `metrics.collector_database_activity` parameters are disabled by default. These are dynamic settings and, as such, changing them do not rquire a server restart.\r\n",
+        "json": "## Locking and blocking\r\n\r\nThis tab offers a detailed analysis of the locking mechanisms in your PostgreSQL server. The data displayed here is based on the `log_lock_waits` & `metrics.collector_database_activity` parameters, `log_lock_waits` triggers a log message when a session's wait time to acquire a lock exceeds the `deadlock_timeout (default: 1s)`.\r\n\r\nThe main sections of this tab include:\r\n\r\n- **Sessions by lock wait event**: This metric provides a count of sessions that are waiting due to a `Lock` wait event.\r\n- **Duration of acquired locks categorized by lock type**: This chart displays the duration of locks that have been acquired in the system during a specified time window, categorized by lock type.\r\n- **Overview of waiting and acquired locks**: This grid view provides information about both acquired and waiting locks. It displays the duration for acquired locks. Notice that it doesn't  show the duration of waiting locks for sessions that have disconnected from the server without acquiring the lock.\r\n- **Blocking information**: This grid provides information about sessions that are still waiting to acquire a lock in the system during the specified time window.\r\n\r\n> **Note**: The `log_lock_waits` and `metrics.collector_database_activity` parameters are disabled by default. These are dynamic settings and, as such, changing them do not rquire a server restart.\r\n",
         "style": "info"
       },
       "conditionalVisibility": {
