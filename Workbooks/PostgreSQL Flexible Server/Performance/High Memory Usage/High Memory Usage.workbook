@@ -1761,7 +1761,7 @@
           {
             "type": 1,
             "content": {
-              "json": "**Recommendations**\r\n\r\n* As a long term approach consider tuning queries identified from the above PIDs using explain analyze.\r\nMore information on EXPLAIN command can be found here\r\n\r\n\r\n* As a short term option you can terminate or cancel the sessions by executing below commands:\r\n\r\nFrom the PIDs retrieved above execute the below query on the server to terminate the session:\r\n\r\n\tSELECT pg_terminate_backend(<pid>);\r\n\r\nYou could also cancel the running queries by executing the below query:\r\n\r\n\tSelect pg_cancel_backend(<pid>); \r\n\r\n* Sessions that run for a prolonged period of time can use up a significant amount of memory. Therefore, it is recommended to configure the server parameters such as `statement_timeout` (in PG14, `idle_session_timeout`) or `idle_in_transaction_session_timeout` to terminate such long running sessions. This will prevent unnecessary consumption of system resources and help maintain server performance.\r\n",
+              "json": "**Recommendations**\r\n\r\n* As a long term approach consider tuning queries identified from the above PIDs using explain analyze.\r\nMore information on EXPLAIN command  can be found here\r\n\r\n\r\n* As a short term option you can terminate or cancel the sessions by executing below commands:\r\n\r\nFrom the PIDs retrieved above execute the below query on the server to terminate the session:\r\n\r\n\tSELECT pg_terminate_backend(<pid>);\r\n\r\nYou could also cancel the running queries by executing the below query:\r\n\r\n\tSelect pg_cancel_backend(<pid>); \r\n\r\n* Sessions that run for a prolonged period of time can use up a significant amount of memory. Therefore, it is recommended to configure the server parameters such as `statement_timeout` (in PG14, `idle_session_timeout`) or `idle_in_transaction_session_timeout` to terminate such long running sessions. This will prevent unnecessary consumption of system resources and help maintain server performance.\r\n",
               "style": "info"
             },
             "conditionalVisibility": {
@@ -3031,7 +3031,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### PostgreSQL can use high memory in various scenarios, including:\r\n\r\n- **Large amounts of data:** As the amount of data stored in a database increases, the memory required to access and manipulate that data also increases. If your database contains many tables or large tables with many columns, this can consume a lot of memory. To find more information, please refer to the section on **Workload Details** in this troubleshooting guide.\r\n\r\n- **Large transactions:** Transactions that modify many rows or tables can consume a significant amount of memory, especially if the changes involve indexes or triggers. If the transaction is not committed or rolled back in a timely manner, it can keep locks and buffers in memory, causing high memory usage. To find more information, please refer to the section on **Long Running Sessions** in this troubleshooting guide.\r\n\r\n- **Complex queries:** Queries that involve multiple joins, subqueries, or aggregates can require significant amounts of memory to execute. If these queries are not optimized or tuned correctly, they can consume excessive memory. To find more information, please refer to the section on **Top queries by data usage**.\r\n\r\n- **Concurrent connections:** If your application has many concurrent connections to the database, each connection will consume a certain amount of memory. Improper management of connections can lead to high memory usage. To find more information, please refer to the section on **Total User Only Connections** in this troubleshooting guide.\r\n\r\nTo manage memory usage in PostgreSQL, it is important to properly configure server parameters, optimize queries, and monitor the system's memory usage.",
+        "json": "#### PostgreSQL can use high memory in various scenarios, including:\r\n\r\n- **Large amounts of data:** As the amount of data stored in a database increases, the memory required to access and manipulate that data also increases. If your database contains many tables or large tables with many columns, this can consume a lot of memory. To find more information, please refer to the **Workload details** tab in this troubleshooting guide.\r\n\r\n- **Large transactions:** Transactions that modify many rows or tables can consume a significant amount of memory, especially if the changes involve indexes or triggers. If the transaction is not committed or rolled back in a timely manner, it can keep locks and buffers in memory, causing high memory usage. To find more information, please refer to the **Long running sessions** tab in this troubleshooting guide.\r\n\r\n- **Complex queries:** Queries that involve multiple joins, subqueries, or aggregates can require significant amounts of memory to execute. If these queries are not optimized or tuned correctly, they can consume excessive memory. To find more information, please refer to the **Top queries by data usage** tab.\r\n\r\n- **Concurrent connections:** If your application has many concurrent connections to the database, each connection will consume a certain amount of memory. Improper management of connections can lead to high memory usage. To find more information, please refer to the **Total user only connections** tab in this troubleshooting guide.\r\n\r\nTo manage memory usage in PostgreSQL, it is important to properly configure server parameters, optimize queries, and monitor the system's memory usage.",
         "style": "info"
       },
       "conditionalVisibility": {
@@ -3185,7 +3185,7 @@
             "columnName": "Tuples Returned"
           }
         ],
-        "title": "Read Workload Metrics",
+        "title": "Read workload metrics",
         "showCreateAlertRule": true,
         "filters": [
           {
@@ -3226,7 +3226,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**The read workload metric calculates the total number of tuples fetched and returned, but it does not include databases like `azure_sys` and `azure_maintenance`.**",
+        "json": "**The read workload metric calculates the total number of tuples fetched and returned for all databases, except for system databases like `azure_sys` and `azure_maintenance`.**",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -3283,7 +3283,7 @@
             "splitByLimit": 50
           }
         ],
-        "title": "Tup_fetched & Tup_returned by Database",
+        "title": "Tuples (rows) fetched and returned by database",
         "gridFormatType": 2,
         "showCreateAlertRule": true,
         "filters": [
@@ -3373,23 +3373,23 @@
           "labelSettings": [
             {
               "columnId": "Segment",
-              "label": "Database"
+              "label": "database"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched",
-              "label": "Tuples Fetched (Preview) (Sum)"
+              "label": "fetched (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched Timeline",
-              "label": "Tuples Fetched (Preview) (Sum) Timeline"
+              "label": "fetched (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned",
-              "label": "Tuples Returned (Preview) (Sum)"
+              "label": "returned (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned Timeline",
-              "label": "Tuples Returned (Preview) (Sum) Timeline"
+              "label": "returned (sum) [timeline]"
             }
           ]
         },
@@ -3418,7 +3418,7 @@
     {
       "type": 1,
       "content": {
-        "json": "## Write workload details \r\nThe number of tuples that have been inserted, updated, or deleted are critical for understanding the overall performance of the database and for identifying potential inefficiencies.\r\n\r\nBy monitoring these metrics, administrators can gain insights into the performance of their PostgreSQL write workloads and make data-driven decisions to optimize the database.\r\n\r\n",
+        "json": "## Write workload details\r\nThe number of tuples that have been inserted, updated, or deleted are critical for understanding the overall performance of the database and for identifying potential inefficiencies.\r\n\r\n\r\nBy monitoring these metrics, you can gain insights into the performance of your PostgreSQL write workloads and make data-driven decisions to optimize the database.\r\n\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -3467,22 +3467,22 @@
             "namespace": "microsoft.dbforpostgresql/flexibleservers",
             "metric": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_inserted",
             "aggregation": 1,
-            "columnName": "Tuples Inserted"
+            "columnName": "inserted"
           },
           {
             "namespace": "microsoft.dbforpostgresql/flexibleservers",
             "metric": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_updated",
             "aggregation": 1,
-            "columnName": "Tuples Updated"
+            "columnName": "updated"
           },
           {
             "namespace": "microsoft.dbforpostgresql/flexibleservers",
             "metric": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_deleted",
             "aggregation": 1,
-            "columnName": "Tuples Deleted"
+            "columnName": "deleted"
           }
         ],
-        "title": "Write Workload Metrics",
+        "title": "Write workload metrics",
         "showCreateAlertRule": true,
         "filters": [
           {
@@ -3528,7 +3528,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**The write workload metric calculates the total number of inserted, updated, and deleted tuples, but it does not include databases like `azure_sys` and `azure_maintenance`.**\r\n\r\n",
+        "json": "**The write workload metric calculates the total number of tuples inserted, updated, and deleted for all databases, except for system databases like `azure_sys` and `azure_maintenance`.**\r\n\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -3598,7 +3598,7 @@
             "splitByLimit": 50
           }
         ],
-        "title": "Tuples Inserted, Updated & Deleted by Database",
+        "title": "Tuples inserted, updated and deleted by database",
         "gridFormatType": 2,
         "showCreateAlertRule": true,
         "filters": [
@@ -3714,31 +3714,31 @@
           "labelSettings": [
             {
               "columnId": "Segment",
-              "label": "Database"
+              "label": "database"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_inserted",
-              "label": "Tuples Inserted (Preview) (Sum)"
+              "label": "inserted (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_inserted Timeline",
-              "label": "Tuples Inserted (Preview) (Sum) Timeline"
+              "label": "inserted (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_updated",
-              "label": "Tuples Updated (Preview) (Sum)"
+              "label": "updated (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_updated Timeline",
-              "label": "Tuples Updated (Preview) (Sum) Timeline"
+              "label": "updated (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_deleted",
-              "label": "Tuples Deleted (Preview) (Sum)"
+              "label": "deleted (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_deleted Timeline",
-              "label": "Tuples Deleted (Preview) (Sum) Timeline"
+              "label": "deleted (sum) [timeline]"
             }
           ]
         },
@@ -3778,7 +3778,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### work_mem\r\n\r\nThe ``work_mem`` parameter is an important setting that determines the amount of memory allocated for internal sorting and hash table operations before data is written to temporary disk files. Unlike some other parameters, `work_mem` is not set on a per-query basis, but rather dynamically adjusted based on the number and complexity of sorting and hash operations that are being performed.\r\n\r\nFor workloads that involve many short-running queries with simple joins and minimal sorting, it is advisable to keep `work_mem` at a lower value. However, if there are a few active queries with complex joins and sorts, a higher value for `work_mem` may be more appropriate. Setting the value of `work_mem` correctly can be a challenge, but if you notice high memory usage or out-of-memory errors, reducing `work_mem` may be necessary.\r\n\r\nA good rule of thumb for setting `work_mem` is to use the formula **work_mem = Total RAM / Max_Connections / 16**. This can provide a safer starting point for adjusting the parameter.\r\n\r\nBy default, `work_mem` is set to 4 MB, but it can be customized at various levels, including at the server level via the parameters page in the Azure portal. It is recommended to monitor memory consumption during peak times, and gradually increase `work_mem` if disk sorts are occurring and there is unused memory. Conversely, if memory usage is high, decreasing `work_mem` may be necessary to achieve a better balance between available and used memory.",
+              "json": "#### work_mem\r\n\r\nThe `work_mem` parameter is an important setting that determines the amount of memory allocated for internal sort and hash query operations before data is written to temporary disk files. Unlike some other parameters, `work_mem` is not set on a per-query basis, but rather dynamically adjusted based on the number and complexity of sorting and hash operations that are being performed.\r\n\r\nFor workloads that involve many short-running queries with simple joins and minimal sorting, it is advisable to keep `work_mem` at a lower value. However, if there are a few active queries with complex joins and sorts, a higher value for `work_mem` may be more appropriate. Setting the value of `work_mem` correctly can be a challenge, but if you notice high memory usage or out-of-memory errors, reducing `work_mem` may be necessary.\r\n\r\nA good rule of thumb for setting `work_mem` is to use the formula **work_mem = total RAM / max_connections / 16**. This can provide a safer starting point for adjusting the parameter.\r\n\r\nBy default, `work_mem` is set to 4 MB, but it can be customized at various levels, including at the server level via the parameters page in the Azure portal. It is recommended to monitor memory consumption during peak times, and gradually increase `work_mem` if disk sorts are occurring if there is unused memory. Conversely, if memory usage is high, decreasing `work_mem` may be necessary to achieve a better balance between available and used memory.",
               "style": "info"
             },
             "name": "high memory parameter guideance - work mem"
@@ -3786,7 +3786,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### maintenance_work_mem\r\n\r\nMaintenance tasks such as vacuuming, index addition, and foreign key insertion require a dedicated memory allocation called `maintenance_work_mem`. This memory usage is specific to each session.\r\n\r\nFor instance, suppose there are three autovacuum workers running simultaneously. In that case, a `maintenance_work_mem` value of 1 GB will result in a total memory usage of 3 GB across all sessions.\r\n\r\nHowever, it's important to note that setting a high `maintenance_work_mem` value coupled with multiple concurrent sessions performing maintenance tasks can result in excessive memory usage. In Azure Database for Flexible Server, the maximum permissible value for the `maintenance_work_mem` server parameter is 2 GB.",
+              "json": "#### maintenance_work_mem\r\n\r\nMaintenance tasks such as vacuuming, creating indexes or reindexing existing indexes, and foreign key insertion require a dedicated memory allocation whose size is controlled through the parameter called `maintenance_work_mem`. This memory usage is specific to each session.\r\n\r\nFor instance, suppose there are three autovacuum workers running simultaneously. In that case, a `maintenance_work_mem` value of 1 GB will result in a total memory usage of 3 GB across all sessions.\r\n\r\nHence, it's important to note that setting a high `maintenance_work_mem` value coupled with multiple concurrent sessions performing maintenance tasks can result in excessive memory usage. In Azure Database for PostgreSQL Flexible Server, the maximum permissible value for the `maintenance_work_mem` server parameter is 2 GB.",
               "style": "info"
             },
             "name": "high memory parameter guideance - maintenance work mem"
@@ -3794,7 +3794,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### shared_buffers\r\n\r\nThe `shared_buffers` configuration parameter specifies the amount of memory allocated by the server to cache data, with the aim of minimizing disk I/O.\r\n\r\nIt's generally recommended to allocate around 25% of available RAM to `shared_buffers`, although the maximum permissible value can be set to 75% of available RAM. This helps to ensure efficient use of memory resources and optimal performance.\r\n\r\nBy utilizing `shared_buffers` to cache frequently accessed data, the server can significantly reduce the amount of I/O operations needed to fetch data from disk, resulting in faster query processing times and improved overall system performance. However, it's important to balance the allocation of memory resources between `shared_buffers` and other system components to prevent excessive memory usage and potential performance issues.",
+              "json": "#### shared_buffers\r\n\r\nThe `shared_buffers` server parameter specifies the amount of memory allocated by the server to cache data, with the aim of minimizing disk I/O.\r\n\r\nIt's generally recommended to allocate around 25% of available RAM to `shared_buffers`, although the maximum permissible value can be set to 75% of available RAM. This helps to ensure efficient use of memory resources and optimal performance.\r\n\r\nBy utilizing `shared_buffers` to cache frequently accessed data, the server can significantly reduce the amount of I/O operations needed to fetch data from disk, resulting in faster query processing times and improved overall system performance. However, it's important to balance the allocation of memory resources between `shared_buffers` and other system components to prevent excessive memory usage and potential performance issues.",
               "style": "info"
             },
             "name": "high memory parameter guideance - shared buffers"
@@ -3802,7 +3802,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### max_locks_per_transaction\r\n\r\nThe `max_locks_per_transaction` parameter controls the maximum number of database objects that can be locked concurrently during a single transaction. By default, this value is set to 64.\r\n\r\nIncreasing the value of `max_locks_per_transaction` may result in higher memory consumption on the server, which can potentially impact system performance. It's important to carefully consider the appropriate value for this parameter based on the specific requirements of your application.\r\n\r\nFurthermore, modifying the value of `max_locks_per_transaction` requires a restart of the database server. As such, it's essential to plan any changes to this parameter carefully and ensure that they are performed during a maintenance window or other scheduled downtime to minimize disruption to application users.",
+              "json": "#### max_locks_per_transaction\r\n\r\nThe `max_locks_per_transaction` parameter controls the maximum number of database objects that can be locked concurrently during a single transaction. By default, this value is set to 64.\r\n\r\nIncreasing the value of `max_locks_per_transaction` may result in higher memory consumption on the server, which can potentially impact system performance. It's important to carefully consider the appropriate value for this parameter based on the specific requirements of your application.\r\n\r\nFurthermore, modifying the value of `max_locks_per_transaction` requires a restart of the database server. As such, it's essential to plan any changes to this parameter carefully and ensure that they are performed during a maintenance window or other scheduled downtime to minimize disruption to application users.",
               "style": "info"
             },
             "name": "high memory parameter guideance - max locks"
@@ -3810,7 +3810,7 @@
           {
             "type": 1,
             "content": {
-              "json": "#### max_connections\r\n\r\nThe `max_connections` parameter specifies the maximum number of concurrent database connections that the server can accept. It's important to set this parameter to a value that is appropriate for the expected workload and usage patterns of your application.\r\n\r\nConfiguring `max_connections` incorrectly can lead to a range of issues, including degraded system performance, connection timeouts, and potential system crashes. To ensure optimal performance and stability, it's essential to review the [documentation](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-limits) and follow best practices when setting the `max_connections` parameter.",
+              "json": "#### max_connections\r\n\r\nThe `max_connections` parameter specifies the maximum number of concurrent database connections that the server can accept. It's important to set this parameter to a value that is appropriate for the expected workload and usage patterns of your application.\r\n\r\nConfiguring `max_connections` incorrectly can lead to a range of issues, including degraded system performance, connection timeouts, and potential system crashes. To ensure optimal performance and stability, it's essential to review the [documentation](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-limits) and follow best practices when setting the `max_connections` parameter.",
               "style": "info"
             },
             "name": "high memory parameter guideance - max connections"

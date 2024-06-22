@@ -1503,6 +1503,7 @@
             "splitByLimit": 50
           }
         ],
+        "title": "Tuples (rows) fetched and returned by database",
         "gridFormatType": 2,
         "filters": [
           {
