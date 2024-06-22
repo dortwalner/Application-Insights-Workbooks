@@ -12,7 +12,7 @@
             "id": "1d96987a-24d3-4382-a299-1cba6098f069",
             "cellValue": "tabType",
             "linkTarget": "parameter",
-            "linkLabel": "High CPU usage",
+            "linkLabel": "CPU utilization",
             "subTarget": "CPU",
             "style": "link",
             "workbookContext": {
@@ -29,7 +29,7 @@
             "id": "404ca5fd-86de-465c-a171-17480180053a",
             "cellValue": "tabType",
             "linkTarget": "parameter",
-            "linkLabel": "High memory usage",
+            "linkLabel": "Memory utilization",
             "subTarget": "MEMORY",
             "style": "link"
           },
@@ -37,7 +37,7 @@
             "id": "23f6e613-ad03-4686-b7ec-d643a7e1cf2e",
             "cellValue": "tabType",
             "linkTarget": "parameter",
-            "linkLabel": "High IOPS usage",
+            "linkLabel": "IOPS utilization",
             "subTarget": "IOPS",
             "style": "link"
           },
@@ -45,7 +45,7 @@
             "id": "4ed0816a-ee7b-4fd6-add0-3e73172bbaec",
             "cellValue": "tabType",
             "linkTarget": "parameter",
-            "linkLabel": "High temporary files",
+            "linkLabel": "Temporary files",
             "subTarget": "TEMP",
             "style": "link"
           },
@@ -82,7 +82,7 @@
         "comparison": "isEqualTo",
         "value": "CPU"
       },
-      "name": "High CPU usage"
+      "name": "CPU utilization"
     },
     {
       "type": 12,
