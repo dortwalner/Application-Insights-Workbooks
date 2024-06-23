@@ -2904,7 +2904,7 @@
         "version": "KqlItem/1.0",
         "query": "let Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{SessionsTable}\r\n| where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where UserId != 10\r\n| where isnotempty(databaseId) and databaseName !in('azure_sys','azure_maintenance')\r\n| distinct TimeGenerated, ProcessId, BackendStartTime,State,WaitEventType,WaitEvent\r\n    | extend uniquePidkeys=strcat(ProcessId,'-',BackendStartTime)\r\n    | where uniquePidkeys =='{SessionPid}'\r\n|  summarize count() by WaitEventType,WaitEvent\r\n|project iff(isempty(WaitEventType),'No Waits',strcat(WaitEventType,':',WaitEvent)),count_",
         "size": 4,
-        "title": "Overall wait events of the PID for the period analyzed. Data is sampled each 5 minutes.",
+        "title": "Overall wait events of the process (PID) for the period analyzed. Data is sampled each 5 minutes.",
         "queryType": 0,
         "resourceType": "microsoft.dbforpostgresql/flexibleservers",
         "crossComponentResources": [
