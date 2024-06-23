@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "\r\n\r\nStep | Description\r\n--- | ---\r\n**Analysis period** | Step 0: Select time interval of interest.\r\n**Storage** | Step 1: Analyze server storage used using the `Storage` tab. Any sudden spike in storage used in the time interval selected compared to previous time intervals may need further investigation.\r\n**Temporary files** | Step 2: Analyze the number of temporary files and temporary bytes generated in the time interval selected using the `Temporary File Generated` tab. \r\n**Workload** | Step 3: Analyze the  `read` and `write` workloads during the time interval using the `Workload` tab.\r\n**Queries** | step 4: Identify and analyze high temporary file generation queries using `Top Queries By Temporary Files` tab."
+              "json": "\r\n\r\nStep | Description\r\n--- | ---\r\n**Analysis period** | Choose the time interval that you wish to analyze.\r\n**Storage** | Analyze server storage utilization during the period analyzed. Any sudden spike in storage used in the time interval selected compared to previous time intervals may need further investigation.\r\n**Temporary files** | Analyze the number of temporary files and temporary bytes generated in the time interval selected. \r\n**Workload** | Analyze and understand what proportion of `read` and `write` your workload is composed of. Read workload includes all reads made by any type of statement, not only SELECTs. While write workload includes all modifications (inserts, deletes or updates) made by any type of statement, including SELECTs. Compare the CPU spike seen in **CPU** step with read and write workloads. Any spike in workload during the window of interest points to increased workload on server.\r\n**Queries** | Identify high temporary file generation queries during the period of interest."
             },
             "name": "high temp usage workbook"
           }
@@ -814,7 +814,7 @@
             "id": "6ecc08b6-475d-4e78-b2d6-6fc300932335",
             "cellValue": "tempfiles-tab",
             "linkTarget": "parameter",
-            "linkLabel": "Temporary gytes generated",
+            "linkLabel": "Temporary bytes generated",
             "subTarget": "bytes",
             "style": "link"
           },
@@ -1276,18 +1276,16 @@
             "id": "31dbd029-ed17-4617-8c18-c4797cafe412",
             "cellValue": "workload-tab",
             "linkTarget": "parameter",
-            "linkLabel": "Read Workload",
+            "linkLabel": "Read workload",
             "subTarget": "readbytes",
-            "preText": "Read Workload",
             "style": "link"
           },
           {
             "id": "2bbfd1c5-fd32-4615-826c-083f83ffc503",
             "cellValue": "workload-tab",
             "linkTarget": "parameter",
-            "linkLabel": "Write Workload",
+            "linkLabel": "Write workload",
             "subTarget": "writebytes",
-            "preText": "Write Workload",
             "style": "link"
           }
         ]
@@ -1354,16 +1352,16 @@
             "metric": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched",
             "aggregation": 1,
             "splitBy": null,
-            "columnName": "Tuples Fetched"
+            "columnName": "fetched"
           },
           {
             "namespace": "microsoft.dbforpostgresql/flexibleservers",
             "metric": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned",
             "aggregation": 1,
-            "columnName": "Tuples Returned"
+            "columnName": "returned"
           }
         ],
-        "title": "Read Workload Metrics",
+        "title": "Read workload metrics",
         "showCreateAlertRule": true,
         "filters": [
           {
@@ -1461,7 +1459,7 @@
             "splitByLimit": 50
           }
         ],
-        "title": "Tup_fetched & Tup_returned by Database",
+        "title": "Tuples (rows) fetched and returned by database",
         "gridFormatType": 2,
         "resourceLimit": 10000,
         "showCreateAlertRule": true,
@@ -1552,23 +1550,23 @@
           "labelSettings": [
             {
               "columnId": "Segment",
-              "label": "Database Name"
+              "label": "database"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched",
-              "label": "Tuples Fetched (Sum)"
+              "label": "fetched (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_fetched Timeline",
-              "label": "Tuples Fetched (Sum) [Timeline]"
+              "label": "fetched (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned",
-              "label": "Tuples Returned  (Sum)"
+              "label": "returned  (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_returned Timeline",
-              "label": "Tuples Returned (Sum) [Timeline]"
+              "label": "returned (sum) [timeline]"
             }
           ]
         },
@@ -1808,7 +1806,7 @@
             "splitByLimit": 50
           }
         ],
-        "title": "Tuples Inserted, Updated & Deleted by Database",
+        "title": "Tuples (rows) inserted, updated and deleted by database",
         "gridFormatType": 2,
         "resourceLimit": 10000,
         "showCreateAlertRule": true,
@@ -1905,7 +1903,7 @@
               "formatter": 5
             },
             {
-              "columnMatch": "Tuples Returned",
+              "columnMatch": "returned",
               "formatter": 1,
               "numberFormat": {
                 "unit": 0,
@@ -1929,31 +1927,31 @@
           "labelSettings": [
             {
               "columnId": "Segment",
-              "label": "Database Name"
+              "label": "database"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_inserted",
-              "label": "Tuples Inserted (Sum)"
+              "label": "inserted (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_inserted Timeline",
-              "label": "Tuples Inserted (Sum) [Timeline]"
+              "label": "inserted (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_updated",
-              "label": "Tuples Updated (Sum)"
+              "label": "updated (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_updated Timeline",
-              "label": "Tuples Updated (Sum) [Timeline]"
+              "label": "updated (sum) [timeline]"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_deleted",
-              "label": "Tuples Deleted (Sum)"
+              "label": "deleted (sum)"
             },
             {
               "columnId": "microsoft.dbforpostgresql/flexibleservers-Database (Preview)-tup_deleted Timeline",
-              "label": "Tuples Deleted (Sum) [Timeline]"
+              "label": "deleted (sum) [timeline]"
             }
           ]
         },
