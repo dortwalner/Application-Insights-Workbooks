@@ -3591,9 +3591,9 @@
             "type": 3,
             "content": {
               "version": "KqlItem/1.0",
-              "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PostgreSQLLogs}\r\n| where TimeGenerated >= TimeStart and TimeGenerated <= TimeEnd\r\n| where Message contains \"automatic vacuum of table\"\r\n| distinct TimeGenerated,Message\r\n| extend database_schema_table = extract_all(@\"automatic vacuum of table \"\"(?P<database>[^.\"\"]+)+\\.(?P<schema>[^.]+)\\.(?P<table>[^\"\"]+)\"\"\", Message)\r\n| extend database_schema_table=substring(tostring(database_schema_table), 1, strlen(tostring(database_schema_table))-2)\r\n| extend database_schema_table = todynamic(database_schema_table)\r\n| extend database = tostring(database_schema_table[0]), schema = tostring(database_schema_table[1]), table = tostring(database_schema_table[2])\r\n| where database =='{Database}'\r\n| summarize ExecutionCount=count() by bin (TimeGenerated,1m),schema\r\n| order by TimeGenerated,ExecutionCount",
+              "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PostgreSQLLogs}\r\n| where TimeGenerated >= TimeStart and TimeGenerated <= TimeEnd\r\n| where Message contains \"automatic vacuum of table\"\r\n| distinct TimeGenerated,Message\r\n| extend database_schema_table = extract_all(@\"automatic vacuum of table \"\"(?P<database>[^.\"\"]+)+\\.(?P<schema>[^.]+)\\.(?P<table>[^\"\"]+)\"\"\", Message)\r\n| extend database_schema_table=substring(tostring(database_schema_table), 1, strlen(tostring(database_schema_table))-2)\r\n| extend database_schema_table = todynamic(database_schema_table)\r\n| extend database = tostring(database_schema_table[0]), schema = tostring(database_schema_table[1]), table = tostring(database_schema_table[2])\r\n| where database =='{Database}'\r\n| summarize ['execution count'] = count() by bin (TimeGenerated, 1m), schema\r\n| project-rename ['time generated'] = TimeGenerated\r\n| order by ['time generated'], ['execution count']",
               "size": 1,
-              "title": "Autovacuum Execution Count for Database {Database}",
+              "title": "Execution of autovacuum on tables in database {Database}",
               "queryType": 0,
               "resourceType": "microsoft.dbforpostgresql/flexibleservers",
               "crossComponentResources": [
@@ -3706,9 +3706,9 @@
             "type": 3,
             "content": {
               "version": "KqlItem/1.0",
-              "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PostgreSQLLogs}\r\n| where TimeGenerated >= TimeStart and TimeGenerated <= TimeEnd\r\n| where Message contains \"automatic vacuum of table\"\r\n| distinct TimeGenerated,Message\r\n| extend database_schema_table = extract_all(@\"automatic vacuum of table \"\"(?P<database>[^.\"\"]+)+\\.(?P<schema>[^.]+)\\.(?P<table>[^\"\"]+)\"\"\", Message)\r\n| extend database_schema_table=substring(tostring(database_schema_table), 1, strlen(tostring(database_schema_table))-2)\r\n| extend database_schema_table = todynamic(database_schema_table)\r\n| extend database = tostring(database_schema_table[0]), schema = tostring(database_schema_table[1]), table = tostring(database_schema_table[2])\r\n| project TimeGenerated, database, schema,table\r\n| where database !in('azure_sys','azure_maintenance')\r\n| summarize ExecutionCount=count() by bin (TimeGenerated,graphgrain),schema,table\r\n| order by TimeGenerated,ExecutionCount",
+              "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PostgreSQLLogs}\r\n| where TimeGenerated >= TimeStart and TimeGenerated <= TimeEnd\r\n| where Message contains \"automatic vacuum of table\"\r\n| distinct TimeGenerated,Message\r\n| extend database_schema_table = extract_all(@\"automatic vacuum of table \"\"(?P<database>[^.\"\"]+)+\\.(?P<schema>[^.]+)\\.(?P<table>[^\"\"]+)\"\"\", Message)\r\n| extend database_schema_table=substring(tostring(database_schema_table), 1, strlen(tostring(database_schema_table))-2)\r\n| extend database_schema_table = todynamic(database_schema_table)\r\n| extend database = tostring(database_schema_table[0]), schema = tostring(database_schema_table[1]), table = tostring(database_schema_table[2])\r\n| project TimeGenerated, database, schema,table\r\n| where database !in('azure_sys','azure_maintenance')\r\n| summarize ['execution count'] = count() by bin (TimeGenerated,graphgrain), schema, table\r\n| project-rename ['time generated'] = TimeGenerated \r\n| order by ['time generated'], ['execution count']",
               "size": 1,
-              "title": "Autovacuum Execution Count by Schema for Database {Database}",
+              "title": "Execution of autovacuum on tables in database {Database} by schema",
               "showExportToExcel": true,
               "queryType": 0,
               "resourceType": "microsoft.dbforpostgresql/flexibleservers",
@@ -3995,7 +3995,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=1d;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PostgreSQLLogs}\r\n| where TimeGenerated >= TimeStart and TimeGenerated <= TimeEnd\r\n| where Message contains \"automatic vacuum of table\"\r\n| distinct TimeGenerated,Message\r\n| extend database_schema_table = extract_all(@\"automatic vacuum of table \"\"(?P<database>[^.\"\"]+)+\\.(?P<schema>[^.]+)\\.(?P<table>[^\"\"]+)\"\"\", Message)\r\n| extend database_schema_table=substring(tostring(database_schema_table), 1, strlen(tostring(database_schema_table))-2)\r\n| extend database_schema_table = todynamic(database_schema_table)\r\n| extend database = tostring(database_schema_table[0]), schema = tostring(database_schema_table[1]), table = tostring(database_schema_table[2])\r\n| extend tuples_removed = extract(\"tuples: (\\\\d+) removed\", 1, Message)\r\n| extend tuples_remain = extract(\"tuples: \\\\d+ removed, (\\\\d+) remain\", 1, Message)\r\n| extend tuples_dead_but_not_removed = extract(\"remain, (\\\\d+) are dead but not yet removable\", 1, Message)\r\n| extend oldest_xmin = extract(\"oldest xmin: (\\\\d+)\", 1, Message)\r\n| extend elapsed_time = extract(\"elapsed: (\\\\d+\\\\.\\\\d+) s\", 1, Message)\r\n| project TimeGenerated, database, schema,table, tuples_removed, tuples_remain, tuples_dead_but_not_removed, oldest_xmin, elapsed_time, Message\r\n| where database !in('azure_sys','azure_maintenance')\r\n| summarize vacuum_count=count(), round(avg(tolong(tuples_removed))), round(avg(tolong(tuples_remain))), round(avg(tolong(tuples_dead_but_not_removed))), round(avg(todecimal(elapsed_time)),2) by bin(TimeGenerated,graphgrain), database, schema,table\r\n| order by TimeGenerated",
+        "query": "let graphgrain=1d;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PostgreSQLLogs}\r\n| where TimeGenerated >= TimeStart and TimeGenerated <= TimeEnd\r\n| where Message contains \"automatic vacuum of table\"\r\n| distinct TimeGenerated,Message\r\n| extend database_schema_table = extract_all(@\"automatic vacuum of table \"\"(?P<database>[^.\"\"]+)+\\.(?P<schema>[^.]+)\\.(?P<table>[^\"\"]+)\"\"\", Message)\r\n| extend database_schema_table=substring(tostring(database_schema_table), 1, strlen(tostring(database_schema_table))-2)\r\n| extend database_schema_table = todynamic(database_schema_table)\r\n| extend database = tostring(database_schema_table[0]), schema = tostring(database_schema_table[1]), table = tostring(database_schema_table[2])\r\n| extend tuples_removed = extract(\"tuples: (\\\\d+) removed\", 1, Message)\r\n| extend tuples_remain = extract(\"tuples: \\\\d+ removed, (\\\\d+) remain\", 1, Message)\r\n| extend tuples_dead_but_not_removed = extract(\"remain, (\\\\d+) are dead but not yet removable\", 1, Message)\r\n| extend oldest_xmin = extract(\"oldest xmin: (\\\\d+)\", 1, Message)\r\n| extend elapsed_time = extract(\"elapsed: (\\\\d+\\\\.\\\\d+) s\", 1, Message)\r\n| project TimeGenerated, database, schema,table, tuples_removed, tuples_remain, tuples_dead_but_not_removed, oldest_xmin, elapsed_time, Message\r\n| where database !in('azure_sys','azure_maintenance')\r\n| summarize ['vacuum count'] = count(), ['tuples removed'] = round(avg(tolong(tuples_removed))), ['tuples remain'] = round(avg(tolong(tuples_remain))), ['tuples dead but nor removed'] = round(avg(tolong(tuples_dead_but_not_removed))), ['elapsed time'] = round(avg(todecimal(elapsed_time)),2) by bin(TimeGenerated, graphgrain), database, schema, table\r\n| project-rename ['time generated'] = TimeGenerated\r\n| order by TimeGenerated",
         "size": 0,
         "showExportToExcel": true,
         "queryType": 0,
@@ -4006,7 +4006,7 @@
         "gridSettings": {
           "formatters": [
             {
-              "columnMatch": "avg_tuples_removed",
+              "columnMatch": "tuples removed",
               "formatter": 0,
               "numberFormat": {
                 "unit": 17,
@@ -4016,7 +4016,7 @@
               }
             },
             {
-              "columnMatch": "avg_tuples_remain",
+              "columnMatch": "tuples remain",
               "formatter": 0,
               "numberFormat": {
                 "unit": 17,
@@ -4026,7 +4026,7 @@
               }
             },
             {
-              "columnMatch": "avg_tuples_dead_but_not_removed",
+              "columnMatch": "tuples dead but nor removed",
               "formatter": 0,
               "numberFormat": {
                 "unit": 17,
@@ -4036,7 +4036,7 @@
               }
             },
             {
-              "columnMatch": "avg_elapsed_time",
+              "columnMatch": "elapsed time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 24,
@@ -4079,7 +4079,7 @@
     {
       "type": 1,
       "content": {
-        "json": "| Column Name                   | Description                                                                                             |\r\n|-------------------------------|---------------------------------------------------------------------------------------------------------|\r\n| database                      | The name of the database on which the autovacuum operation was performed.                              |\r\n| schema                        | The schema of the table that underwent the autovacuum process.                                          |\r\n| table                         | The name of the table that underwent the autovacuum process.\r\n| vacuum_count                         | The count of autovacuum operations summarized.                                             |\r\n| tuples_removed                | The number of tuples (rows) that were removed during the autovacuum operation.                          |\r\n| tuples_remain                 | The number of tuples (rows) that remain after the autovacuum operation.                                 |\r\n| tuples_dead_but_not_removed   | The number of tuples (rows) that are marked as dead but have not been physically removed from the table. |\r\n| elapsed_time                  | The duration of time taken for the autovacuum operation to complete.                                     |\r\n"
+        "json": "| Column name                   | Description                                                                                             |\r\n|-------------------------------|---------------------------------------------------------------------------------------------------------|\r\n| database                      | The name of the database on which the autovacuum operation was performed.                              |\r\n| schema                        | The schema of the table that underwent the autovacuum process.                                          |\r\n| table                         | The name of the table that underwent the autovacuum process.\r\n| vacuum count                         | The count of autovacuum operations summarized.                                             |\r\n| tuples removed                | The number of tuples (rows) that were removed during the autovacuum operation.                          |\r\n| tuples remain                 | The number of tuples (rows) that remain after the autovacuum operation.                                 |\r\n| tuples dead but not removed   | The number of tuples (rows) that are marked as dead but have not been physically removed from the table. |\r\n| elapsed time                  | The duration of time taken for the autovacuum operation to complete.                                     |\r\n"
       },
       "conditionalVisibilities": [
         {
