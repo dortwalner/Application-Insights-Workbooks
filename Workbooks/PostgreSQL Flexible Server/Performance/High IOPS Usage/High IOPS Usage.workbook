@@ -2950,7 +2950,7 @@
             "id": "78753f4c-89f7-4880-8fde-10fdd30eade9",
             "version": "KqlParameterItem/1.0",
             "name": "PIDs",
-            "label": "Number Of PIDs",
+            "label": "Maximum processes",
             "type": 2,
             "isRequired": true,
             "typeSettings": {
