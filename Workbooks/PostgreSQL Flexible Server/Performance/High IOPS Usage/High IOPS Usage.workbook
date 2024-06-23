@@ -3828,7 +3828,7 @@
         "query": "\r\nlet graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\n//let graphgrain=15m;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet Topwaits = \r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| extend WaitEvent = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| summarize max_calls = max(Calls) by WaitEvent\r\n| where max_calls > 0\r\n| top {MaxCount} by max_calls desc\r\n| project WaitEvent;\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n| where EventType=='IO'\r\n| extend Events = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| where Events in (Topwaits)\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(todatetime(EndTime),1m)\r\n| make-series max(Calls) default=0 on EVENT_TIME_GRAPHGRAIN from TimeStart to TimeEnd step graphgrain by Events\r\n\r\n",
         "size": 0,
         "aggregation": 2,
-        "title": "Top Sampled Wait Events. Data is plotted at a granularity of {ChartGrain}",
+        "title": "Top sampled wait events. Data is plotted at a granularity of {ChartGrain}",
         "queryType": 0,
         "resourceType": "microsoft.dbforpostgresql/flexibleservers",
         "crossComponentResources": [
@@ -3870,10 +3870,10 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "\r\nlet graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\n//let graphgrain=15m;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet Topwaits = \r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| extend WaitEvent = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| summarize max_calls = max(Calls) by WaitEvent\r\n| where max_calls > 0\r\n| top {MaxCount} by max_calls desc\r\n| project WaitEvent;\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n| where EventType=='IO'\r\n| extend Events = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| where Events in (Topwaits)\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(todatetime(EndTime),1m)\r\n| summarize Calls=max(Calls) by QueryId, Events\r\n| order by Calls\r\n\r\n",
+        "query": "\r\nlet graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\n//let graphgrain=15m;\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet Topwaits = \r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n | where EventType=='IO'\r\n| extend WaitEvent = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| summarize max_calls = max(Calls) by WaitEvent\r\n| where max_calls > 0\r\n| top {MaxCount} by max_calls desc\r\n| project WaitEvent;\r\n{QueryWaitSamplingTable}\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| where UserId !in (0, 10) // exclude azure super user  and system calls\r\n| where QueryId !=0\r\n| where EventType=='IO'\r\n| extend Events = strcat(iff(isempty(EventType), 'No Waits', EventType), \":\", Event)\r\n| where Events in (Topwaits)\r\n| extend  EVENT_TIME_GRAPHGRAIN = bin(todatetime(EndTime),1m)\r\n| summarize ['calls'] = max(Calls) by ['query identifier'] = QueryId, ['event type'] = Events\r\n| order by ['calls']\r\n\r\n",
         "size": 0,
         "aggregation": 2,
-        "title": "Top Sampled Wait Events By QueryId",
+        "title": "Top sampled wait events by query identier",
         "queryType": 0,
         "resourceType": "microsoft.dbforpostgresql/flexibleservers",
         "crossComponentResources": [
@@ -3914,7 +3914,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**Recommendations On Common IO Wait Events**\r\n\r\n*IO:DATAFILEREAD* or *IO:DATAFILEWRITE*\r\n\r\n\r\n* High bloat on the tables can also lead to considerable IO utilization. As a one-off case consider carrying manual vacuum analyze of the tables using the below command on the database\r\n\r\n        Vacuum (analyze,verbose) <Table Name> \r\n\r\n* Partitioning: If you observe queries on large tables taking high IO consider partitioning the large tables.\r\n\r\n* Indexes & Joins: Consider creating indexes and reducing the joins in the query if applicable.\r\n\r\n* Consider tuning server parameters like work_mem, and maintainence_work_mem. Please make the changes with caution and testing as setting a very high value of both parameters could lead to out-of-memory issues.\r\n\r\n* Understand the checkpoint timings and follow the recommendations below in the troubleshooting guide's checkpoint details tab to tune checkpoint-related server parameters.\r\n\r\n* Consider moving to a higher SKU.\r\n\r\n*IO:WALWRITE*\r\n\r\n* Analyze the checkpoint details tab and follow recommendations around server parameters `max_wal_size`,`checkpoint_completion_target`.\r\n\r\n* Tune queries.\r\n\r\n* Consider moving to a higher SKU.\r\n",
+        "json": "**Recommendations on common IO wait events**\r\n\r\n*IO:DATAFILEREAD* or *IO:DATAFILEWRITE*\r\n\r\n\r\n* High bloat on the tables can also lead to considerable IO utilization. As a one-off case consider carrying manual vacuum analyze of the tables using the below command on the database\r\n\r\n        Vacuum (analyze,verbose) <table_name> \r\n\r\n* Partitioning: If you observe queries on large tables taking high IO consider partitioning the large tables.\r\n\r\n* Indexes & Joins: Consider creating indexes and reducing the joins in the query if applicable.\r\n\r\n* Consider tuning server parameters like `work_mem`, and `maintainence_work_mem`. Please make the changes with caution and testing as setting a very high value of both parameters could lead to out-of-memory issues.\r\n\r\n* Understand the checkpoint timings and follow the recommendations below in the troubleshooting guide's checkpoint details tab to tune checkpoint-related server parameters.\r\n\r\n* Consider moving to a higher SKU.\r\n\r\n*IO:WALWRITE*\r\n\r\n* Analyze the checkpoint details tab and follow recommendations around server parameters `max_wal_size`,`checkpoint_completion_target`.\r\n\r\n* Tune queries.\r\n\r\n* Consider moving to a higher SKU.\r\n",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -4131,7 +4131,7 @@
     {
       "type": 1,
       "content": {
-        "json": "#### Monitor Checkpoint frequency and the checkpoint Time \r\n<table>\r\n\t<tr>\r\n        <td><strong>Checkpoint Timed</strong></td>\r\n        <td> A checkpoint is begun every `checkpoint_timeout` seconds </td>\r\n    </tr>\r\n\t<tr>\r\n        <td><strong>Checkpoint Requested</strong></td>\r\n        <td>A checkpoint is begun if `max_wal_size` is about to be exceeded</td>\r\n    </tr>\r\n</table>",
+        "json": "#### Monitor checkpoint frequency and the checkpoint time \r\n<table>\r\n\t<tr>\r\n        <td><strong>Checkpoint Timed</strong></td>\r\n        <td> A checkpoint is begun every `checkpoint_timeout` seconds </td>\r\n    </tr>\r\n\t<tr>\r\n        <td><strong>Checkpoint Requested</strong></td>\r\n        <td>A checkpoint is begun if `max_wal_size` is about to be exceeded</td>\r\n    </tr>\r\n</table>",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -4179,7 +4179,7 @@
         "version": "KqlItem/1.0",
         "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PGServerLogsTable}\r\n| where todatetime(Timestamp) >= TimeStart and todatetime(Timestamp) <= TimeEnd\r\n| where Message contains \"checkpoint starting\" or Message contains \"restartpoint starting\"\r\n|distinct Message,Timestamp\r\n| extend preg_matchall=extract_all(@'(checkpoint|restartpoint) starting: (.+)',Message)\r\n| extend CheckpointFlagsBit=tostring(preg_matchall[0][1])\r\n| extend CheckpointType=preg_matchall[0][0]\r\n| project Timestamp,CheckpointType,CheckpointFlagsBit\r\n| extend ts = bin(todatetime(Timestamp), 1m)\r\n| where CheckpointFlagsBit ==\"time\" or CheckpointFlagsBit==\"wal\"\r\n| make-series NrOfCheckpointsEach30min=count(CheckpointFlagsBit) default=0 on ts  from TimeStart to TimeEnd step graphgrain by CheckpointFlagsBit\r\n\r\n\r\n",
         "size": 0,
-        "title": "Checkpoint Frequency Every {ChartGrain}",
+        "title": "Checkpoint frequency every {ChartGrain}",
         "timeBrushParameterName": "TimeRange",
         "queryType": 0,
         "resourceType": "microsoft.dbforpostgresql/flexibleservers",
@@ -4195,7 +4195,7 @@
           "seriesLabelSettings": [
             {
               "seriesName": "Checkpoint Frequency",
-              "label": "Chkpoint Frequency"
+              "label": "Checkpoint frequency"
             },
             {
               "seriesName": "immediate force wait",
@@ -4207,11 +4207,11 @@
             },
             {
               "seriesName": "time",
-              "label": "Checkpt Timed"
+              "label": "Checkpoint timed"
             },
             {
               "seriesName": "wal",
-              "label": "Checkpt Requested"
+              "label": "Checkpoint requested"
             }
           ]
         }
@@ -4237,7 +4237,7 @@
         "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{PGServerLogsTable}\r\n| where todatetime(Timestamp) >= TimeStart and todatetime(Timestamp) <= TimeEnd\r\n| where Message contains \"checkpoint complete\"\r\n| distinct Message,Timestamp\r\n| extend preg_matchall=extract_all(@'checkpoint complete: (.+)',Message)\r\n|extend CheckpointFlagsBit=extract(\"total=([0-9.]+)\", 1, tostring(preg_matchall[0]), typeof(real))\r\n| project Timestamp,CheckpointFlagsBit,Type=strcat(extract(\"checkpoint\",0,Message),' ',\"Times\")\r\n| extend ts = bin(todatetime(Timestamp), 1m)\r\n| make-series NrOfCheckpointsEach30min=avg(CheckpointFlagsBit) default=0 on ts from  TimeStart to TimeEnd step graphgrain by Type",
         "size": 0,
         "aggregation": 3,
-        "title": "Checkpoint Time Every {ChartGrain}",
+        "title": "Checkpoint time every {ChartGrain}",
         "timeBrushParameterName": "TimeRange",
         "queryType": 0,
         "resourceType": "microsoft.dbforpostgresql/flexibleservers",
@@ -4250,7 +4250,7 @@
           "seriesLabelSettings": [
             {
               "seriesName": "checkpoint Times",
-              "label": "ChkpointTime"
+              "label": "Checkpoint time"
             }
           ],
           "ySettings": {

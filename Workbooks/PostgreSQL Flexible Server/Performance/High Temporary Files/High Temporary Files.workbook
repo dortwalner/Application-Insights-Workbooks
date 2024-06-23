@@ -2292,7 +2292,7 @@
     {
       "type": 1,
       "content": {
-        "json": "**The chart above depicts the top {TopTempConsumingQueries} queries responsible for creating the largest combined size of temporary files, which could be a result of either numerous small files or one or several massive ones.**\r\n\r\n\r\nDetails on these QueryIds are shown below. ",
+        "json": "**The chart above depicts the top {TopTempConsumingQueries} queries responsible for creating the largest combined size of temporary files, which could be a result of either numerous small files or a few massive ones.**\r\n\r\n\r\nDetails on these queries are shown below. ",
         "style": "info"
       },
       "conditionalVisibilities": [
@@ -2379,9 +2379,9 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where UserId != 10\r\n| where QueryId == '{QueryIdsByTemp}'\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| distinct MeanExecDurationMs,MaxExecDurationMs,MinExecDurationMs,Calls,QueryId,QueryType,TempBlksRead,TempBlksWritten,RuntimeStatsEntryId\r\n| extend Mean_Temp_blks_written = TempBlksWritten* 8 / Calls\r\n| extend kb_Temp_blks_written = TempBlksWritten * 8\r\n| summarize MeanTempBlksWritten = avg(Mean_Temp_blks_written), MeanExecutionTime=avg(MeanExecDurationMs), MaxTempBlksWritten = max(Mean_Temp_blks_written), MaxExecutionTime=max(MaxExecDurationMs), TotalCalls=sum(Calls), TotalTempBlksWritten=sum(kb_Temp_blks_written), MinTempBlksWritten=min(Mean_Temp_blks_written), MinExecutionTime=min(MinExecDurationMs) by QueryId,QueryType",
+        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where UserId != 10\r\n| where QueryId == '{QueryIdsByTemp}'\r\n| where EndTime >= TimeStart and EndTime <= TimeEnd\r\n| distinct MeanExecDurationMs,MaxExecDurationMs,MinExecDurationMs,Calls,QueryId,QueryType,TempBlksRead,TempBlksWritten,RuntimeStatsEntryId\r\n| extend Mean_Temp_blks_written = TempBlksWritten* 8 / Calls\r\n| extend kb_Temp_blks_written = TempBlksWritten * 8\r\n| summarize ['mean temporary blocks written'] = avg(Mean_Temp_blks_written), ['mean execution time'] = avg(MeanExecDurationMs), ['maximum temporary blocks written'] = max(Mean_Temp_blks_written), ['maximum execution time'] = max(MaxExecDurationMs), ['total calls'] = sum(Calls), ['total temporary blocks written'] = sum(kb_Temp_blks_written), ['minimum temporary blocks written'] = min(Mean_Temp_blks_written), ['minimum execution time'] = min(MinExecDurationMs) by ['query identifier'] = QueryId, ['query type'] = QueryType",
         "size": 4,
-        "title": "QueryId {QueryIdsByTemp} Summary in Selected TimeRange",
+        "title": "Summary for query with identifier {QueryIdsByTemp} for the period analyzed",
         "showExportToExcel": true,
         "queryType": 0,
         "resourceType": "microsoft.dbforpostgresql/flexibleservers",
@@ -2391,7 +2391,7 @@
         "gridSettings": {
           "formatters": [
             {
-              "columnMatch": "MeanTempBlksWritten",
+              "columnMatch": "mean temporary blocks written",
               "formatter": 0,
               "numberFormat": {
                 "unit": 3,
@@ -2401,7 +2401,7 @@
               }
             },
             {
-              "columnMatch": "MeanExecutionTime",
+              "columnMatch": "mean execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2411,7 +2411,7 @@
               }
             },
             {
-              "columnMatch": "MaxTempBlksWritten",
+              "columnMatch": "maximum temporary blocks written",
               "formatter": 0,
               "numberFormat": {
                 "unit": 3,
@@ -2421,7 +2421,7 @@
               }
             },
             {
-              "columnMatch": "MaxExecutionTime",
+              "columnMatch": "maximum execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2431,7 +2431,7 @@
               }
             },
             {
-              "columnMatch": "TotalTempBlksWritten",
+              "columnMatch": "total temporary blocks written",
               "formatter": 0,
               "numberFormat": {
                 "unit": 3,
@@ -2441,7 +2441,7 @@
               }
             },
             {
-              "columnMatch": "MinTempBlksWritten",
+              "columnMatch": "minimum temporary blocks written",
               "formatter": 0,
               "numberFormat": {
                 "unit": 2,
@@ -2451,247 +2451,10 @@
               }
             },
             {
-              "columnMatch": "MinExecutionTime",
+              "columnMatch": "minimum execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "AvgExecutionTime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "AvgIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MaxIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MinIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "AvgReadWriteIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MaxReadWriteIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MinReadWriteIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Start_time",
-              "formatter": 6
-            },
-            {
-              "columnMatch": "End_time",
-              "formatter": 6
-            },
-            {
-              "columnMatch": "Blk_read_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Blk_write_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_query_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_blk_rw_time",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "greenRed"
-              },
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_dataRead",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "greenRed"
-              },
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_dataWritten",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "greenRed"
-              },
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Total_blk_rw_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Total_dataRead",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Total_dataWritten",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Total_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Min_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Max_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "dataRead",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "dataWritten",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 3,
                 "options": {
                   "style": "decimal"
                 }
@@ -2730,9 +2493,9 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet databasename = \r\n{SessionsTable}\r\n| distinct DatabaseName,DatabaseId;\r\n{QueryStoreTable}\r\n| where UserId != 10   \r\n| where QueryId == {QueryIdsByTemp}\r\n| distinct MeanExecDurationMs,MaxExecDurationMs,MinExecDurationMs,Calls,QueryId,QueryType,Rows,TotalExecDurationMs,StartTime,EndTime,PlanId,DatabaseId,UserId,TempBlksWritten,TempBlksRead, RuntimeStatsEntryId \r\n| where todatetime(EndTime) >= TimeStart and todatetime(EndTime) <= TimeEnd\r\n| extend total_Temp_blks_written = TempBlksWritten*8\r\n| extend total_Temp_blks_read = TempBlksRead*8\r\n| extend Mean_Temp_blks_written=TempBlksWritten*8/Calls\r\n| extend Mean_Temp_blks_read=TempBlksRead*8/Calls\r\n| summarize WindowStart=min(StartTime), WindowEnd=max(EndTime), MeanTempBlksWritten=avg(Mean_Temp_blks_written),MeanTempBlksRead=avg(Mean_Temp_blks_read),MinTempBlksWritten=min(Mean_Temp_blks_written), MaxTempBlksWritten=max(Mean_Temp_blks_written),MeanRows=sum(Rows)/sum(Calls),TotalRows=sum(Rows),TotalCalls=sum(Calls), MeanExecutionTime=avg(MeanExecDurationMs),MinExecutionTime=min(MinExecDurationMs),MaxExecutionTime=max(MaxExecDurationMs),TotalExecutionTime=sum(TotalExecDurationMs),TotalTempBlksWritten=sum(total_Temp_blks_written) by bin(todatetime(EndTime), graphgrain), QueryId,QueryType,PlanId,DatabaseId,UserId\r\n| join kind=leftouter databasename on $left.DatabaseId == $right.DatabaseId\r\n| project QueryId,QueryType,PlanId,DatabaseName = iff(isempty(DatabaseName),strcat(\"oid::\",DatabaseId), DatabaseName), UserId, WindowStart, WindowEnd,MeanRows, MeanTempBlksWritten, MeanTempBlksRead,MeanExecutionTime, TotalRows,TotalTempBlksWritten, TotalCalls, TotalExecutionTime, MinTempBlksWritten, MaxTempBlksWritten, MinExecutionTime, MaxExecutionTime\r\n|order by WindowStart asc",
+        "query": "let graphgrain=iff({TimeRange:grain}<15m,15m, {TimeRange:grain});\r\nlet TimeStart = todatetime('{GlobalStartTime}');\r\nlet TimeEnd = todatetime('{GlobalEndTime}');\r\nlet databasename = \r\n{SessionsTable}\r\n| distinct DatabaseName,DatabaseId;\r\n{QueryStoreTable}\r\n| where UserId != 10   \r\n| where QueryId == {QueryIdsByTemp}\r\n| distinct MeanExecDurationMs,MaxExecDurationMs,MinExecDurationMs,Calls,QueryId,QueryType,Rows,TotalExecDurationMs,StartTime,EndTime,PlanId,DatabaseId,UserId,TempBlksWritten,TempBlksRead, RuntimeStatsEntryId \r\n| where todatetime(EndTime) >= TimeStart and todatetime(EndTime) <= TimeEnd\r\n| extend total_Temp_blks_written = TempBlksWritten*8\r\n| extend total_Temp_blks_read = TempBlksRead*8\r\n| extend Mean_Temp_blks_written=TempBlksWritten*8/Calls\r\n| extend Mean_Temp_blks_read=TempBlksRead*8/Calls\r\n| summarize WindowStart=min(StartTime), WindowEnd=max(EndTime), MeanTempBlksWritten=avg(Mean_Temp_blks_written),MeanTempBlksRead=avg(Mean_Temp_blks_read),MinTempBlksWritten=min(Mean_Temp_blks_written), MaxTempBlksWritten=max(Mean_Temp_blks_written),MeanRows=sum(Rows)/sum(Calls),TotalRows=sum(Rows),TotalCalls=sum(Calls), MeanExecutionTime=avg(MeanExecDurationMs),MinExecutionTime=min(MinExecDurationMs),MaxExecutionTime=max(MaxExecDurationMs),TotalExecutionTime=sum(TotalExecDurationMs),TotalTempBlksWritten=sum(total_Temp_blks_written) by bin(todatetime(EndTime), graphgrain), QueryId,QueryType,PlanId,DatabaseId,UserId\r\n| join kind=leftouter databasename on $left.DatabaseId == $right.DatabaseId\r\n| project ['query identifier'] = QueryId, ['query type'] = QueryType, ['plan identifier'] = PlanId, ['database'] = DatabaseName = iff(isempty(DatabaseName), strcat(\"oid::\", DatabaseId), DatabaseName), ['user identifier'] = UserId, ['window start'] = WindowStart, ['window end'] = WindowEnd, ['mean rows'] = MeanRows, ['mean temporary blocks written'] = MeanTempBlksWritten, ['mean temporary blocks read'] = MeanTempBlksRead, ['mean execution time'] = MeanExecutionTime, ['total rows'] = TotalRows, ['total temporary blocks written'] = TotalTempBlksWritten, ['total calls'] = TotalCalls, ['total execution time'] = TotalExecutionTime, ['minimum temporary blocks written'] = MinTempBlksWritten, ['maximum temporary blocks written'] = MaxTempBlksWritten, ['minimum execution time'] = MinExecutionTime, ['maximum execution time'] = MaxExecutionTime\r\n| order by ['window start']  asc",
         "size": 0,
-        "title": "QueryId {QueryIdsByTemp} Runtime Statistics Split by Time Buckets of {ChartGrain} Each",
+        "title": "Runtime statistics for query identifier {QueryIdsByTemp} split by time buckets of {ChartGrain}",
         "noDataMessageStyle": 4,
         "showExportToExcel": true,
         "queryType": 0,
@@ -2744,15 +2507,15 @@
         "gridSettings": {
           "formatters": [
             {
-              "columnMatch": "WindowStart",
+              "columnMatch": "window start",
               "formatter": 6
             },
             {
-              "columnMatch": "WindowEnd",
+              "columnMatch": "window end",
               "formatter": 6
             },
             {
-              "columnMatch": "MeanTempBlksWritten",
+              "columnMatch": "mean temporary blocks written",
               "formatter": 8,
               "formatOptions": {
                 "palette": "blue"
@@ -2765,7 +2528,7 @@
               }
             },
             {
-              "columnMatch": "MeanTempBlksRead",
+              "columnMatch": "mean temporary blocks read",
               "formatter": 8,
               "formatOptions": {
                 "palette": "blue"
@@ -2778,7 +2541,7 @@
               }
             },
             {
-              "columnMatch": "MeanExecutionTime",
+              "columnMatch": "mean execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2788,7 +2551,7 @@
               }
             },
             {
-              "columnMatch": "TotalTempBlksWritten",
+              "columnMatch": "total temporary blocks written",
               "formatter": 8,
               "formatOptions": {
                 "palette": "blue"
@@ -2801,14 +2564,14 @@
               }
             },
             {
-              "columnMatch": "TotalCalls",
+              "columnMatch": "total calls",
               "formatter": 8,
               "formatOptions": {
                 "palette": "blue"
               }
             },
             {
-              "columnMatch": "TotalExecutionTime",
+              "columnMatch": "total execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2818,7 +2581,7 @@
               }
             },
             {
-              "columnMatch": "MinTempBlksWritten",
+              "columnMatch": "minimum temporary blocks written",
               "formatter": 0,
               "numberFormat": {
                 "unit": 3,
@@ -2828,7 +2591,7 @@
               }
             },
             {
-              "columnMatch": "MaxTempBlksWritten",
+              "columnMatch": "maximum temporary blocks written",
               "formatter": 0,
               "numberFormat": {
                 "unit": 3,
@@ -2838,7 +2601,7 @@
               }
             },
             {
-              "columnMatch": "MinExecutionTime",
+              "columnMatch": "minimum execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
@@ -2848,313 +2611,10 @@
               }
             },
             {
-              "columnMatch": "MaxExecutionTime",
+              "columnMatch": "maximum execution time",
               "formatter": 0,
               "numberFormat": {
                 "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "EndTime",
-              "formatter": 5
-            },
-            {
-              "columnMatch": "End_time",
-              "formatter": 5
-            },
-            {
-              "columnMatch": "TemporaryBlocksWritten",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "TemporaryBlocksRead",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MeanTemporaryBlockWritten",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              }
-            },
-            {
-              "columnMatch": "MeanTemporaryBlockRead",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              }
-            },
-            {
-              "columnMatch": "MeanIOtime",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MeanDataRead",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MeanDataWrite",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MinIOtime",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MaxIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "TotalIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MeanReadIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "MeanWriteIOtime",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Start_time",
-              "formatter": 6
-            },
-            {
-              "columnMatch": "Blk_read_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Blk_write_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_query_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_blk_rw_time",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_dataRead",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_dataWritten",
-              "formatter": 8,
-              "formatOptions": {
-                "palette": "blue"
-              },
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Total_blk_rw_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Total_dataRead",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Total_dataWritten",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Total_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Min_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Max_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "Mean_time",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 23,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "dataRead",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 3,
-                "options": {
-                  "style": "decimal"
-                }
-              }
-            },
-            {
-              "columnMatch": "dataWritten",
-              "formatter": 0,
-              "numberFormat": {
-                "unit": 3,
                 "options": {
                   "style": "decimal"
                 }
