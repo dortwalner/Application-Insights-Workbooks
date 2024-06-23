@@ -2655,7 +2655,7 @@
                   "id": "4a11b036-17c2-4fb9-ae07-b5258bd36fee",
                   "cellValue": "vacuum-tab",
                   "linkTarget": "parameter",
-                  "linkLabel": "Vacuumed Execution Count",
+                  "linkLabel": "Vacuum execution",
                   "subTarget": "vacuum",
                   "style": "link"
                 },
@@ -2663,7 +2663,7 @@
                   "id": "5bba1dca-dd6f-4224-a56e-0b0eaa5d399e",
                   "cellValue": "vacuum-tab",
                   "linkTarget": "parameter",
-                  "linkLabel": "Analyzed Execution Count",
+                  "linkLabel": "Analyze execution",
                   "subTarget": "analyze",
                   "style": "link"
                 }
@@ -2693,7 +2693,7 @@
                     "size": 0,
                     "aggregation": 2,
                     "showAnnotations": true,
-                    "title": "Table vacuuming execution for all databases. Data is plotted at a granularity of {ChartGrain}",
+                    "title": "Execution of VACUUM on tables in all databases. Data is plotted at a granularity of {ChartGrain}",
                     "timeBrushParameterName": "TimeRange",
                     "timeBrushExportOnlyWhenBrushed": true,
                     "queryType": 0,
@@ -2740,7 +2740,7 @@
                     "size": 0,
                     "aggregation": 2,
                     "showAnnotations": true,
-                    "title": "Table vacuuming execution for {Database} database. Data is plotted at a granularity of {ChartGrain}",
+                    "title": "Execution of VACUUM on tables in database {Database}. Data is plotted at a granularity of {ChartGrain}",
                     "timeBrushParameterName": "TimeRange",
                     "timeBrushExportOnlyWhenBrushed": true,
                     "queryType": 0,
@@ -2798,7 +2798,7 @@
                   "type": 3,
                   "content": {
                     "version": "KqlItem/1.0",
-                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName in ({QualifiedDatabases})\r\n| distinct TimeGenerated,DatabaseName,SchemaName,TablesCount,TablesVacuumedCount,TablesAutovacuumedCount\r\n|summarize _Tables_counter=sum(TablesCount),_Tables_vacuumed=sum(TablesVacuumedCount),_Tables_autovacuumed=sum(TablesAutovacuumedCount) by bin(TimeGenerated,1s),DatabaseName\r\n|make-series Tables_counter=max(_Tables_counter) default=-1,Tables_vacuumed=max(_Tables_vacuumed) default=-1,Tables_autovacuumed=max(_Tables_autovacuumed) default=-1 on TimeGenerated from Start_Time to End_Time step graphgrain by DatabaseName\r\n| mv-expand TimeGenerated,Tables_counter, Tables_vacuumed,Tables_autovacuumed\r\n| where Tables_counter !=-1 or Tables_vacuumed !=-1 or Tables_autovacuumed != -1\r\n| extend Tables_counter = tolong(Tables_counter), Tables_vacuumed=tolong(Tables_vacuumed),Tables_autovacuumed=tolong(Tables_autovacuumed), TimeGenerated=todatetime(TimeGenerated)\r\n| extend Tables_never_autovacuumed= iff(Tables_counter==Tables_autovacuumed,0.0,toreal(Tables_counter-Tables_autovacuumed))\r\n| extend Tables_autovacuumed_pct= iff(Tables_counter==Tables_autovacuumed,100.00,iff(Tables_autovacuumed < Tables_counter, (toreal(Tables_autovacuumed)/toreal(Tables_counter))*100,100.0))\r\n| extend Tables_never_autovacuumed_pct= iff(Tables_counter==Tables_autovacuumed,0.0,iff(Tables_never_autovacuumed < Tables_counter, (toreal(Tables_never_autovacuumed)/toreal (Tables_counter))*100,100.0))\r\n| project ['time generated'] = TimeGenerated, ['database'] = DatabaseName, ['tables in database'] = Tables_counter, ['tables vacuumed'] = Tables_vacuumed, ['tables autovacuumed'] = Tables_autovacuumed, ['tables autovacuumed ratio'] = Tables_autovacuumed_pct, ['tables never autovacuumed'] = Tables_never_autovacuumed, ['tables never autovacuumed ratio'] = Tables_never_autovacuumed_pct\r\n| order by TimeGenerated, ['tables never autovacuumed']  desc",
+                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName in ({QualifiedDatabases})\r\n| distinct TimeGenerated,DatabaseName,SchemaName,TablesCount,TablesVacuumedCount,TablesAutovacuumedCount\r\n|summarize _Tables_counter=sum(TablesCount),_Tables_vacuumed=sum(TablesVacuumedCount),_Tables_autovacuumed=sum(TablesAutovacuumedCount) by bin(TimeGenerated,1s),DatabaseName\r\n|make-series Tables_counter=max(_Tables_counter) default=-1,Tables_vacuumed=max(_Tables_vacuumed) default=-1,Tables_autovacuumed=max(_Tables_autovacuumed) default=-1 on TimeGenerated from Start_Time to End_Time step graphgrain by DatabaseName\r\n| mv-expand TimeGenerated,Tables_counter, Tables_vacuumed,Tables_autovacuumed\r\n| where Tables_counter !=-1 or Tables_vacuumed !=-1 or Tables_autovacuumed != -1\r\n| extend Tables_counter = tolong(Tables_counter), Tables_vacuumed=tolong(Tables_vacuumed),Tables_autovacuumed=tolong(Tables_autovacuumed), TimeGenerated=todatetime(TimeGenerated)\r\n| extend Tables_never_autovacuumed= iff(Tables_counter==Tables_autovacuumed,0.0,toreal(Tables_counter-Tables_autovacuumed))\r\n| extend Tables_autovacuumed_pct= iff(Tables_counter==Tables_autovacuumed,100.00,iff(Tables_autovacuumed < Tables_counter, (toreal(Tables_autovacuumed)/toreal(Tables_counter))*100,100.0))\r\n| extend Tables_never_autovacuumed_pct= iff(Tables_counter==Tables_autovacuumed,0.0,iff(Tables_never_autovacuumed < Tables_counter, (toreal(Tables_never_autovacuumed)/toreal (Tables_counter))*100,100.0))\r\n| project ['time generated'] = TimeGenerated, ['database'] = DatabaseName, ['tables in database'] = Tables_counter, ['tables vacuumed'] = Tables_vacuumed, ['tables autovacuumed'] = Tables_autovacuumed, ['tables autovacuumed ratio'] = Tables_autovacuumed_pct, ['tables never autovacuumed'] = Tables_never_autovacuumed, ['tables never autovacuumed ratio'] = Tables_never_autovacuumed_pct\r\n| order by ['time generated'], ['tables never autovacuumed']  desc",
                     "size": 1,
                     "aggregation": 2,
                     "showExportToExcel": true,
@@ -3065,11 +3065,11 @@
                   "type": 3,
                   "content": {
                     "version": "KqlItem/1.0",
-                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m, {TimeRange:grain});\r\nlet DB_NAME =iff('{Database}'== 'All', '', '{Database}');\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName in ({QualifiedDatabases})\r\n| distinct TimeGenerated, TablesCount,TablesAnalyzedCount,TablesAutoanalyzedCount\r\n|summarize _Tables_counter=sum(TablesCount),_Tables_analyzed=sum(TablesAnalyzedCount),_Tables_autoanalyzed=sum(TablesAutoanalyzedCount) by bin(TimeGenerated,5m)\r\n|make-series Tables_counter=max(_Tables_counter),Tables_analyzed=max(_Tables_analyzed),Tables_autoanalyzed=max(_Tables_autoanalyzed) on TimeGenerated from Start_Time to End_Time step graphgrain",
+                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m, {TimeRange:grain});\r\nlet DB_NAME =iff('{Database}'== 'All', '', '{Database}');\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName in ({QualifiedDatabases})\r\n| distinct TimeGenerated, TablesCount,TablesAnalyzedCount,TablesAutoanalyzedCount\r\n|summarize _Tables_counter=sum(TablesCount),_Tables_analyzed=sum(TablesAnalyzedCount),_Tables_autoanalyzed=sum(TablesAutoanalyzedCount) by bin(TimeGenerated,5m)\r\n| make-series ['tables in database'] = max(_Tables_counter), ['tables analyzed'] = max(_Tables_analyzed), ['tables autoanalyzed'] = max(_Tables_autoanalyzed) on TimeGenerated from Start_Time to End_Time step graphgrain",
                     "size": 0,
                     "aggregation": 2,
                     "showAnnotations": true,
-                    "title": "Tables Analyzed Execution Count for all Databases. Data is plotted at a granularity of {ChartGrain}",
+                    "title": "Execution of ANALYZE on tables in all databases. Data is plotted at a granularity of {ChartGrain}",
                     "timeBrushParameterName": "TimeRange",
                     "timeBrushExportOnlyWhenBrushed": true,
                     "queryType": 0,
@@ -3137,11 +3137,11 @@
                   "type": 3,
                   "content": {
                     "version": "KqlItem/1.0",
-                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName == '{Database}' and SchemaName in ({QualifiedSchemas})\r\n| distinct TimeGenerated,SchemaName,TablesCount,TablesAnalyzedCount,TablesAutoanalyzedCount,DatabaseName\r\n|summarize _Tables_counter=sum(TablesCount),_Tables_analyzed=sum(TablesAnalyzedCount),_Tables_autoanalyzed=sum(TablesAutoanalyzedCount) by bin(TimeGenerated,5m),DatabaseName\r\n|make-series Tables_counter=max(_Tables_counter),Tables_analyzed=max(_Tables_analyzed),Tables_autoanalyzed=max(_Tables_autoanalyzed) on TimeGenerated from Start_Time to End_Time step graphgrain by DatabaseName",
+                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName == '{Database}' and SchemaName in ({QualifiedSchemas})\r\n| distinct TimeGenerated,SchemaName,TablesCount,TablesAnalyzedCount,TablesAutoanalyzedCount,DatabaseName\r\n|summarize _Tables_counter=sum(TablesCount),_Tables_analyzed=sum(TablesAnalyzedCount),_Tables_autoanalyzed=sum(TablesAutoanalyzedCount) by bin(TimeGenerated,5m),DatabaseName\r\n|make-series ['tables in database'] = max(_Tables_counter), ['tables analyzed'] = max(_Tables_analyzed), ['tables autoanalyzed'] = max(_Tables_autoanalyzed) on TimeGenerated from Start_Time to End_Time step graphgrain by DatabaseName",
                     "size": 0,
                     "aggregation": 2,
                     "showAnnotations": true,
-                    "title": "Tables Analyzed Execution Count for {Database} Database. Data is plotted at a granularity of {ChartGrain}",
+                    "title": "Execution of ANALYZE on tables in database {Database}. Data is plotted at a granularity of {ChartGrain}",
                     "timeBrushParameterName": "TimeRange",
                     "timeBrushExportOnlyWhenBrushed": true,
                     "queryType": 0,
@@ -3212,7 +3212,7 @@
                 {
                   "type": 1,
                   "content": {
-                    "json": "##### Column Details\r\n\r\n**Total Tables** : Total tables that are present in the database when Database=All is selected or Total tables that are present in the individual schema when a particular database is selected from troubleshooting guide dropdown.\r\n\r\n**Tables Analyzed** : Total tables that are manually analyzed in the database when Database=All is selected or Total tables that are manually analyzed in the individual schema when a particular database is selected from troubleshooting guide dropdown.\r\n\r\n**Tables Autoanalyzed** : Total tables that are  autoanalyzed in the database when Database=All is selected from troubleshooting guide dropdown or Total tables that are autoanalyzed in the individual schema when a particular database is selected from troubleshooting guide dropdown.\r\n\r\n**Tables Autoanalyzed[Pct]** : Tables Autoanalyzed/Total Tables *100\r\n\r\n**Tables Never Autoanalyzed[Pct]** : Tables Never Analyzed/Total Tables *100",
+                    "json": "##### Column details\r\n\r\n**Total tables** : Total tables that are present in all databases, when Database parameter is set to All, or total tables that are present in the individual database, when a particular database name is selected.\r\n\r\n**Tables analyzed**: Total tables that are manually analyzed in all databases, when Database parameter is set to All, or total tables that are manually analyzed in the individual database, when a particular database name is selected.\r\n\r\n**Tables autoanalyzed**: Total tables that are autoanalyzed in all databases, when Database parameter is set to All, or total tables that are autoanalyzed in the individual database, when a particular database name is selected.\r\n\r\n**Tables autoanalyzed [%]**: Tables autoanalyzed / total tables * 100\r\n\r\n**Tables never autoanalyzed [%]**: Tables never autoanalyzed / total tables * 100\r\n",
                     "style": "info"
                   },
                   "name": "Tables Analyzed Execution Count cluster texts"
