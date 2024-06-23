@@ -1990,7 +1990,7 @@
                         "id": "98d4f3a7-4057-400a-a84f-cbd61df98051",
                         "version": "KqlParameterItem/1.0",
                         "name": "QueryIdsByTime",
-                        "label": "QueryId Snapshot",
+                        "label": "Snapshot for query id",
                         "type": 2,
                         "isRequired": true,
                         "query": "let Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{QueryStoreTable}\r\n| where todatetime(EndTime) >= Start_Time and todatetime(EndTime) <= End_Time\r\n| where UserId != 10 // exclude azure super user \r\n| extend Mean_memory_blks=(SharedBlksHit + SharedBlksDirtied)/Calls\r\n| summarize Max_blks = max(Mean_memory_blks) by QueryId\r\n| where Max_blks>0\r\n| top {TopTimeConsumingQueries} by Max_blks desc\r\n| serialize Rank = row_number()\r\n| project value = QueryId, label = QueryId, selected = iff(Rank == 1, true, false)",
