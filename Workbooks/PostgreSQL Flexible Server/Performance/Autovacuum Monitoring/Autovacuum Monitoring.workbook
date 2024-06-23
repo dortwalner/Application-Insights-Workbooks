@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "Step | Observations\r\n--- | ---\r\n**Analysis period** | Step 0: Select Time interval of interest and database. You can select All option to view the metrics for all databases available on server or by selecting a particular database you could drill down metrics for that selected database.\r\n** Identify Bloat** | Step 1: Determine database bloat ratio. \r\n**Live, Dead and DML Tuple count ** | Step 2: Identify count of dead tuples, live tuples, inserted/updated/deleted tuples.\r\n**Table Vacuumed Execution Count** | Step 3: Identify count of tables vacuumed in the database. \r\n**Table Analyzed Execution Count** | Step 4: Identify count of tables analyzed in the database. \r\n**Autovacuum Workers Execution Count** | Step 5: Monitor autovacuum workers execution count.\r\n\r\n"
+              "json": "Step | Description\r\n--- | ---\r\n**Analysis period** | Choose the time interval that you wish to analyze.\r\n**Database** | Choose the database that you wish to analyze. You can select **All** to view the metrics for all databases available on server or you can select a particular database if you want to narrow the analysis to that single database.\r\n**Bloat** | Understand what is the database bloat ratio.\r\n**Tuples** | Identify count of live vs dead tuples, and the number of inserted, updated, and deleted tuples.\r\n**Table vacuum and analyze** | Identify count of tables vacuumed and tables analyzed on each database.\r\n**Autovacuum Workers** | Monitor autovacuum workers execution count.\r\n**Autovacuum per table** | Monitor execution history of autovacuum on each table.\r\n**Enhanced metrics** | **MISSING DESCRIPTION FOR ENHANCED METRICS**.\r\n\r\n"
             },
             "name": "table of contents"
           },
@@ -1602,7 +1602,7 @@
             "id": "658f22a6-f71a-4f7e-add6-445c7c80b66b",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Bloat Ratio",
+            "linkLabel": "Bloat",
             "subTarget": "bloat",
             "style": "link"
           },
