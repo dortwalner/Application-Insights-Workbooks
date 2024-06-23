@@ -2655,7 +2655,7 @@
                   "id": "4a11b036-17c2-4fb9-ae07-b5258bd36fee",
                   "cellValue": "vacuum-tab",
                   "linkTarget": "parameter",
-                  "linkLabel": "Vacuum execution",
+                  "linkLabel": "Vacuum",
                   "subTarget": "vacuum",
                   "style": "link"
                 },
@@ -2663,7 +2663,7 @@
                   "id": "5bba1dca-dd6f-4224-a56e-0b0eaa5d399e",
                   "cellValue": "vacuum-tab",
                   "linkTarget": "parameter",
-                  "linkLabel": "Analyze execution",
+                  "linkLabel": "Analyze",
                   "subTarget": "analyze",
                   "style": "link"
                 }
