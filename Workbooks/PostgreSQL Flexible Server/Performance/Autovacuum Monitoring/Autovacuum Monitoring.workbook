@@ -18,7 +18,7 @@
           {
             "type": 1,
             "content": {
-              "json": "Step | Description\r\n--- | ---\r\n**Analysis period** | Choose the time interval that you wish to analyze.\r\n**Database** | Choose the database that you wish to analyze. You can select **All** to view the metrics for all databases available on server or you can select a particular database if you want to narrow the analysis to that single database.\r\n**Bloat** | Understand what is the database bloat ratio.\r\n**Tuples** | Identify count of live vs dead tuples, and the number of inserted, updated, and deleted tuples.\r\n**Table vacuum and analyze** | Identify count of tables vacuumed and tables analyzed on each database.\r\n**Autovacuum Workers** | Monitor autovacuum workers execution count.\r\n**Autovacuum per table** | Monitor execution history of autovacuum on each table.\r\n**Enhanced metrics** | **MISSING DESCRIPTION FOR ENHANCED METRICS**.\r\n\r\n"
+              "json": "Step | Description\r\n--- | ---\r\n**Analysis period** | Choose the time interval that you wish to analyze.\r\n**Database** | Choose the database that you wish to analyze. You can select **All** to view the metrics for all databases available on server or you can select a particular database if you want to narrow the analysis to that single database.\r\n**Bloat** | Understand what is the database bloat ratio.\r\n**Tuples** | Identify count of live vs dead tuples, and the number of inserted, updated, and deleted tuples.\r\n**Vacuum and analyze** | Identify count of tables vacuumed and tables analyzed on each database.\r\n**Autovacuum workers** | Monitor autovacuum workers execution count.\r\n**Autovacuum per table** | Monitor execution history of autovacuum on each table.\r\n**Enhanced metrics** | **MISSING DESCRIPTION FOR ENHANCED METRICS**.\r\n\r\n"
             },
             "name": "table of contents"
           },
@@ -1610,7 +1610,7 @@
             "id": "daa324f1-0d29-4dac-b76b-1447edfe6b0d",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Tuple Counts",
+            "linkLabel": "Tuples",
             "subTarget": "tupcount",
             "style": "link"
           },
@@ -1618,7 +1618,7 @@
             "id": "e48395ed-d0a2-424d-8951-744764988284",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Tables Vacuumed & Analyzed Execution Counts",
+            "linkLabel": "Vacuum and analyze",
             "subTarget": "vacuumanalyze",
             "style": "link"
           },
@@ -1626,7 +1626,7 @@
             "id": "5187a9fe-7e5c-4223-bcdf-e4e229bcffdf",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Autovacuum Workers Execution Count",
+            "linkLabel": "Autovacuum workers",
             "subTarget": "vacuumworkers",
             "style": "link"
           },
@@ -1634,7 +1634,7 @@
             "id": "cb5d1854-1f79-4960-8b3c-295dade842e3",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Autovacuum per table history",
+            "linkLabel": "Autovacuum per table",
             "subTarget": "vacuumpertablehistory",
             "style": "link"
           },
@@ -1642,7 +1642,7 @@
             "id": "1268adb1-c7a8-44b1-ad0e-43c0b137e8ce",
             "cellValue": "tab",
             "linkTarget": "parameter",
-            "linkLabel": "Enhanced Metrics",
+            "linkLabel": "Enhanced metrics",
             "subTarget": "txidmetric",
             "style": "link"
           }
@@ -1660,7 +1660,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "editable",
-        "title": "Blot Ratio for {Database} database(s)",
+        "title": "Bloat ratio for {Database} database(s)",
         "items": [
           {
             "type": 1,
@@ -1678,7 +1678,7 @@
               "size": 0,
               "aggregation": 2,
               "showAnnotations": true,
-              "title": "Bloat Ratio by Database. Data is plotted at a granularity of {ChartGrain}",
+              "title": "Bloat ratio by database. Data is plotted at a granularity of {ChartGrain}",
               "timeBrushParameterName": "TimeRange",
               "timeBrushExportOnlyWhenBrushed": true,
               "queryType": 0,
@@ -1927,7 +1927,7 @@
                   "id": "ea04fb8f-dbf1-4eb6-bdb8-f835b59f6579",
                   "cellValue": "tuptab",
                   "linkTarget": "parameter",
-                  "linkLabel": "Live & Dead Tuple Counts",
+                  "linkLabel": "Live and dead tuples",
                   "subTarget": "live",
                   "style": "link"
                 },
@@ -1935,7 +1935,7 @@
                   "id": "3eb571c9-8116-426f-9655-1cd7cde73f80",
                   "cellValue": "tuptab",
                   "linkTarget": "parameter",
-                  "linkLabel": "Insert, Update & Delete Tuple Counts",
+                  "linkLabel": "Inserted, updated & deleted tuples",
                   "subTarget": "insert",
                   "style": "link"
                 }
@@ -2290,11 +2290,11 @@
                   "type": 3,
                   "content": {
                     "version": "KqlItem/1.0",
-                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName in ({QualifiedDatabases})\r\n| distinct TimeGenerated,DatabaseName,SchemaName,RowsInsertedCount,RowsUpdatedCount,RowsDeletedCount\r\n| summarize TuplesInserted= sum(RowsInsertedCount),\r\n            TuplesUpdated = sum(RowsUpdatedCount),\r\n            TuplesDeleted = sum(RowsDeletedCount)\r\n  by bin(TimeGenerated,5m)\r\n|make-series TuplesInserted=max(TuplesInserted), TuplesUpdated=max(TuplesUpdated), TuplesDeleted=max(TuplesDeleted) on TimeGenerated from Start_Time to End_Time step graphgrain",
+                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName in ({QualifiedDatabases})\r\n| distinct TimeGenerated,DatabaseName,SchemaName,RowsInsertedCount,RowsUpdatedCount,RowsDeletedCount\r\n| summarize TuplesInserted= sum(RowsInsertedCount),\r\n            TuplesUpdated = sum(RowsUpdatedCount),\r\n            TuplesDeleted = sum(RowsDeletedCount)\r\n  by bin(TimeGenerated,5m)\r\n|make-series ['inserted'] = max(TuplesInserted), ['updated'] = max(TuplesUpdated), ['deletedinserted'] = max(TuplesDeleted) on TimeGenerated from Start_Time to End_Time step graphgrain",
                     "size": 0,
                     "aggregation": 2,
                     "showAnnotations": true,
-                    "title": "Tuple State for {Database} Databases. Data is plotted at a granularity of {ChartGrain}",
+                    "title": "Tuple state for {Database} database(s). Data is plotted at a granularity of {ChartGrain}",
                     "timeBrushParameterName": "TimeRange",
                     "timeBrushExportOnlyWhenBrushed": true,
                     "queryType": 0,
@@ -2359,7 +2359,7 @@
                   "type": 3,
                   "content": {
                     "version": "KqlItem/1.0",
-                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName in ({QualifiedDatabases})\r\n| distinct TimeGenerated,DatabaseName,SchemaName,RowsInsertedCount,RowsUpdatedCount,RowsDeletedCount\r\n| summarize TuplesInserted= sum(RowsInsertedCount),\r\n            TuplesUpdated = sum(RowsUpdatedCount),\r\n            TuplesDeleted = sum(RowsDeletedCount)\r\n  by bin(TimeGenerated,5m),DatabaseName\r\n|make-series TuplesInserted=max(TuplesInserted) default=-1, TuplesUpdated=max(TuplesUpdated) default=-1, TuplesDeleted=max(TuplesDeleted) default=-1 on TimeGenerated from Start_Time to End_Time step graphgrain by DatabaseName\r\n| mv-expand TimeGenerated,TuplesInserted, TuplesUpdated,TuplesDeleted\r\n| where TuplesInserted !=-1 or TuplesUpdated !=-1 or TuplesDeleted !=-1\r\n| extend TimeGenerated=todatetime(TimeGenerated), TuplesInserted = tolong(TuplesInserted), TuplesUpdated=tolong(TuplesUpdated),TuplesDeleted=tolong(TuplesDeleted)\r\n| project TimeGenerated,DatabaseName, TuplesInserted, TuplesUpdated , TuplesDeleted\r\n| order by TimeGenerated desc ",
+                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName in ({QualifiedDatabases})\r\n| distinct TimeGenerated,DatabaseName,SchemaName,RowsInsertedCount,RowsUpdatedCount,RowsDeletedCount\r\n| summarize TuplesInserted= sum(RowsInsertedCount),\r\n            TuplesUpdated = sum(RowsUpdatedCount),\r\n            TuplesDeleted = sum(RowsDeletedCount)\r\n  by bin(TimeGenerated,5m),DatabaseName\r\n|make-series TuplesInserted=max(TuplesInserted) default=-1, TuplesUpdated=max(TuplesUpdated) default=-1, TuplesDeleted=max(TuplesDeleted) default=-1 on TimeGenerated from Start_Time to End_Time step graphgrain by DatabaseName\r\n| mv-expand TimeGenerated,TuplesInserted, TuplesUpdated,TuplesDeleted\r\n| where TuplesInserted !=-1 or TuplesUpdated !=-1 or TuplesDeleted !=-1\r\n| extend TimeGenerated=todatetime(TimeGenerated), TuplesInserted = tolong(TuplesInserted), TuplesUpdated=tolong(TuplesUpdated),TuplesDeleted=tolong(TuplesDeleted)\r\n| project ['time generated'] = TimeGenerated, ['database'] = DatabaseName, ['inserted'] = TuplesInserted, ['updated'] = TuplesUpdated , ['deleted'] = TuplesDeleted\r\n| order by ['time generated'] desc ",
                     "size": 1,
                     "aggregation": 2,
                     "showExportToExcel": true,
@@ -2379,14 +2379,14 @@
                           }
                         },
                         {
-                          "columnMatch": "DatabaseName",
+                          "columnMatch": "database",
                           "formatter": 16,
                           "formatOptions": {
                             "showIcon": true
                           }
                         },
                         {
-                          "columnMatch": "TuplesInserted",
+                          "columnMatch": "inserted",
                           "formatter": 0,
                           "numberFormat": {
                             "unit": 17,
@@ -2396,7 +2396,7 @@
                           }
                         },
                         {
-                          "columnMatch": "TuplesUpdated",
+                          "columnMatch": "updated",
                           "formatter": 0,
                           "numberFormat": {
                             "unit": 17,
@@ -2406,20 +2406,13 @@
                           }
                         },
                         {
-                          "columnMatch": "TuplesDeleted",
+                          "columnMatch": "deleted",
                           "formatter": 0,
                           "numberFormat": {
                             "unit": 17,
                             "options": {
                               "style": "decimal"
                             }
-                          }
-                        },
-                        {
-                          "columnMatch": "DatabaseName_s",
-                          "formatter": 16,
-                          "formatOptions": {
-                            "showIcon": true
                           }
                         },
                         {
@@ -2435,7 +2428,7 @@
                       "hierarchySettings": {
                         "treeType": 1,
                         "groupBy": [
-                          "DatabaseName"
+                          "database"
                         ],
                         "expandTopLevel": false
                       }
@@ -2456,11 +2449,11 @@
                   "type": 3,
                   "content": {
                     "version": "KqlItem/1.0",
-                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName == '{Database}' and SchemaName in ({QualifiedSchemas})\r\n| distinct TimeGenerated,SchemaName,RowsInsertedCount,RowsUpdatedCount,RowsDeletedCount\r\n| summarize TuplesInserted= sum(RowsInsertedCount),\r\n            TuplesUpdated = sum(RowsUpdatedCount),\r\n            TuplesDeleted = sum(RowsDeletedCount)\r\n  by bin(TimeGenerated,5m)\r\n|make-series TuplesInserted=max(TuplesInserted), TuplesUpdated=max(TuplesUpdated), TuplesDeleted=max(TuplesDeleted) on TimeGenerated from Start_Time to End_Time step graphgrain ",
+                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName == '{Database}' and SchemaName in ({QualifiedSchemas})\r\n| distinct TimeGenerated,SchemaName,RowsInsertedCount,RowsUpdatedCount,RowsDeletedCount\r\n| summarize TuplesInserted= sum(RowsInsertedCount),\r\n            TuplesUpdated = sum(RowsUpdatedCount),\r\n            TuplesDeleted = sum(RowsDeletedCount)\r\n  by bin(TimeGenerated,5m)\r\n|make-series ['inserted'] = max(TuplesInserted), ['updated'] = max(TuplesUpdated), ['deleted'] = max(TuplesDeleted) on ['time generated'] = TimeGenerated from Start_Time to End_Time step graphgrain ",
                     "size": 0,
                     "aggregation": 2,
                     "showAnnotations": true,
-                    "title": "Tuple State for {Database} database. Data is plotted at a granularity of {ChartGrain}",
+                    "title": "Tuple state for {Database} database(s). Data is plotted at a granularity of {ChartGrain}",
                     "timeBrushParameterName": "TimeRange",
                     "timeBrushExportOnlyWhenBrushed": true,
                     "queryType": 0,
@@ -2486,7 +2479,7 @@
                           }
                         },
                         {
-                          "columnMatch": "DatabaseName",
+                          "columnMatch": "database",
                           "formatter": 1
                         },
                         {
@@ -2504,7 +2497,7 @@
                       "hierarchySettings": {
                         "treeType": 1,
                         "groupBy": [
-                          "DatabaseName"
+                          "database"
                         ],
                         "expandTopLevel": false
                       }
@@ -2532,7 +2525,7 @@
                   "type": 3,
                   "content": {
                     "version": "KqlItem/1.0",
-                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName == '{Database}' and SchemaName in ({QualifiedSchemas})\r\n| distinct TimeGenerated,SchemaName,RowsInsertedCount,RowsUpdatedCount,RowsDeletedCount\r\n| summarize TuplesInserted= sum(RowsInsertedCount),\r\n            TuplesUpdated = sum(RowsUpdatedCount),\r\n            TuplesDeleted = sum(RowsDeletedCount)\r\n  by bin(TimeGenerated,5m), SchemaName\r\n|make-series TuplesInserted=max(TuplesInserted) default=-1, TuplesUpdated=max(TuplesUpdated) default=-1, TuplesDeleted=max(TuplesDeleted) default=-1 on TimeGenerated from Start_Time to End_Time step graphgrain by SchemaName\r\n| mv-expand TimeGenerated,TuplesInserted, TuplesUpdated,TuplesDeleted\r\n| where TuplesInserted !=-1 or TuplesUpdated !=-1 or TuplesDeleted !=-1\r\n| extend TuplesInserted = tolong(TuplesInserted), TuplesUpdated=tolong(TuplesUpdated),TuplesDeleted=tolong(TuplesDeleted), TimeGenerated=todatetime(TimeGenerated)\r\n| project TimeGenerated,SchemaName, TuplesInserted, TuplesUpdated , TuplesDeleted\r\n| order by TimeGenerated desc ",
+                    "query": "let graphgrain=iff({TimeRange:grain}<30m,30m,{TimeRange:grain});\r\nlet Start_Time = todatetime('{GlobalStartTime}');\r\nlet End_Time = todatetime('{GlobalEndTime}');\r\n{PostgreSQLFlexTableStats}\r\n|where TimeGenerated >= Start_Time and TimeGenerated <= End_Time\r\n| where DatabaseName == '{Database}' and SchemaName in ({QualifiedSchemas})\r\n| distinct TimeGenerated,SchemaName,RowsInsertedCount,RowsUpdatedCount,RowsDeletedCount\r\n| summarize TuplesInserted= sum(RowsInsertedCount),\r\n            TuplesUpdated = sum(RowsUpdatedCount),\r\n            TuplesDeleted = sum(RowsDeletedCount)\r\n  by bin(TimeGenerated,5m), SchemaName\r\n|make-series TuplesInserted=max(TuplesInserted) default=-1, TuplesUpdated=max(TuplesUpdated) default=-1, TuplesDeleted=max(TuplesDeleted) default=-1 on TimeGenerated from Start_Time to End_Time step graphgrain by SchemaName\r\n| mv-expand TimeGenerated,TuplesInserted, TuplesUpdated,TuplesDeleted\r\n| where TuplesInserted !=-1 or TuplesUpdated !=-1 or TuplesDeleted !=-1\r\n| extend TuplesInserted = tolong(TuplesInserted), TuplesUpdated=tolong(TuplesUpdated),TuplesDeleted=tolong(TuplesDeleted), TimeGenerated=todatetime(TimeGenerated)\r\n| project ['time generated'] = TimeGenerated, ['schema'] = SchemaName, ['inserted'] = TuplesInserted, ['updated'] = TuplesUpdated , ['deleted'] = TuplesDeleted\r\n| order by ['time generated'] desc ",
                     "size": 1,
                     "aggregation": 2,
                     "timeBrushParameterName": "TimeRange",
